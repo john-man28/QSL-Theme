@@ -6,14 +6,14 @@
             data-toggle="cart-preview-dropdown"
             href="{{urls.cart}}"
             title="{{lang 'common.cart'}}">
-            <svg class="icon"><use href="#icon-cart" /></svg>
+            <svg class="icon"><use xlink:href="#icon-cart" /></svg>
             <span class="_label">{{lang 'common.cart'}}</span> <span class="countPill cart-quantity"></span>
         </a>
     </li>
 
     <li class="navUser-item navUser-item--account u-hideDesktop">
         <a class="navUser-action navUser-action--account" href="{{#if customer}}{{urls.account.index}}{{else}}{{urls.auth.login}}{{/if}}" title="{{lang 'common.account'}}">
-            <svg class="icon"><use href="#icon-account" /></svg>
+            <svg class="icon"><use xlink:href="#icon-account" /></svg>
             <span class="_label">{{lang 'common.account'}}</span>
         </a>
     </li>
@@ -25,7 +25,7 @@
                 data-options="align:bottom"
                 href="{{urls.cart}}"
                 title="{{lang 'common.store_credit_overview' credit=customer.store_credit.formatted}}">
-                <svg class="icon"><use href="#icon-credit" /></svg>
+                <svg class="icon"><use xlink:href="#icon-credit" /></svg>
                 <span class="_label">{{lang 'common.store_credit_overview' credit=customer.store_credit.formatted}}</span>
             </a>
             <div class="dropdown-menu" id="storeCredit-dropdown" data-dropdown-content aria-hidden="true">
@@ -37,7 +37,7 @@
     {{#if settings.phone_number}}
         <li class="navUser-item navUser-item--phone u-hideDesktop">
             <a class="navUser-action" href="tel:{{settings.phone_number}}" title="{{lang 'header.call_us' phone_number=settings.phone_number}}">
-                <svg class="icon"><use href="#icon-phone" /></svg>
+                <svg class="icon"><use xlink:href="#icon-phone" /></svg>
                 <span class="_label">{{{lang 'header.call_us2' phone_number=settings.phone_number}}}</span>
             </a>
         </li>

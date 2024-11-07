@@ -637,7 +637,7 @@
                                                         data-minutes-text="{{{lang 'shipping_countdown.minutes'}}}"
                                                         class="_addToCartVisibility"
                                                         style="display:none">
-                                                            <svg class="icon"><use href="#icon-ih-fast-delivery-icon"></svg>
+                                                            <svg class="icon"><use xlink:href="#icon-ih-fast-delivery-icon"></svg>
                                                             <div data-today-hm>{{{lang 'shipping_countdown.today_hm'}}}</div>
                                                             <div data-today-m>{{{lang 'shipping_countdown.today_h'}}}</div>
                                                             <div data-tomorrow-hm>{{{lang 'shipping_countdown.tomorrow_hm'}}}</div>
@@ -651,7 +651,7 @@
                                                 <p>{{product.release_date}}</p>
                                             {{/if}}
                                             <div class="productView-info--stock">
-                                                <span class="productView-info-name productView-info-name--stock {{#unless product.stock_level}} u-hiddenVisually{{/unless}}{{#if product.stock_level '<' product.low_stock_level}} _lowStock{{/if}}"><span class="_std"><svg class="icon"><use href="#icon-stock"></use></svg>{{lang 'products.current_stock'}}</span><span class="_low"><svg class="icon"><use href="#icon-fire"></use></svg>{{lang 'products.low_stock'}}</span></span>
+                                                <span class="productView-info-name productView-info-name--stock {{#unless product.stock_level}} u-hiddenVisually{{/unless}}{{#if product.stock_level '<' product.low_stock_level}} _lowStock{{/if}}"><span class="_std"><svg class="icon"><use xlink:href="#icon-stock"></use></svg>{{lang 'products.current_stock'}}</span><span class="_low"><svg class="icon"><use xlink:href="#icon-fire"></use></svg>{{lang 'products.low_stock'}}</span></span>
                                                 <span class="productView-info-value productView-info-value--stock {{#unless product.stock_level}} u-hiddenVisually{{/unless}}" data-product-stock>{{product.stock_level}}</span>
                                             </div>
                                         </div>
@@ -668,7 +668,7 @@
                                                             <span class="is-srOnly">{{lang 'products.quantity_decrease'}}</span>
                                                             <i class="icon" aria-hidden="true">
                                                                 <svg>
-                                                                    <use href="#icon-keyboard-arrow-down"/>
+                                                                    <use xlink:href="#icon-keyboard-arrow-down"/>
                                                                 </svg>
                                                             </i>
                                                         </button>
@@ -686,7 +686,7 @@
                                                             <span class="is-srOnly">{{lang 'products.quantity_increase'}}</span>
                                                             <i class="icon" aria-hidden="true">
                                                                 <svg>
-                                                                    <use href="#icon-keyboard-arrow-up"/>
+                                                                    <use xlink:href="#icon-keyboard-arrow-up"/>
                                                                 </svg>
                                                             </i>
                                                         </button>
@@ -699,10 +699,10 @@
                                                 </button>
                                             </div>
                                             {{#or customer (unless settings.hide_price_from_guests)}}
-                                                <div class="formView-action" {{#unless product.can_purchase}}style="display:none"{{/unless}}>
+                                                <div class="formView-action _addToCartVisibility" {{#unless product.can_purchase}}style="display:none"{{/unless}}>
                                                     {{#if settings.show_wishlist}}
                                                         <a href="#" aria-controls="wishlist-dropdown--{{product.id}}" aria-expanded="false" class="button dropdown-menu-button" data-dropdown="wishlist-dropdown--{{product.id}}" title="{{lang 'account.wishlists.add_item'}}">
-                                                            <svg class="icon"><use href="#icon-heart" /></svg>
+                                                            <svg class="icon"><use xlink:href="#icon-heart" /></svg>
                                                         </a>
                                                     {{/if}}
                                                     {{#if theme_settings.productpage_show_compare}}
@@ -711,13 +711,8 @@
                                                         data-compare-image="{{getImage product.main_image 'productthumb_size' (cdn theme_settings.default_image_product)}}"
                                                         data-compare-title="{{product.title}}"
                                                         data-compare-url="{{product.url}}"
-                                                    ><svg class="icon"><use href="#icon-compare"></use></svg></button>
+                                                    ><svg class="icon"><use xlink:href="#icon-compare"></use></svg></button>
                                                     {{/if}}
-                                                </div>
-                                                <div class="productView-addToCartExtras _addToCartVisibility" {{#unless product.can_purchase}}style="display:none"{{/unless}}>
-                                                    <div class="add-to-cart-wallet-buttons" data-add-to-cart-wallet-buttons>
-                                                        {{> components/common/wallet-buttons}}
-                                                    </div>
                                                 </div>
                                                 {{{snippet 'product_addtocart'}}}
                                             {{/or}}
@@ -746,7 +741,7 @@
                                                             >
                                                                 <span class="aria-description--hidden">{{{capitalize service}}}</span>
                                                                 <svg>
-                                                                    <use href="#icon-facebook"/>
+                                                                    <use xlink:href="#icon-facebook"/>
                                                                 </svg>
                                                             </a>
                                                             {{else if service '===' 'email'}}
@@ -759,7 +754,7 @@
                                                             >
                                                                 <span class="aria-description--hidden">{{{capitalize service}}}</span>
                                                                 <svg>
-                                                                    <use href="#icon-envelope"/>
+                                                                    <use xlink:href="#icon-envelope"/>
                                                                 </svg>
                                                             </a>
                                                             {{else if service '===' 'print'}}
@@ -770,7 +765,7 @@
                                                             >
                                                                 <span class="aria-description--hidden">{{{capitalize service}}}</span>
                                                                 <svg>
-                                                                    <use href="#icon-print"/>
+                                                                    <use xlink:href="#icon-print"/>
                                                                 </svg>
                                                             </a>
                                                             {{else if service '===' 'twitter'}}
@@ -783,7 +778,7 @@
                                                             >
                                                                 <span class="aria-description--hidden">X</span>
                                                                 <svg>
-                                                                    <use href="#icon-x"/>
+                                                                    <use xlink:href="#icon-x"/>
                                                                 </svg>
                                                             </a>
                                                             {{else if service '===' 'linkedin'}}
@@ -796,7 +791,7 @@
                                                             >
                                                                 <span class="aria-description--hidden">{{{capitalize service}}}</span>
                                                                 <svg>
-                                                                    <use href="#icon-linkedin"/>
+                                                                    <use xlink:href="#icon-linkedin"/>
                                                                 </svg>
                                                             </a>
                                                             {{else if service '===' 'pinterest'}}
@@ -809,7 +804,7 @@
                                                             >
                                                                 <span class="aria-description--hidden">{{{capitalize service}}}</span>
                                                                 <svg>
-                                                                    <use href="#icon-pinterest"/>
+                                                                    <use xlink:href="#icon-pinterest"/>
                                                                 </svg>
                                                             </a>
                                                             {{/if}}
@@ -830,7 +825,7 @@
                                                             <span class="is-srOnly">{{lang 'products.quantity_decrease'}}</span>
                                                             <i class="icon" aria-hidden="true">
                                                                 <svg>
-                                                                    <use href="#icon-keyboard-arrow-down"/>
+                                                                    <use xlink:href="#icon-keyboard-arrow-down"/>
                                                                 </svg>
                                                             </i>
                                                         </button>
@@ -848,7 +843,7 @@
                                                             <span class="is-srOnly">{{lang 'products.quantity_increase'}}</span>
                                                             <i class="icon" aria-hidden="true">
                                                                 <svg>
-                                                                    <use href="#icon-keyboard-arrow-up"/>
+                                                                    <use xlink:href="#icon-keyboard-arrow-up"/>
                                                                 </svg>
                                                             </i>
                                                         </button>
@@ -942,7 +937,7 @@
         </div>
     </div>
 
-    <div class="productView-alsoBought-wrapper {{#if theme_settings.card_show_qty}}_show-quantity{{/if}}">
+    <div class="productView-alsoBought-wrapper {{#if theme_settings.show_product_quantity_box}}_show-quantity{{/if}}">
         <div class="container">
             {{#if theme_settings.alsobought_position '!==' 'disable'}}
                 {{> components/papathemes/also-bought-game/also-bought}}
@@ -1010,7 +1005,7 @@
             </ul>
             <div class="tab-content is-active" id="tab-description-{{product.id}}" aria-hidden="false" role="tabpanel" aria-labelledby="productView-tab-description-{{product.id}}">
                 {{#unless in_quickview}}<div class="container">{{/unless}}
-                <a class="productView-description-tabHeading is-open" data-tab-mobile href="#tab-description-{{product.id}}">{{lang 'products.description'}}<svg class="icon"><use href="#icon-product-tab-arrow"></svg></a>
+                <a class="productView-description-tabHeading is-open" data-tab-mobile href="#tab-description-{{product.id}}">{{lang 'products.description'}}<svg class="icon"><use xlink:href="#icon-product-tab-arrow"></svg></a>
                 <div class="productView-description-tabContent is-open" {{#if settings.data_tag_enabled}} data-event-type="product" {{/if}}>
                     {{{product.description}}}
                     {{{snippet 'product_description'}}}
@@ -1023,7 +1018,7 @@
                 {{#if product.videos.list.length}}
                     <div class="tab-content" id="tab-videos-{{product.id}}" aria-hidden="true" role="tabpanel" aria-labelledby="productView-tab-videos-{{product.id}}">
                         {{#unless in_quickview}}<div class="container">{{/unless}}
-                        <a class="productView-description-tabHeading" data-tab-mobile href="#tab-videos-{{product.id}}">{{lang 'products.videos.header'}}<svg class="icon"><use href="#icon-product-tab-arrow"></svg></a>
+                        <a class="productView-description-tabHeading" data-tab-mobile href="#tab-videos-{{product.id}}">{{lang 'products.videos.header'}}<svg class="icon"><use xlink:href="#icon-product-tab-arrow"></svg></a>
                         <div class="productView-description-tabContent">
                             <section class="videoGallery videoGallery--inTab" data-video-gallery>
                                 <div class="videoGallery-main">
@@ -1069,7 +1064,7 @@
                 {{#any (unless theme_settings.productpage_custom_fields_hide_special) (if product.custom_fields.length '>' specialCustomFields )}}
                     <div class="tab-content" id="tab-addition-{{product.id}}" aria-hidden="true" role="tabpanel" aria-labelledby="productView-tab-addition-{{product.id}}">
                         {{#unless in_quickview}}<div class="container">{{/unless}}
-                        <a class="productView-description-tabHeading" data-tab-mobile href="#tab-addition-{{product.id}}">{{theme_settings.productpage_custom_fields_tab_title}}<svg class="icon"><use href="#icon-product-tab-arrow"></svg></a>
+                        <a class="productView-description-tabHeading" data-tab-mobile href="#tab-addition-{{product.id}}">{{theme_settings.productpage_custom_fields_tab_title}}<svg class="icon"><use xlink:href="#icon-product-tab-arrow"></svg></a>
                         <div class="productView-description-tabContent productView-addition-tabContent">
                             <table class="productView-addition-table table">
                                 <tbody class="table-tbody">
@@ -1120,7 +1115,7 @@
             {{#if product.warranty}}
                 <div class="tab-content" id="tab-warranty-{{product.id}}" aria-hidden="true" role="tabpanel" aria-labelledby="productView-tab-warranty-{{product.id}}">
                     {{#unless in_quickview}}<div class="container">{{/unless}}
-                    <a class="productView-description-tabHeading" data-tab-mobile href="#tab-warranty-{{product.id}}">{{lang 'products.warranty'}}<svg class="icon"><use href="#icon-product-tab-arrow"></svg></a>
+                    <a class="productView-description-tabHeading" data-tab-mobile href="#tab-warranty-{{product.id}}">{{lang 'products.warranty'}}<svg class="icon"><use xlink:href="#icon-product-tab-arrow"></svg></a>
                     <div class="productView-description-tabContent">
                         {{{product.warranty}}}
                     </div>
@@ -1131,7 +1126,7 @@
             {{#or in_development theme_settings.productpage_delivery_tab}}
                 <div class="tab-content" id="tab-return-{{product.id}}" aria-hidden="true" role="tabpanel" aria-labelledby="productView-tab-return-{{product.id}}">
                     {{#unless in_quickview}}<div class="container">{{/unless}}
-                    <a class="productView-description-tabHeading" data-tab-mobile href="#tab-return-{{product.id}}">{{theme_settings.productpage_delivery_tab_title}}<svg class="icon"><use href="#icon-product-tab-arrow"></svg></a>
+                    <a class="productView-description-tabHeading" data-tab-mobile href="#tab-return-{{product.id}}">{{theme_settings.productpage_delivery_tab_title}}<svg class="icon"><use xlink:href="#icon-product-tab-arrow"></svg></a>
                     <div class="productView-description-tabContent">
                         {{{region name="product_delivery_tab_content--global"}}}
                         {{{region name="product_delivery_tab_content"}}}
@@ -1171,7 +1166,7 @@
             {{#if settings.show_product_reviews}}
                 <div class="tab-content" id="tab-reviews-{{product.id}}" aria-hidden="true" role="tabpanel" aria-labelledby="productView-tab-reviews-{{product.id}}">
                     {{#unless in_quickview}}<div class="container">{{/unless}}
-                    <a class="productView-description-tabHeading" data-tab-mobile href="#tab-reviews-{{product.id}}">{{lang 'products.reviews.title' total=product.num_reviews}}<svg class="icon"><use href="#icon-product-tab-arrow"></svg></a>
+                    <a class="productView-description-tabHeading" data-tab-mobile href="#tab-reviews-{{product.id}}">{{lang 'products.reviews.title' total=product.num_reviews}}<svg class="icon"><use xlink:href="#icon-product-tab-arrow"></svg></a>
                     <div class="productView-description-tabContent">
                         {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
                     </div>

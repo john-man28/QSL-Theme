@@ -14,7 +14,7 @@
             <a class="customer-service" href="mailto:{{ theme_settings.footer_email }}" title="{{ lang 'customer_service.email_address' email=theme_settings.footer_email }}">
                 {{#if theme_settings.variant '!==' 'game' }}
                     <svg class="icon">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" href="#icon-email"></use>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-email"></use>
                     </svg>   
                 {{else}}         
                     <img class="icon" src="{{cdn 'img/enjoy-email.png'}}" alt="{{ lang 'customer_service.email' }}" title="{{ lang 'customer_service.email' }}" />
@@ -23,10 +23,10 @@
             </a>
             {{/if}}
             {{#if theme_settings.footer_whatsapp}}
-            <a class="customer-service" href="https://wa.me/{{ theme_settings.footer_whatsapp }}" title="{{ lang 'customer_service.whatsapp_address' whatsapp=theme_settings.footer_whatsapp }}">
+            <a class="customer-service" href="mailto:{{ theme_settings.footer_whatsapp }}" title="{{ lang 'customer_service.whatsapp_address' whatsapp=theme_settings.footer_whatsapp }}">
                 {{#if theme_settings.variant '!==' 'game' }} 
                     <svg class="icon">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" href="#icon-live-chat"></use>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-live-chat"></use>
                     </svg>
                 {{else}}
                     <img class="icon" src="{{cdn 'img/enjoy-live.png'}}" alt="{{lang 'customer_service.whatsapp'}}" title="{{lang 'customer_service.whatsapp'}}" />
@@ -38,7 +38,7 @@
             <a class="customer-service" href="tel:{{settings.phone_number}}" title="{{ lang 'customer_service.call_us' phone_number=settings.phone_number }}">
                  {{#if theme_settings.variant '!==' 'game' }}
                     <svg class="icon">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" href="#icon-phone-service"></use>
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-phone-service"></use>
                     </svg>
                 {{else}}
                     <img class="icon icon-contact" src="{{cdn 'img/enjoy-phone.png'}}" alt="{{ settings.phone_number }}" title="{{ settings.phone_number }}" />

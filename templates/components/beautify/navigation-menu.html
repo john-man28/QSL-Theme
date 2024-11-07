@@ -27,13 +27,13 @@
             {{assignVar 'navWebPageCount' 0}}
             {{#and theme_settings.navPages_webpageFrom (if theme_settings.navPages_webpageFrom '>' 1)}}
                 {{#each (limit (after pages (subtract theme_settings.navPages_webpageFrom 1)) theme_settings.navPages_webpageLimit)}}
-                    <li class="navPages-item navPages-item--page u-hideDesktop">
+                    <li class="navPages-item navPages-item--page u-hideDesktop ">
                         {{> components/beautify/navigation-list theme_settings=../theme_settings menu_type='standard' page_type='page'}}
                     </li>
                 {{/each}}
             {{else}}
                 {{#each (limit pages theme_settings.navPages_webpageLimit)}}
-                    <li class="navPages-item navPages-item--page u-hideDesktop">
+                    <li class="navPages-item navPages-item--page u-hideDesktop mobile-class-{{@index}}">
                         {{> components/beautify/navigation-list theme_settings=../theme_settings menu_type='standard' page_type='page'}}
                     </li>
                 {{/each}}

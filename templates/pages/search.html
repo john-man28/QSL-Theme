@@ -26,7 +26,7 @@ shop_by_brand:
                 <div class="page-sidebar page-sidebar--top beautify__filters" id="sidebar-top">
                     <div class="_header">
                         <h2 class="_heading">{{lang 'search.faceted.filter_by'}}</h2>
-                        <a href="#" class="_close" data-toggle="sidebar-top"><svg class="icon"><use href="#icon-close"></use></svg><span class="sr-only">{{lang 'common.close'}}</span></a>
+                        <a href="#" class="_close" data-toggle="sidebar-top"><svg class="icon"><use xlink:href="#icon-close"></use></svg><span class="sr-only">{{lang 'common.close'}}</span></a>
                     </div>
 
                     <div class="_body">
@@ -47,7 +47,7 @@ shop_by_brand:
         <div class="page-sidebar page-sidebar--top page-sidebar--advancedSearch beautify__filters" id="sidebar-top">
             <div class="_header">
                 <h2 class="_heading">{{lang 'search.faceted.filters'}}</h2>
-                <a href="#" class="_close" data-toggle="sidebar-top"><svg class="icon"><use href="#icon-close"></use></svg><span class="sr-only">{{lang 'common.close'}}</span></a>
+                <a href="#" class="_close" data-toggle="sidebar-top"><svg class="icon"><use xlink:href="#icon-close"></use></svg><span class="sr-only">{{lang 'common.close'}}</span></a>
             </div>
             <div class="_body">
                 {{>components/search/advanced-search}}
@@ -97,7 +97,6 @@ shop_by_brand:
             <h2 class="is-srOnly">{{lang 'forms.search.suggestions.title'}}</h2>
             <div class="panel panel--large">
                 <div class="panel-body panel-body--searchSuggestions">
-                    <h2 class="is-srOnly">{{lang 'forms.search.refine'}}</h2>
                     {{#if forms.search.suggested_query}}
                         <div class="search-suggestion search-suggestion--query">
                             {{lang 'forms.search.did_you_mean'}} <strong>{{forms.search.suggested_query.query}}</strong>
@@ -165,12 +164,12 @@ shop_by_brand:
             <div id="search-results-content" {{#if forms.search.section '!=' 'content'}}class="u-hiddenVisually"{{/if}}>
                 <h2 class="is-srOnly">{{lang 'search.results.content_count' count=pagination.content_results.total}}</h2>
                 {{> components/search/content-sort-box sort=pagination.content_results.sort}}
-                <div>
+                <ul>
                     {{#each content_results}}
                         <strong><a href="{{url}}">{{{title}}}</a></strong>({{type}})
                         <p>{{{content}}}</p>
                     {{/each}}
-                </div>
+                </ul>
                 {{> components/common/paginator pagination.content_results reload=true instantload=true}}
             </div>
 

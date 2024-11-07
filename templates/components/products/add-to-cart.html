@@ -1,13 +1,18 @@
 <div class="form-field form-field--increments _addToCartVisibility" {{#unless product.can_purchase}}style="display:none"{{/unless}}>
     <label class="form-label form-label--alternate is-srOnly"
            for="qty[]">{{lang 'products.quantity'}}</label>
-
+           {{#each product.custom_fields}}
+            {{name}}
+            {{#if (toLowerCase name) '===' 'pack size'}}
+            <input style="display: none;" class="qty_packSize" type="hidden" name="qty_packSize" value="{{value}}" data-pack-value>
+            {{/if}}
+            {{/each}}
     <div class="form-increment" data-quantity-change>
         <button class="button button--icon" data-action="dec">
             <span class="is-srOnly">{{lang 'products.quantity_decrease' name=product.title}}</span>
             <i class="icon" aria-hidden="true">
                 <svg>
-                    <use href="#icon-minus"/>
+                    <use xlink:href="#icon-minus"/>
                 </svg>
             </i>
         </button>
@@ -20,12 +25,12 @@
                data-quantity-max="{{product.max_purchase_quantity}}"
                min="1"
                pattern="[0-9]*"
-               aria-live="polite">
+               aria-live="polite" data-product-qty {{#each product.custom_fields}}{{#if (toLowerCase name) '===' 'pack size'}}{{#if value '!==' '1'}}readonly{{/if}}{{/if}}{{/each}}>
         <button class="button button--icon" data-action="inc">
             <span class="is-srOnly">{{lang 'products.quantity_increase' name=product.title}}</span>
             <i class="icon" aria-hidden="true">
                 <svg>
-                    <use href="#icon-add"/>
+                    <use xlink:href="#icon-add"/>
                 </svg>
             </i>
         </button>
@@ -42,9 +47,6 @@
     <div class="form-action _addToCartVisibility" {{#unless product.can_purchase}}style="display:none"{{/unless}}>
         <input id="form-action-addToCart" data-wait-message="{{lang 'products.adding_to_cart'}}" class="button button--primary" type="submit"
             value="{{#if product.pre_order}}{{lang 'products.pre_order'}}{{else}}{{lang 'products.add_to_cart'}}{{/if}}">
-        <div class="add-to-cart-wallet-buttons" data-add-to-cart-wallet-buttons>
-            {{> components/common/wallet-buttons}}
-        </div>
     </div>
      {{{snippet 'product_addtocart'}}}
 {{/or}}

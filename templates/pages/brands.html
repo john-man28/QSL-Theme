@@ -27,7 +27,7 @@ shop_by_brand:
         <ul class="brandGrid">
             {{#each brands}}
                 <li class="brand">
-                    <article class="card">
+                    <article class="card {{#if alternate}}card--alternate{{/if}}">
                         <figure class="card-figure">
                             <a href="{{url}}" data-instantload title="{{name}}">
                                 <div class="card-img-container">
@@ -43,15 +43,15 @@ shop_by_brand:
                             </a>
                             <figcaption class="card-figcaption">
                                 <button type="button" class="button _brandQuickView" data-brand-quick-view="{{url}}" title="{{lang 'products.quick_view'}}: {{name}}">
-                                    <svg class="icon _on"><use href="#icon-eye-open"></use></svg>
-                                    <svg class="icon _off"><use href="#icon-eye-close"></use></svg>
+                                    <svg class="icon _on"><use xlink:href="#icon-eye-open"></use></svg>
+                                    <svg class="icon _off"><use xlink:href="#icon-eye-close"></use></svg>
                                 </button>
                             </figcaption>
                         </figure>
                         <div class="card-body {{#unless ../theme_settings.show_brand_name}}_hide{{/unless}}">
                             <h2 class="card-title">
                                 <a href="{{url}}" data-instantload>{{name}}</a>
-                            </h2>
+                            </h4>
                         </div>
                         <div class="_brandQuickView-content">
                             <div class="_body" data-brand-quick-view-body>

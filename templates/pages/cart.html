@@ -48,6 +48,34 @@ shop_by_brand:
                             {{> components/cart/totals}}
                         </div>
 
+                        <div class="cart-actions-wrapper">
+                            {{#or customer (unless settings.hide_price_from_guests)}}
+                                {{#if cart.show_primary_checkout_button}}
+                                    <div class="cart-actions">
+                                        <a href="{{urls.checkout.single_address}}" class="button button--primary">
+                                            <svg class="icon"><use xlink:href="#icon-lock"></use></svg>{{lang 'cart.preview.checkout_now'}}
+                                        </a>
+                                        {{#if cart.show_multiple_address_shipping}}
+                                            <a class="button _checkoutMultiple" href="{{urls.checkout.multiple_address}}">
+                                                {{lang 'cart.preview.checkout_multiple'}}
+                                            </a>
+                                        {{/if}}
+                                    </div>
+                                {{else}}
+                                    <div class="cart-actions">
+                                        <a class="button" href="{{urls.home}}" title="{{lang 'cart.continue_shopping'}}">{{lang 'cart.continue_shopping'}}</a>
+                                    </div>
+                                {{/if}}
+                            {{else}}
+                                <div class="cart-actions">
+                                    <a class="button" href="{{urls.home}}" title="{{lang 'cart.continue_shopping'}}">{{lang 'cart.continue_shopping'}}</a>
+                                </div>
+                            {{/or}}
+                        </div>
+    
+                        <div data-cart-additional-checkout-buttons class="cart-additionalCheckoutButtons">
+                            {{> components/cart/additional-checkout-buttons}}
+                        </div>
                         <div class="cart-payment">
                             <h3 class="cart-payment-heading">{{lang 'footer.accepted_payments'}}</h3>
                             {{> components/common/payment-icons}}

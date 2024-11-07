@@ -89,7 +89,7 @@
                                     {{#or options configurable_fields}}
                                         <a class="_editLink" href="#" data-item-edit="{{id}}" data-product-id="{{product_id}}" aria-label="{{lang 'products.change_product_options' name=name}}">
                                             <i class="icon" aria-hidden="true">
-                                                <svg><use href="#icon-edit-cart2" /></svg>
+                                                <svg><use xlink:href="#icon-edit-cart2" /></svg>
                                             </i><span class="u-hideMobile u-hideTablet">{{lang 'cart.checkout.change'}}</span>
                                         </a>
                                     {{/or}}
@@ -134,7 +134,7 @@
                                 {{#if can_modify}}
                                     <button class="button button--icon" data-cart-update data-cart-itemid="{{id}}" data-action="dec">
                                         <span class="is-srOnly">{{lang 'products.quantity_decrease' name=name}}</span>
-                                        <i class="icon" aria-hidden="true"><svg><use href="#icon-minus" /></svg></i>
+                                        <i class="icon" aria-hidden="true"><svg><use xlink:href="#icon-minus" /></svg></i>
                                     </button>
                                 {{/if}}
                                 <input class="form-input form-input--incrementTotal cart-item-qty-input"
@@ -155,7 +155,7 @@
                                 {{#if can_modify}}
                                     <button class="button button--icon" data-cart-update data-cart-itemid="{{id}}" data-action="inc">
                                         <span class="is-srOnly">{{lang 'products.quantity_increase' name=name}}</span>
-                                        <i class="icon" aria-hidden="true"><svg><use href="#icon-add" /></svg></i>
+                                        <i class="icon" aria-hidden="true"><svg><use xlink:href="#icon-add" /></svg></i>
                                     </button>
                                 {{/if}}
                             </div>

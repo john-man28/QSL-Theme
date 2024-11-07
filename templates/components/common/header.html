@@ -37,7 +37,7 @@
         </div>
     </div>
     <button class="banners-close">
-        <span class="_close"><span class="is-srOnly">{{lang 'common.close'}}</span><svg class="icon"><use href="#icon-close2"></use></svg></span>
+        <span class="_close"><span class="is-srOnly">{{lang 'common.close'}}</span><svg class="icon"><use xlink:href="#icon-close2"></use></svg></span>
     </button>
 </div>
 {{/or}}
@@ -46,7 +46,7 @@
         {{{region name="top_banner_carousel--global"}}}
     </div>
     <button class="banners-close">
-        <span class="_close"><span class="is-srOnly">{{lang 'common.close'}}</span><svg class="icon"><use href="#icon-close2"></use></svg></span>
+        <span class="_close"><span class="is-srOnly">{{lang 'common.close'}}</span><svg class="icon"><use xlink:href="#icon-close2"></use></svg></span>
     </button>
 </div>
 <header class="header" role="banner" {{#if theme_settings.header_sticky}} data-sticky-header{{/if}}>
@@ -106,7 +106,7 @@
                 {{#if theme_settings.navUser-phone '===' 'show'}}
                     <div class="navUser-item navUser-item--phone">
                         <a class="navUser-action" href="tel:{{settings.phone_number}}" title="{{lang 'header.call_us' phone_number=settings.phone_number}}">
-                            <svg class="icon"><use href="#icon-phone" /></svg>
+                            <svg class="icon"><use xlink:href="#icon-phone" /></svg>
                             <span class="_label">{{settings.phone_number}}</span>
                         </a>
                     </div>
@@ -119,7 +119,7 @@
                 data-toggle="cart-preview-dropdown"
                 href="{{urls.cart}}"
                 title="{{lang 'common.cart'}}">
-                <svg class="icon"><use href="#icon-cart" /></svg>
+                <svg class="icon"><use xlink:href="#icon-cart" /></svg>
                 <span class="_total-cart">
                     <span class="_total-items">
                         <span class="countPill cart-quantity"></span>
@@ -145,15 +145,15 @@
             <div class="_popular" data-papathemes-search-popular="{{theme_settings.quickSearch_popular}}">
                 <div class="_heading">{{lang 'search.quick_search.popular_search'}}</div>
                 <button type="button" class="button button--small button--link is-open" data-collapsible="#quickSearch-popular-list" aria-expanded="true">
-                    <span class="on">{{lang 'common.hide'}}<svg class="icon"><use href="#icon-eye-open"></use></svg></span>
-                    <span class="off">{{lang 'common.show'}}<svg class="icon"><use href="#icon-eye-close"></use></svg></span>
+                    <span class="on">{{lang 'common.hide'}}<svg class="icon"><use xlink:href="#icon-eye-open"></use></svg></span>
+                    <span class="off">{{lang 'common.show'}}<svg class="icon"><use xlink:href="#icon-eye-close"></use></svg></span>
                 </button>
                 <ul id="quickSearch-popular-list" class="is-open" aria-hidden="false"></ul>
             </div>
             <div class="_recent" data-papathemes-search-history style="display: none;">
                 <div class="_heading">{{lang 'search.quick_search.search_history'}}</div>
                 <button type="button" class="button button--small button--link is-open" data-papathemes-delete-search-history>
-                    <span class="on">{{lang 'common.delete'}}<svg class="icon"><use href="#icon-close"></use></svg></span>
+                    <span class="on">{{lang 'common.delete'}}<svg class="icon"><use xlink:href="#icon-close"></use></svg></span>
                 </button>
                 <ul id="quickSearch-recently-list"></ul>
             </div>
@@ -165,3 +165,18 @@
 
 {{{region name="header_bottom--global"}}}
 {{{region name="header_bottom"}}}
+<style>
+    li.navPages-item.navPages-item--page.unique-class-3 {
+       display: none;
+    }
+    
+    li.navPages-item.navPages-item--page.u-hideDesktop.mobile-class-3 {
+
+    display: none;
+        
+    }
+
+    
+    
+</style>
+ 

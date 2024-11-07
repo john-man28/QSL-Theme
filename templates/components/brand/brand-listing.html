@@ -1,7 +1,7 @@
 <ul class="brandGrid" id="brandGrid">
     {{#each brands}}
         <li class="brand">
-            <article class="card {{#unless image}}card--noimage{{/unless}}">
+            <article class="card {{#if alternate}}card--alternate{{/if}} {{#unless image}}card--noimage{{/unless}}">
                 <figure class="card-figure">
                     <a href="{{url}}">
                         <div class="card-img-container">
