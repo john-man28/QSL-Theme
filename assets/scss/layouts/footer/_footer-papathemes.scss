@@ -1,0 +1,131 @@
+.footer-info {
+    padding-top: remCalc(30);
+    @include breakpoint("medium") { 
+        padding-top: remCalc(60);
+    }
+    
+    article {
+        padding-left: 0;
+        padding-right: 0;
+        @include breakpoint("medium") {
+            padding-left: remCalc(12);
+            padding-right: remCalc(12);
+        }
+        @include breakpoint("large") {
+            margin-left: 0;
+            margin-right: auto;
+        }
+    }
+
+    .socialLinks--alt {
+        margin-bottom: remCalc(18);
+        @media (max-width: (screenSize("medium") - 1px)) { 
+            margin-top: remCalc(14);
+            margin-bottom: spacing("eighth");
+        }
+    }
+}
+
+.footer-info--list {
+    display: flex;
+    @include breakpoint("medium") {
+        margin-right: - remCalc(12);
+        margin-left: - remCalc(12);
+    }
+
+    article {
+        margin-bottom: remCalc(22);
+        
+    }
+
+    &:has(article:nth-child(2)) {
+        justify-content: flex-start;
+        @include breakpoint("medium") { 
+            column-gap: remCalc(130);
+        }
+
+        article {
+            @include breakpoint("medium") {
+                margin-right: unset;
+                margin-left: unset;
+            }
+        }
+    }
+
+    &:has(article:nth-child(3)) {
+        justify-content: unset;
+        column-gap: 0;
+
+        article {
+            @include breakpoint("medium") { 
+                margin-left: 0;
+                margin-right: auto;
+            }
+
+            &:last-child {
+                @include breakpoint("large") {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+    @media screen and (max-width:992px) {
+        flex-wrap: wrap;
+    }
+
+    @media (max-width: (screenSize("medium") - 1px)) {
+        flex-direction: column;
+    }
+    
+}
+
+// papathemes-beautify edited
+
+
+// ----------------------------------------------------------------------------
+// Block About Us
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+// Brands Carousel on footer
+// ----------------------------------------------------------------------------
+.papathemes-brandCarousel-container {
+    text-align: center;
+    font-size: fontSize("base");
+}
+
+.papathemes-brandCarousel {
+    margin-bottom: 0;
+}
+
+
+.papathemes-brandCarousel-slide {
+    text-transform: uppercase;
+    text-align: center;
+    padding: 0 spacing("half");
+    display: inline-block;
+
+    a {
+        font-size: fontSize("large");
+        text-decoration: none;
+        display: block;
+        white-space: nowrap;
+
+        &:hover img,
+        &:focus img {
+            opacity: 0.5;
+        }
+    }
+
+    img {
+        opacity: 1;
+        margin: 0 auto;
+
+        &.lazyload {
+            height: 0;
+        }
+    }
+}
+
+.papathemes-brandCarousel .slick-track {
+    margin: 0 auto;
+}

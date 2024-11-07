@@ -1,0 +1,80 @@
+{{#and settings.blog_enabled (if posts.length '>' 0)}}
+    <div class="beautify__section kitchenary__recentBlog {{#if index}}beautify__section--index{{index}}{{/if}} productCarousel--responsiveCol blaze-slider"
+        {{#if settings.data_tag_enabled}} data-list-name="{{list}}"{{/if}}
+        data-blaze-slider='{
+            "all": {
+                "enableAutoplay": true,
+                "autoplayInterval": 5000,
+                "transitionDuration": 500,
+                "slidesToShow": 3,
+                "slidesToScroll": 3,
+                "slideGap": "30px",
+                "loop": true,
+                "enablePagination": true
+            },
+            "(max-width: 1260px)": {
+                "slidesToShow": 2,
+                "slidesToScroll": 2
+            },
+            "(max-width: 800px)": {
+                "slidesToShow": 2,
+                "slidesToScroll": 2,
+                "slideGap": "16px"
+            },
+            "(max-width: 550px)": {
+                "slidesToShow": 1,
+                "slidesToScroll": 1
+            }
+        }'
+        >
+        <div class="container">
+            {{#if theme_settings.homepage_blog_heading}}
+                <h2 class="page-heading">{{theme_settings.homepage_blog_heading}}</h2>
+            {{else}}
+                <h2 class="page-heading is-srOnly">{{lang 'blog.recent_posts'}}</h2>
+            {{/if}}
+            <div class="blaze-container">
+                <button class="blaze-button blaze-prev" aria-label="{{lang 'common.previous'}}"></button>
+                <div class="blaze-track-container">
+                    <div class="blaze-track">
+                        {{#each posts}}
+                            <div class="_item">
+                                <article class="_blog">
+                                    {{#if thumbnail}}
+                                        <div class="_blog-post-figure">
+                                            <figure class="_blog-thumbnail">
+                                                <a data-instantload href="{{url}}">
+                                                    {{> components/common/responsive-img
+                                                        image=thumbnail
+                                                        fallback_size=theme_settings.blog_size
+                                                        lazyload=theme_settings.lazyload_mode
+                                                    }}
+                                                </a>
+                                            </figure>
+                                        </div>
+                                    {{/if}}
+                                    <div class="_blog-post-body">
+                                        <header class="_blog-header">
+                                            <h3 class="_blog-title">
+                                                <a data-instantload href="{{url}}">{{title}}</a>
+                                            </h3>
+                                        </header>
+                                        <div class="_blog-post">
+                                            <p>{{{sanitize summary}}}...</p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+                <button class="blaze-button blaze-next" aria-label="{{lang 'common.next'}}"></button>
+                <div class="blaze-pagination">
+                </div>
+            </div>
+            <div class="_more">
+                <a href="{{blog.url}}" class="button button--small button--outline">{{lang 'blog.read_more_articles'}}</a>
+            </div>
+        </div>
+    </div>
+{{/and}}

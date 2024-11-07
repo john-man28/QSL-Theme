@@ -1,0 +1,45 @@
+<ul class="navUser-section">
+    <li class="navUser-item navUser-item--cart u-hideDesktop">
+        <a
+            class="navUser-action navUser-action--cart"
+            data-cart-preview
+            data-toggle="cart-preview-dropdown"
+            href="{{urls.cart}}"
+            title="{{lang 'common.cart'}}">
+            <svg class="icon"><use href="#icon-cart" /></svg>
+            <span class="_label">{{lang 'common.cart'}}</span> <span class="countPill cart-quantity"></span>
+        </a>
+    </li>
+
+    <li class="navUser-item navUser-item--account u-hideDesktop">
+        <a class="navUser-action navUser-action--account" href="{{#if customer}}{{urls.account.index}}{{else}}{{urls.auth.login}}{{/if}}" title="{{lang 'common.account'}}">
+            <svg class="icon"><use href="#icon-account" /></svg>
+            <span class="_label">{{lang 'common.account'}}</span>
+        </a>
+    </li>
+
+    {{#if customer.store_credit.value '>' 0}}
+        <li class="navUser-item">
+            <a class="navUser-action navUser-action--storeCredit"
+                data-dropdown="storeCredit-dropdown"
+                data-options="align:bottom"
+                href="{{urls.cart}}"
+                title="{{lang 'common.store_credit_overview' credit=customer.store_credit.formatted}}">
+                <svg class="icon"><use href="#icon-credit" /></svg>
+                <span class="_label">{{lang 'common.store_credit_overview' credit=customer.store_credit.formatted}}</span>
+            </a>
+            <div class="dropdown-menu" id="storeCredit-dropdown" data-dropdown-content aria-hidden="true">
+                {{{lang 'common.store_credit' store_credit=customer.store_credit.formatted}}}
+            </div>
+        </li>
+    {{/if}}
+
+    {{#if settings.phone_number}}
+        <li class="navUser-item navUser-item--phone u-hideDesktop">
+            <a class="navUser-action" href="tel:{{settings.phone_number}}" title="{{lang 'header.call_us' phone_number=settings.phone_number}}">
+                <svg class="icon"><use href="#icon-phone" /></svg>
+                <span class="_label">{{{lang 'header.call_us2' phone_number=settings.phone_number}}}</span>
+            </a>
+        </li>
+    {{/if}}
+</ul>

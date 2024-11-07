@@ -1,0 +1,446 @@
+// COMMON SECTIONS
+// ============================================================================
+
+%papathemes-section-page-heading {
+    font-size: fontSize("largest");
+
+    @include breakpoint("medium") {
+        font-size: fontSize("larger");
+        display: inline-block;
+        border-bottom: 2px solid color("primary");
+        text-align: center;
+        @if $theme-style == "compact" {
+            margin: 0 0 spacing("single");
+        }
+
+        &::after {
+            content: " ";
+            display: block;
+            font-size: 0;
+            height: 0;
+            border-top: container("border");
+            position: absolute;
+            width: 100%;
+            margin-top: spacing("half") + remCalc(2px);
+        }
+    }
+}
+
+.papathemes-sections-group {
+    display: inline;
+}
+
+.papathemes-section {
+    @if $theme-style == "compact" {
+        padding: spacing("half") 0;
+    }
+    @else {
+        padding: spacing("single") 0;
+    }
+}
+
+.papathemes-section-inner {
+    position: relative;
+
+    > .page-heading {
+        @extend %papathemes-section-page-heading;
+    }
+}
+
+.papathemes-section--alt {
+    background-color: container("fill", "dark");
+
+    @include breakpoint("medium") {
+        width: 100vw;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .papathemes-section-inner {
+        @extend %papathemes-container;
+    }
+}
+
+
+
+// SECTION 1
+// ============================================================================
+.container--papathemes-section1-fullwidth.container,
+.container--papathemes-section1-stretch.container {
+    padding: 0;
+    margin: 0;
+    max-width: none;
+}
+
+.papathemes-section1 {
+    margin-top: 0;
+}
+
+.papathemes-section1--fullwidth,
+.papathemes-section1--stretch {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.papathemes-section1-socials {
+    display: none;
+}
+
+.papathemes-section1-top {
+    @include breakpoint("medium") {
+        display: flex;
+        align-items: center;
+        padding: spacing("quarter") 0;
+        background: $body-bg;
+
+        .papathemes-section1-hotNews {
+            flex: 1;
+        }
+
+        .papathemes-section1-socials {
+            display: block;
+            flex: 0;
+            white-space: nowrap;
+            padding-left: spacing("single");
+        }
+    }
+}
+
+.container--papathemes-section1-boxed.container {
+    @include breakpoint("medium") {
+        row-gap: spacing("single");
+        position: relative;
+
+        .papathemes-section1--boxed,
+        .blaze-container {
+            position: static;
+        }
+    }
+}
+
+.heroCarousel-container-bg._has-left._has-right .container--papathemes-section1-boxed.container,
+.heroCarousel-container-bg._has-left .container--papathemes-section1-boxed.container,
+.heroCarousel-container-bg._has-right .container--papathemes-section1-boxed.container,
+.heroCarousel-container-bg .container--papathemes-section1-boxed.container {
+    display: flex;
+    flex-direction: column;
+    @include breakpoint("medium") {
+        @if (
+            stencilColor("navPages-backgroundColor") ==
+            stencilColor("carousel-section-bgColor")
+        ) {
+            padding-top: 0;
+        }
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        justify-content: space-between;
+        column-gap: spacing("single");
+    }
+    background-color: stencilColor("carousel-section-bgColor");
+    @if (
+        stencilColor("navPages-backgroundColor-mobile") ==
+        stencilColor("carousel-section-bgColor")
+    ) {
+        padding-top: 0;
+    }
+    @media (max-width: screenSize("large") - 1px) {
+        padding: 0 spacing("single");
+        padding-bottom: spacing("double");
+    }
+    @media (max-width: screenSize("medium") - 1px) {
+        padding: 0 spacing("half");
+        padding-bottom: spacing("double");
+    }
+}
+
+.heroCarousel-container-bg .container--papathemes-section1-boxed.container {
+    @media (max-width: screenSize("small") - 1px) {
+        padding-bottom: 0;
+    }
+}
+
+.heroCarousel {
+    @include breakpoint("medium") {
+        padding-bottom: 2.5rem;
+    }
+    padding-bottom: 0;
+    @if $theme-variant == "game" {
+        .blaze-container {
+            .blaze-pagination {
+                button {
+                    background-color: $slick-dot-color;
+
+                    &.active {
+                        background-color: $slick-dot-color-active;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.heroCarousel-container-bg .papathemes-section1--boxed {
+    @include breakpoint("medium") {
+        margin: 0 auto;
+    }
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-radius: $container-border-radius;
+}
+
+.heroCarousel-container-bg .papathemes-section1--boxed {
+    width: 100%;
+    grid-column: 1 / 5;
+}
+
+.heroCarousel-container-bg._has-left .papathemes-section1--boxed {
+    @include breakpoint("medium") {
+        width: 100%;
+        grid-column: 2 / 5;
+    }
+    width: 100%;
+}
+
+.heroCarousel-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.heroCarousel-container-bg {
+    background-color: stencilColor("carousel-section-bgColor");
+}
+
+.heroCarousel-container-bg:not(:has(.heroCarousel-container)) {
+    display: none;
+}
+
+.heroCarousel-container {
+    position: static;
+    overflow: hidden;
+
+    .slick-next,
+    .slick-prev {
+        &::after {
+            border-color: $body-bg;
+        }
+
+        &:hover::after,
+        &:focus::after {
+            border-color: stencilColor("carousel-dot-color-active");
+            box-shadow: 0 4px 4px 0 rgba(stencilColor("color-black"), 0.2);
+            transition: 0.2s ease-in-out;
+        }
+    }
+
+    .slick-next {
+        &::before {
+            background-image: $heroCarousel-slick-arrow-next;
+        }
+
+        &:hover::before,
+        &:focus::before {
+            background-image: $heroCarousel-slick-arrow-next-hover;
+        }
+    }
+
+    .slick-prev {
+        &::before {
+            background-image: $heroCarousel-slick-arrow-prev;
+        }
+
+        &:hover::before,
+        &:focus::before {
+            background-image: $heroCarousel-slick-arrow-prev-hover;
+        }
+    }
+}
+
+// Stretch
+.container--papathemes-section1-stretch.container {
+    display: grid;
+    grid-template-columns: 20% 1fr 20%;
+    column-gap: spacing("single");
+    row-gap: spacing("single");
+    padding: 0;
+    @include breakpoint("medium") {
+        padding-bottom: 0;
+        row-gap: spacing("single");
+    }
+
+    padding-bottom: spacing("single");
+
+    .papathemes-section1--stretch {
+        width: 100%;
+        grid-column: 1 / 4;
+        border-radius: $container-border-radius;
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        .slick-list {
+            position: static;
+        }
+
+        .heroCarousel--stretch {
+            position: static;
+        }
+    }
+
+}
+
+.heroCarousel-container-bg._has-left._has-right .container--papathemes-section1-stretch.container,
+.heroCarousel-container-bg._has-left .container--papathemes-section1-stretch.container,
+.heroCarousel-container-bg._has-right .container--papathemes-section1-stretch.container,
+.heroCarousel-container-bg .container--papathemes-section1-stretch.container {
+    @include breakpoint("medium") {
+        padding-top: 0;
+        @if (
+            stencilColor("navPages-backgroundColor") ==
+            stencilColor("carousel-section-bgColor")
+        ) {
+            padding-top: 0;
+        }
+    }
+
+    @media (max-width : (screenSize("small") - 1px)) {
+        padding-bottom: 0;
+    }
+
+    background-color: stencilColor("carousel-section-bgColor");
+    padding-top: 0;
+    @if (stencilColor("navPages-backgroundColor-mobile") == stencilColor("carousel-section-bgColor")) {
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 1023px) {
+    .container--papathemes-section1-stretch.container {
+        padding: 0;
+        padding-bottom: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .papathemes-section1--stretch {
+            order: 1;
+        }
+    }
+}
+//Full width
+.container--papathemes-section1-fullwidth.container {
+    padding: 0;
+    width: 100%;
+    margin: 0 auto;
+    // .papathemes-section1--fullwidth{
+    // 	max-height: 485px;
+    // 	.heroCarousel-container{
+    // 		height: 100%;
+    // 		// .slick-list{
+    // 		// 	height: 100%;
+    // 		// }
+    // 	}
+    // }
+    @include breakpoint("medium") {
+        padding-bottom: spacing("double");
+        row-gap: spacing("single");
+    }
+    padding-bottom: spacing("single");
+    display: grid;
+    grid-template-columns: 21.3% repeat(2, 1fr) 21.3%;
+    column-gap: spacing("single");
+    row-gap: spacing("single");
+    @media (max-width: 550px) {
+        column-gap: spacing("half");
+        row-gap: spacing("half");
+    }
+
+    .papathemes-section1--fullwidth {
+        width: 100%;
+        grid-column: 1 / 5;
+        border-radius: $container-border-radius;
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        .slick-list {
+            position: static;
+        }
+
+        .heroCarousel--fullwidth {
+            position: static;
+            @media (max-width: 550px) {
+                position: relative;
+                margin-bottom: spacing("double");
+            }
+        }
+    }
+}
+
+.heroCarousel-container-bg .container--papathemes-section1-fullwidth.container {
+    padding-bottom: 0;
+}
+
+.heroCarousel-container-bg._has-left._has-right .container--papathemes-section1-fullwidth.container,
+.heroCarousel-container-bg._has-left .container--papathemes-section1-fullwidth.container,
+.heroCarousel-container-bg._has-right .container--papathemes-section1-fullwidth.container,
+.heroCarousel-container-bg .container--papathemes-section1-fullwidth.container {
+    @include breakpoint("medium") {
+        @if (
+            stencilColor("navPages-backgroundColor") ==
+            stencilColor("carousel-section-bgColor")
+        ) {
+            padding-top: 0;
+        }
+    }
+    background-color: stencilColor("carousel-section-bgColor");
+    @if (stencilColor("navPages-backgroundColor-mobile") == stencilColor("carousel-section-bgColor")) {
+        padding-top: 0;
+    }
+}
+
+.heroCarousel-container-bg {
+    .container--papathemes-section1-fullwidth.container {
+        @media (max-width : (screenSize("large") - 1px)) {
+            padding-bottom: calc(#{spacing("double")});
+        }
+    }
+
+    &:has(.heroCarousel-content) {
+        @media (max-width: (screenSize("small") - 1px)) { 
+            .container--papathemes-section1-fullwidth.container {
+                padding-bottom: 0;
+            }
+        }
+    }
+}
+
+@media (max-width: 1023px) {
+    .container--papathemes-section1-fullwidth.container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .papathemes-section1--fullwidth {
+            order: 1;
+        }
+    }
+}
+
+.heroCarousel-container-bg {
+    .container--papathemes-section1-stretch,
+    .container--papathemes-section1-fullwidth {
+        [data-layout-name] > [data-sub-layout] {
+            [data-test-theme] > .container {
+                max-width: unset;
+            }
+        }
+    }
+}
+
+[data-content-region="home_below_carousel"] {
+    [data-layout-name="HOME-BELOW-CAROUSEL"] {
+        max-width: unset;
+    }
+}

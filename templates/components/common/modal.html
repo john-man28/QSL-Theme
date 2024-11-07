@@ -1,0 +1,81 @@
+<div id="modal" class="modal" data-reveal data-prevent-quick-search-close>
+    <a href="#" class="modal-close" aria-label="{{lang 'common.close'}}" role="button">
+        <svg class="icon"><use href="#icon-close" /></svg>
+    </a>
+    <div class="modal-content"></div>
+    <div class="loadingOverlay"></div>
+</div>
+
+<div id="previewModal" class="modal modal--large" data-reveal>
+    <a href="#" class="modal-close" aria-label="{{lang 'common.close'}}" role="button">
+        <svg class="icon"><use href="#icon-close" /></svg>
+    </a>
+    <div class="modal-content"></div>
+    <div class="loadingOverlay"></div>
+</div>
+
+<div id="popupModal" class="modal modal--large" data-reveal>
+    <a href="#" class="modal-close" aria-label="{{lang 'common.close'}}" role="button">
+        <svg class="icon"><use href="#icon-close" /></svg>
+    </a>
+    <div class="modal-content"></div>
+    <div class="loadingOverlay"></div>
+</div>
+
+<div class="micromodal-slide blog-post-popup" id="blogPostModal" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <span class="loader"></span>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+            <header class="modal__header">
+                <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+            </header>
+            <main class="modal__body">
+            </main>
+        </div>
+    </div>
+</div>
+
+{{#if theme_settings.variant '==' 'game' }}
+    <div class="micromodal-slide region-retriction-modal" id="regionRetrictionModal" aria-hidden="true">
+        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <span class="loader"></span>
+            <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                <header class="modal__header">
+                    <div class="region-title">
+                        <svg class="icon activated"><use href="#icon-circle-success"></svg>
+                        <svg class="icon not-activated"><use href="#icon-circle-close"></svg>
+                        <span class="region-title-text" data-region-title data-region-cannot-activated="{{lang 'products.special_customfield.restricted_cannot_activated'}}">{{lang 'products.special_customfield.restricted_can_activated'}}</span>
+                        <span data-region-name></span>
+                    </div>
+                    <button class="modal__close" aria-label="Close modal" data-micromodal-close><svg data-micromodal-close class="icon"><use href="#icon-close3" /></svg></button>
+                </header>
+                <main class="modal__body">
+                    <div class="region-info">
+                        <div class="region-info-restricted">
+                            <label class="region-info-label">{{lang 'products.special_customfield.restricted_label'}}</label>
+                            <div class="region-info-restrictedList" data-region-global="{{lang 'products.special_customfield.global'}}">
+                                <button id="restricted-more" data-restricted-collapse="false" data-show-more="{{lang 'products.special_customfield.show_more'}}" data-show-less="{{lang 'products.special_customfield.show_less'}}" style="display: none;"></button>
+                            </div>
+                        </div>
+                        <div class="region-info-country">
+                            <label class="region-info-label">{{lang 'products.special_customfield.your_country'}}</label>
+                            <label class="form-label region-info-value"></label>
+                        </div>
+                    </div>
+                    <div class="region-country">
+                        <div class="region-search">
+                            <label class="form-label region-search-label">{{lang 'products.special_customfield.search_label'}}</label>
+                            <div class="region-search-field">
+                                <svg class="icon"><use href="#icon-bs-search"></use></svg>
+                                <input id="region-search" placeholder="{{lang 'products.special_customfield.search_placeholder'}}">
+                            </div>
+                        </div>
+
+                        <ul class="region-list">
+                        </ul>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+{{/if}}

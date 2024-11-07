@@ -1,0 +1,54 @@
+<div class="_wrapper-coupon-code">
+    {{#if cart.coupons}}
+        {{#each cart.coupons}}
+            <div class="cart-total cart-total--coupons">
+                <div class="cart-total-label">
+                    {{lang 'cart.coupons.code_label' code=code}}
+                    <div>
+                        <a href="{{remove_url}}">{{lang 'cart.coupons.remove'}}</a>
+                    </div>
+                </div>
+                <div class="cart-total-value">
+                    <span>{{discount.formatted}}</span>
+                </div>
+            </div>
+        {{/each}}
+    {{else}}
+        <div class="cart-total-label _coupon-code-input">
+            {{{lang 'cart.coupons.add_title'}}}
+            <button class="coupon-code-cancel" style="display: none;">{{lang 'cart.coupons.cancel'}}<i><svg class='icon'><use href='#icon-chervon-right-thin'></use></svg></i></button>
+        </div>
+        <div class="cart-form coupon-code" style="display: none;">
+            <form class="form form--hiddenLabels coupon-form" method="post" action="{{urls.cart}}">
+                <label class="form-label" for="couponcode">{{lang 'cart.coupons.coupon_code'}}</label>
+                <input class="form-input" data-error="{{lang 'cart.coupons.empty_error'}}"  id="couponcode" type="text" name="couponcode" value="" placeholder="{{lang 'cart.coupons.coupon_code'}}">
+                <input class="button button--primary button--small" type="submit" value="{{lang 'cart.coupons.button'}}">
+                <input type="hidden" name="action" value="applycoupon">
+            </form>
+        </div>
+    {{/if}}
+</div>
+<ul class="previewCartAction-totals">
+    {{#each cart.taxes}}
+        <li class="cart-total cart-total--taxes">
+            <div class="cart-total-label">
+                {{name}}:
+            </div>
+            <div class="cart-total-value">
+                <span>{{cost.formatted}}</span>
+            </div>
+        </li>
+    {{/each}}
+    <li class="cart-total cart-total--grandTotal">
+        <div class="cart-total-label">
+            {{lang 'cart.checkout.total'}}:
+        </div>
+        <div class="cart-total-value cart-total-grandTotal">
+            {{#or customer (unless settings.hide_price_from_guests)}}
+                <span>{{cart.grand_total.formatted}}</span>
+            {{else}}
+                {{> components/common/login-for-pricing}}
+            {{/or}}
+        </div>
+    </li>
+</ul>

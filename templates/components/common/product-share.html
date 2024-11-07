@@ -1,0 +1,16 @@
+{{#or settings.add_this.buttons settings.facebook_like_button.enabled}}
+    {{assignVar 'encodedUrl' (encodeURI product.url)}}
+    {{assignVar 'encodedTitle' (encodeURI head.title)}}
+    <div class="form-share">
+        <a href="#" class="button dropdown-menu-button" data-dropdown="share-dropdown--{{product.id}}" aria-controls="share-dropdown--{{product.id}}" aria-expanded="false">
+            <svg class="icon"><use href="#icon-share" /></svg>
+            <span class="is-srOnly">{{lang 'common.share'}}</span>
+        </a>
+        <div class="socialLinks socialLinks--alt" id="share-dropdown--{{product.id}}" tabindex="-1">
+            <div class="form-field">
+                <label class="form-label" for="share_link--{{product.id}}">{{lang 'common.share'}}</label>
+                <input class="form-input" type="text" id="share_link--{{product.id}}" name="share_link--{{product.id}}" value="{{product.url}}">
+            </div>
+        </div>
+    </div>
+{{/or}}

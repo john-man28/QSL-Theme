@@ -1,0 +1,15 @@
+<div class="footer-section--gMap">
+    <div id="footerGMap-map" class="footerGMap-map"></div>
+    <script>
+        function kitchenary_footerGMap_initMap() {
+            var addr = {{{json theme_settings.gmap_loc}}}.split(",").map(parseFloat);
+            var loc = { lat: addr[0], lng: addr[1] };
+            var map = new google.maps.Map(document.getElementById('footerGMap-map'), {
+                center: loc,
+                zoom: addr[2] || 13
+            });
+            var marker = new google.maps.Marker({position: loc, map: map});
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{theme_settings.gmap_api_key}}&callback=kitchenary_footerGMap_initMap" async defer></script>
+</div>

@@ -1,0 +1,103 @@
+.beautify__homeWideBanner[data-test-theme="kitchenary"] {
+    ._box {
+        border-radius: 0;
+
+        ._content {
+            padding: spacing("single") spacing("base");
+
+            @include breakpoint("medium") {
+                padding: spacing("single") spacing("double");
+            }
+
+            @include breakpoint("large") {
+                padding: spacing("single") spacing("single") * 3;
+            }
+
+            @include breakpoint("xlarge") {
+                padding: spacing("single") spacing("single") * 4;
+            }
+        }
+
+        ._heading {
+            font-family: $header-font-family;
+            font-weight: $header-font-weight;
+            font-size: fontSize("large");
+            @include breakpoint("medium") {
+                font-size: beautify__fontSize(32);
+                margin-bottom: spacing("single");
+            }
+        }
+
+        ._description {
+            font-size: inherit;
+            @if $theme-variant == "game" {
+                line-height: 1.8;
+            }
+            @include breakpoint("medium") {
+                @if $theme-variant == "game" {
+                    max-width: remCalc(500);
+                    margin-bottom: spacing("single");
+                    font-weight: fontWeight("normal");
+                }
+                @else {
+                    margin-bottom: spacing("single") + spacing("half");
+                }
+            }
+        }
+
+        .button {
+            @if $theme-variant == "game" {
+                font-size: fontSize("smaller");
+                @include breakpoint("medium") {
+                    padding: spacing("base") spacing("single") * 3;
+                }
+            }
+        }
+
+        &:hover {
+            img {
+                transform: none;
+            }
+        }
+    }
+
+    @media (max-width: screenSize("medium") - 1px) {
+        ._box {
+            flex-direction: column;
+        }
+
+        ._imgContainer {
+            position: relative;
+            height: var(--image-height-mobile);
+            overflow: hidden;
+
+            img {
+                position: relative;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    @include breakpoint("medium") {
+        ._imgContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        ._content {
+            position: relative;
+        }
+
+        &[data-test-content-alignment-horizontal="left"] {
+            ._box {
+                flex-direction: row-reverse;
+            }
+        }
+    }
+}

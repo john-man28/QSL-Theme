@@ -1,0 +1,82 @@
+.beautify__section--customer-service {
+    .body-service {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: spacing("single") * 1.25;
+
+        .customer-service {
+            display: flex;
+            align-items: center;
+            column-gap: spacing("single");
+            @if $theme-variant == "game" {
+                padding: spacing("base") 0;
+            }
+            @else {
+                padding: spacing("single") 0;
+            }
+            justify-content: center;
+            border-radius: stencilNumber("container-border-radius");
+            background-color: stencilColor("color-secondary");
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+            width: calc(100% / 3);
+            text-decoration: none;
+
+            &:hover {
+                background-color: stencilColor("color-textLink");
+
+                .icon {
+                    fill: stencilColor("color-secondary");
+                }
+
+                .title-service {
+                    color: stencilColor("color-secondary");
+                }
+            }
+
+            .icon {
+                fill: stencilColor("color-textLink");
+                transition: fill 0.15s ease;
+                @if $theme-variant == "game" {
+                    @include square(70);
+                    object-fit: contain;
+                }
+                @else {
+                    @include square(50);
+                }
+            }
+
+            .title-service {
+                @if $theme-variant == "game" {
+                    color: rgba(stencilColor("color-textBase"), 0.6);
+                }
+                @else {
+                    color: stencilColor("color-textLink");
+                }
+                font-weight: fontWeight("semibold");
+                font-size: fontSize("large");
+                transition: color 0.15s ease;
+            }
+
+            @media (max-width: (screenSize("medium") - 1px)) {
+                width: 100%;
+            }
+        }
+    }
+
+    @media (max-width: (screenSize("medium") - 1px)) {
+        .body-service {
+            column-gap: spacing("half");
+
+            .customer-service {
+                flex-direction: column;
+                gap: spacing("half");
+
+                .title-service {
+                    font-size: inherit;
+                }
+            }
+        }
+    }
+}

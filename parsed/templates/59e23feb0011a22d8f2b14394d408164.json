@@ -1,0 +1,4 @@
+{
+  "components/search/show-more": "{{#if product_results}}\n    {{> components/faceted-search/show-more-facets product_results}}\n{{/if}}\n",
+  "components/faceted-search/show-more-facets": "{{#each facets}}\n    {{#if facet '===' ../all_facets}}\n        {{#each items}}\n            <li class=\"navList-item\">\n                <a\n                href=\"{{url}}\"\n                class=\"navList-action navList-action--checkbox {{#if selected }} is-selected {{/if}}\"\n                rel=\"nofollow\"\n                data-faceted-search-facet\n                >\n                    {{{title}}}\n                    {{#if ../show_product_counts}}\n                        {{#if count}}\n                            <span>{{count}}</span>\n                        {{/if}}\n                    {{/if}}\n                </a>\n            </li>\n        {{/each}}\n    {{/if}}\n{{/each}}"
+}

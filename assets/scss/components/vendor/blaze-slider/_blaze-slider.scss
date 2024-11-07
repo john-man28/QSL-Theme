@@ -1,0 +1,143 @@
+
+.blaze-container {
+    @include breakpoint("medium") {
+        margin: 0 (- spacing("half"));
+    }
+
+    .blaze-track-container {
+        position: relative;
+        @include breakpoint("large") {
+            padding: spacing("eighth") spacing("base");
+        }
+        @media (max-width: screenSize("medium") - 1px) {
+            padding: 0;
+        }
+        padding: spacing("eighth") spacing("half");
+    }
+
+    .blaze-prev,
+    .blaze-next {
+        position: absolute;
+        display: block;
+        top: 50%;
+        z-index: 1;
+        padding: remCalc(10px);
+        width: remCalc(40px);
+        height: remCalc(40px);
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(stencilColor("color-black"), 0.15);
+        background: stencilColor("button--white-backgroundColor");
+
+        @media (max-width: screenSize("medium") - 1px) {
+            display: none;
+        }
+
+        &::before {
+            content: "";
+            background-repeat: no-repeat;
+            background-size: 100%;
+            display: block;
+            height: remCalc(18px);
+            width: remCalc(10px);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        &:hover {
+            background-position: 50%;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background: stencilColor("button--white-backgroundColorHover");
+            box-shadow: 0 4px 8px rgba(stencilColor("color-black"), 0.15);
+        }
+
+        &:hover {
+            &::after {
+                border-color: stencilColor("carousel-dot-color-active");
+            }
+        }
+    }
+
+    .blaze-prev {
+        transform: translate(0, -50%);
+        left: - spacing("base") * 2;
+
+        @media (min-width: 1750px) {
+            left: -(spacing("base") * 3.5);
+        }
+
+        @media (max-width: screenSize("large") - 1px) {
+            left: spacing("eighth");
+        }
+
+        &::before {
+            background-image: $slick-arrow-prev;
+        }
+
+        &:hover {
+            &::before {
+                background-image: $slick-arrow-prev-hover;
+            }
+        }
+    }
+
+    .blaze-next {
+        transform: translate(0, -50%);
+        right: - spacing("base") * 2;
+
+        @media (min-width: 1750px) {
+            right: -(spacing("base") * 3.5);
+        }
+
+        @media (max-width: screenSize("large") - 1px) {
+            right: spacing("eighth");
+        }
+
+        &::before {
+            background-image: $slick-arrow-next;
+        }
+
+        &:hover {
+            &::before {
+                background-image: $slick-arrow-next-hover;
+            }
+        }
+    }
+
+    .blaze-pagination {
+        display: flex;
+        gap: spacing("base") * 0.625;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: spacing("half") 0;
+
+        button {
+            color: transparent;
+            font-size: 0;
+            padding: 0;
+            @include square(10px);
+            border-radius: 50%;
+            
+            @if $theme-variant == "game" {
+                background-color: stencilColor("color-secondaryDarker");
+                
+            }@else {
+                background-color: $slick-dot-color;
+            }
+
+            &.active {
+                
+                @if $theme-variant == "game" {
+                    background-color: stencilColor("color-primary");
+                }
+                @else {
+                    background-color: $slick-dot-color-active;
+                }
+            }
+        }
+
+        &:not(:has(button)) {
+            display: none;
+        }
+    }
+}

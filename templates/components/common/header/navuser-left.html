@@ -1,0 +1,83 @@
+<ul class="navUser-section u-hideDesktop">
+    <li class="navUser-item navUser-item--account u-hideDesktop">
+        <a class="navUser-action navUser-action--account" href="{{#if customer}}{{urls.account.index}}{{else}}{{urls.auth.login}}{{/if}}" title="{{lang 'common.account'}}">
+            <svg class="icon"><use href="#icon-account" /></svg>
+            <span class="_label">{{lang 'common.account'}}</span>
+        </a>
+    </li>
+    {{#if settings.phone_number}}
+        <li class="navUser-item navUser-item--phone u-hideDesktop">
+            <a class="navUser-action" href="tel:{{settings.phone_number}}" title="{{lang 'header.call_us' phone_number=settings.phone_number}}">
+                <svg class="icon"><use href="#icon-phone" /></svg>
+                <span class="_label">{{{lang 'header.call_us2' phone_number=settings.phone_number}}}</span>
+            </a>
+        </li>
+    {{/if}}
+
+    {{#if customer.store_credit.value '>' 0}}
+        <li class="navUser-item">
+            <a class="navUser-action navUser-action--storeCredit"
+                data-dropdown="storeCredit-dropdown"
+                data-options="align:bottom"
+                href="{{urls.cart}}"
+                title="{{lang 'common.store_credit_overview' credit=customer.store_credit.formatted}}">
+                <svg class="icon"><use href="#icon-credit" /></svg>
+                <span class="_label">{{lang 'common.store_credit_overview' credit=customer.store_credit.formatted}}</span>
+            </a>
+            <div class="dropdown-menu" id="storeCredit-dropdown" data-dropdown-content aria-hidden="true">
+                {{{lang 'common.store_credit' store_credit=customer.store_credit.formatted}}}
+            </div>
+        </li>
+    {{/if}}
+
+    <li class="navUser-item navUser-item--cart">
+        <a
+            class="navUser-action navUser-action--cart u-hideDesktop"
+            data-cart-preview
+            data-toggle="cart-preview-dropdown"
+            href="{{urls.cart}}"
+            title="{{lang 'common.cart'}}">
+            <svg class="icon"><use href="#icon-cart" /></svg>
+            <span class="_total-cart">
+                <span class="_total-items">
+                    <span class="countPill cart-quantity"></span><span class="_label cart-quantity-label">
+                        <span class="_single-item">{{lang 'cart.single_item'}}</span>
+                        <span class="_plural-item">{{lang 'cart.plural_item'}}</span>
+                    </span>
+                </span>
+                <span data-cart-preview-price class="_total-price-nav"></span>
+            </span>
+        </a>
+    </li>
+</ul>
+
+{{#if theme_settings.logo_position '==' 'center'}}
+    {{#or (if theme_settings.variant '==' 'fashion') (if theme_settings.variant '==' 'game')}}
+        {{> components/common/header/navuser-account}}
+    {{/or}}
+    <ul class="navUser-section _contentNav u-hideMobile u-hideTablet">
+        {{#unless theme_settings.hide_content_navigation}}
+            {{assignVar 'navWebPageCount' 0}}
+            {{#and theme_settings.navPages_webpageFrom (if theme_settings.navPages_webpageFrom '>' 1)}}
+                {{#each (limit (after pages (subtract theme_settings.navPages_webpageFrom 1)) theme_settings.navPages_webpageLimit)}}
+                    <li class="navPages-item navPages-item--page">
+                        {{> components/beautify/navigation-list theme_settings=../theme_settings menu_type='standard' page_type='page' idSuffix='-navUser'}}
+                    </li>
+                {{/each}}
+            {{else}}
+                {{#each (limit pages theme_settings.navPages_webpageLimit)}}
+                    <li class="navPages-item navPages-item--page">
+                        {{> components/beautify/navigation-list theme_settings=../theme_settings menu_type='standard' page_type='page' idSuffix='-navUser'}}
+                    </li>
+                {{/each}}
+            {{/and}}
+        {{/unless}}
+        {{#if settings.gift_certificates_enabled}}
+            <li class="navUser-item navPages-item--page navUser-item--giftCert">
+                <a class="navUser-action navUser-action--giftCert" href="{{urls.gift_certificate.purchase}}" title="{{lang 'common.gift_cert'}}">
+                    <span class="_label">{{lang 'common.gift_cert'}}</span>
+                </a>
+            </li>
+        {{/if}}
+    </ul>
+{{/if}}

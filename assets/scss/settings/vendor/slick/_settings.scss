@@ -1,0 +1,51 @@
+// Slick Carousel
+// -----------------------------------------------------------------------------
+//
+// Purpose: Settings for the vendor carousel, Slick
+//
+// -----------------------------------------------------------------------------
+
+$slick-font-path:                   "./fonts/";
+$slick-font-family:                 inherit;
+$slick-loader-path:                 null;
+$slick-arrow-color:                 stencilColor("button--white-color");
+$slick-arrow-color-secondary:       stencilColor("color-secondary");
+$slick-arrow-color-hover:           stencilColor("button--white-colorHover");
+$slick-arrow-bgColor:               rgba(stencilColor("carousel-dot-color-active"), 0);
+$slick-arrow-prev:                  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='18' viewBox='0 0 10 18' fill='none'%3E%3Cpath d='M0.370547 8.11719C-0.124245 8.60547 -0.124245 9.39844 0.370547 9.88672L7.97055 17.3867C8.46534 17.875 9.26888 17.875 9.76367 17.3867C10.2585 16.8984 10.2585 16.1055 9.76367 15.6172L3.05826 9L9.75971 2.38281C10.2545 1.89453 10.2545 1.10156 9.75971 0.613281C9.26492 0.125 8.46138 0.125 7.96659 0.613281L0.366588 8.11328L0.370547 8.11719Z' fill='#{str-replace(#{$slick-arrow-color}, "#", "%23")}'/%3E%3C/svg%3E");
+$slick-arrow-prev-hover:            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='18' viewBox='0 0 10 18' fill='none'%3E%3Cpath d='M0.501821 8.33934C0.0136347 8.8414 0.0136347 9.65676 0.501821 10.1588L8.00036 17.8705C8.48854 18.3726 9.28136 18.3726 9.76954 17.8705C10.2577 17.3685 10.2577 16.5531 9.76954 16.051L3.15365 9.24707L9.76564 2.4431C10.2538 1.94103 10.2538 1.12568 9.76564 0.623618C9.27745 0.121554 8.48464 0.121554 7.99645 0.623618L0.497914 8.33532L0.501821 8.33934Z' fill='#{str-replace(#{$slick-arrow-color-hover}, "#", "%23")}'/%3E%3C/svg%3E%0A");
+$slick-arrow-prev-color-secondary:  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='18' viewBox='0 0 10 18' fill='none'%3E%3Cpath d='M10.1651 8.33934C10.6533 8.8414 10.6533 9.65675 10.1651 10.1588L2.66658 17.8705C2.17839 18.3726 1.38558 18.3726 0.897389 17.8705C0.409204 17.3685 0.409204 16.5531 0.897389 16.051L7.51328 9.24707L0.901295 2.4431C0.413109 1.94103 0.413109 1.12568 0.901295 0.623618C1.38948 0.121554 2.18229 0.121554 2.67048 0.623618L10.169 8.33532L10.1651 8.33934Z' fill='#{str-replace(#{$slick-arrow-color-secondary}, "#", "%23")}'/%3E%3C/svg%3E%0A");
+$slick-arrow-prev-topBanner:        url("data:image/svg+xml,%3Csvg width='24' height='21' viewBox='0 0 24 21' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.222414 10.6969L8.86222 19.9106C9.03408 20.0938 9.3153 20.1828 9.50278 20.1828C9.71037 20.1828 9.91878 20.1108 10.084 19.9652C10.4367 19.6544 10.4628 19.1245 10.1422 18.7826L2.81592 10.9691H22.4656C22.9432 10.9691 23.3296 10.5946 23.3296 10.1786C23.3296 9.76271 22.9431 9.29392 22.4656 9.29392H2.81644L10.1439 1.47801C10.4645 1.13611 10.4384 0.605849 10.0856 0.295411C9.73208 -0.0137704 9.18625 0.00910681 8.8644 0.352682L0.224602 9.56635C-0.0744324 9.88548 -0.0744324 10.3776 0.222414 10.6969Z' fill='#{str-replace(#{stencilColor("topBanner-color")}, "#", "%23")}'/%3E%3C/svg%3E%0A");
+$slick-arrow-next:                  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='18' viewBox='0 0 10 18' fill='none'%3E%3Cpath d='M10.1651 8.33934C10.6533 8.8414 10.6533 9.65675 10.1651 10.1588L2.66658 17.8705C2.17839 18.3726 1.38558 18.3726 0.897389 17.8705C0.409204 17.3685 0.409204 16.5531 0.897389 16.051L7.51328 9.24707L0.901295 2.4431C0.413109 1.94103 0.413109 1.12568 0.901295 0.623618C1.38948 0.121554 2.18229 0.121554 2.67048 0.623618L10.169 8.33532L10.1651 8.33934Z' fill='#{str-replace(#{$slick-arrow-color}, "#", "%23")}'/%3E%3C/svg%3E%0A");
+$slick-arrow-next-hover:            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='18' viewBox='0 0 10 18' fill='none'%3E%3Cpath d='M10.1651 8.33934C10.6533 8.8414 10.6533 9.65675 10.1651 10.1588L2.66658 17.8705C2.17839 18.3726 1.38558 18.3726 0.897389 17.8705C0.409204 17.3685 0.409204 16.5531 0.897389 16.051L7.51328 9.24707L0.901295 2.4431C0.413109 1.94103 0.413109 1.12568 0.901295 0.623618C1.38948 0.121554 2.18229 0.121554 2.67048 0.623618L10.169 8.33532L10.1651 8.33934Z' fill='#{str-replace(#{$slick-arrow-color-hover}, "#", "%23")}'/%3E%3C/svg%3E%0A");
+$slick-arrow-next-color-secondary:  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='18' viewBox='0 0 10 18' fill='none'%3E%3Cpath d='M10.1651 8.33934C10.6533 8.8414 10.6533 9.65675 10.1651 10.1588L2.66658 17.8705C2.17839 18.3726 1.38558 18.3726 0.897389 17.8705C0.409204 17.3685 0.409204 16.5531 0.897389 16.051L7.51328 9.24707L0.901295 2.4431C0.413109 1.94103 0.413109 1.12568 0.901295 0.623618C1.38948 0.121554 2.18229 0.121554 2.67048 0.623618L10.169 8.33532L10.1651 8.33934Z' fill='#{str-replace(#{$slick-arrow-color-secondary}, "#", "%23")}'/%3E%3C/svg%3E%0A");
+$slick-arrow-next-topBanner:        url("data:image/svg+xml,%3Csvg width='24' height='21' viewBox='0 0 24 21' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M23.4368 10.6969L14.797 19.9106C14.6251 20.0938 14.3439 20.1828 14.1564 20.1828C13.9488 20.1828 13.7404 20.1108 13.5752 19.9652C13.2225 19.6544 13.1963 19.1245 13.517 18.7826L20.8433 10.9691H1.19357C0.715959 10.9691 0.32959 10.5946 0.32959 10.1786C0.32959 9.76271 0.716063 9.29392 1.19357 9.29392H20.8427L13.5153 1.47801C13.1947 1.13611 13.2208 0.605849 13.5735 0.295411C13.9271 -0.0137704 14.4729 0.00910681 14.7948 0.352682L23.4346 9.56635C23.7336 9.88548 23.7336 10.3776 23.4368 10.6969Z' fill='#{str-replace(#{stencilColor("topBanner-color")}, "#", "%23")}'/%3E%3C/svg%3E%0A");
+$slick-dot-color:                   stencilColor("carousel-dot-color");
+$slick-dot-color-active:            stencilColor("carousel-dot-color-active");
+$slick-dot-bgColor:                 stencilColor("carousel-dot-color"); // papathemes-beautify mod
+$slick-prev-character:              "";
+$slick-next-character:              "";
+$slick-dot-character:               "";
+$slick-dot-size:                    60px;
+$slick-opacity-default:             1;
+$slick-opacity-on-hover:            0.8;
+$slick-opacity-not-active:          0.6;
+
+// -----------------------------------------------------------------------------
+$heroCarousel-slick-arrow-prev:         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-5 0 35 36' fill='none'%3E%3Cpath d='M0.744146 16.2344C-0.245438 17.2109 -0.245438 18.7969 0.744146 19.7734L15.9441 34.7734C16.9337 35.75 18.5408 35.75 19.5304 34.7734C20.52 33.7969 20.52 32.2109 19.5304 31.2344L6.11956 18L19.5225 4.76563C20.5121 3.78906 20.5121 2.20313 19.5225 1.22656C18.5329 0.25 16.9258 0.25 15.9362 1.22656L0.736228 16.2266L0.744146 16.2344Z' fill='#{str-replace(#{$slick-dot-color}, "#", "%23")}'/%3E%3C/svg%3E%0A");
+$heroCarousel-slick-arrow-prev-hover:   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-5 0 35 36' fill='none'%3E%3Cpath d='M0.744146 16.2344C-0.245438 17.2109 -0.245438 18.7969 0.744146 19.7734L15.9441 34.7734C16.9337 35.75 18.5408 35.75 19.5304 34.7734C20.52 33.7969 20.52 32.2109 19.5304 31.2344L6.11956 18L19.5225 4.76563C20.5121 3.78906 20.5121 2.20313 19.5225 1.22656C18.5329 0.25 16.9258 0.25 15.9362 1.22656L0.736228 16.2266L0.744146 16.2344Z' fill='#{str-replace(#{$slick-dot-color-active}, "#", "%23")}'/%3E%3C/svg%3E%0A");
+$heroCarousel-slick-arrow-next:         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-10 0 35 36' fill='none'%3E%3Cpath d='M19.5892 16.2344C20.5788 17.2109 20.5788 18.7969 19.5892 19.7734L4.38923 34.7734C3.39965 35.75 1.79256 35.75 0.802979 34.7734C-0.186605 33.7969 -0.186605 32.2109 0.802979 31.2344L14.2138 18L0.810895 4.76563C-0.178688 3.78906 -0.178688 2.20313 0.810895 1.22656C1.80048 0.25 3.40756 0.25 4.39715 1.22656L19.5971 16.2266L19.5892 16.2344Z' fill='#{str-replace(#{$slick-dot-color}, "#", "%23")}'/%3E%3C/svg%3E%0A");
+$heroCarousel-slick-arrow-next-hover:   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-10 0 35 36' fill='none'%3E%3Cpath d='M19.5892 16.2344C20.5788 17.2109 20.5788 18.7969 19.5892 19.7734L4.38923 34.7734C3.39965 35.75 1.79256 35.75 0.802979 34.7734C-0.186605 33.7969 -0.186605 32.2109 0.802979 31.2344L14.2138 18L0.810895 4.76563C-0.178688 3.78906 -0.178688 2.20313 0.810895 1.22656C1.80048 0.25 3.40756 0.25 4.39715 1.22656L19.5971 16.2266L19.5892 16.2344Z' fill='#{str-replace(#{$slick-dot-color-active}, "#", "%23")}'/%3E%3C/svg%3E%0A");
+
+
+
+// Stencil Additional Settings
+// -----------------------------------------------------------------------------
+//
+// Purpose: Additional settings for the slick plugin
+//
+// -----------------------------------------------------------------------------
+
+$carousel-bgColor:              stencilColor("carousel-bgColor");
+$carousel-description-color:    stencilColor("carousel-description-color");
+$carousel-title-color:          stencilColor("carousel-title-color");

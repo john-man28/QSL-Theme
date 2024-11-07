@@ -1,0 +1,48 @@
+
+<div class="kitchenary__navUser-account">
+    {{#or customer (unless settings.hide_price_from_guests)}}
+    {{#if currency_selector.currencies.length '>' 1}}
+        <div class="_currency">
+            <a href="#" data-dropdown="topHeader-currency" aria-controls="topHeader-currency" aria-expanded="false">
+                {{{currency_selector.active_currency_flag}}}{{{lang 'common.currency' code=currency_selector.active_currency_code}}} <svg class="icon"><use href="#icon-caret-down"></use></svg>
+            </a>
+            <div class="dropdown-menu" id="topHeader-currency" data-dropdown-content aria-hidden="true" tabindex="-1">
+                <ul>
+                    {{#each currency_selector.currencies}}
+                    <li>
+                        <a href="{{{switch_url}}}">
+                            {{#if is_active}}
+                                <strong>{{{flag}}} {{name}} ({{code}})</strong>
+                            {{else}}
+                            {{{flag}}} {{name}} ({{code}})
+                            {{/if}}
+                        </a>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    {{/if}}
+    {{/or}}
+    <div class="_account-user">
+        {{#if customer}}
+            <a class="navUser-action navUser-action--account" href="{{urls.account.index}}" title="{{lang 'common.account'}}">
+                <svg class="icon"><use href="#icon-account" /></svg>
+                <span class="_label">{{lang 'common.account'}}</span>
+            </a>
+            <span class="_sep"></span>
+            <a class="navUser-action navUser-action--account" href="{{urls.auth.logout}}" title="{{lang 'common.logout'}}">
+                <span class="_label">{{lang 'common.logout'}}</span>
+            </a>
+        {{else}}
+            <a class="navUser-action navUser-action--account" href="{{urls.auth.create_account}}" title="{{lang 'common.sign_up'}}">
+                <svg class="icon"><use href="#icon-user-fill"/></svg>
+                <span class="_label">{{lang 'common.sign_up'}}</span>
+            </a>
+            <span class="_sep"></span>
+            <a class="navUser-action navUser-action--account" href="{{urls.auth.login}}" title="{{lang 'common.login'}}">
+                <span class="_label">{{lang 'common.login'}}</span>
+            </a>
+        {{/if}}
+    </div>
+</div>

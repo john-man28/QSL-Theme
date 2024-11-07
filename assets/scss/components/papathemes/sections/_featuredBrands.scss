@@ -1,0 +1,165 @@
+
+////// FeaturedBrands Section //////
+.kitchenary__featuredBrands {
+    overflow: hidden;
+
+    &.blaze-slider {
+        --slides-to-show: 6 !important;
+        @include breakpoint("medium") {
+            --slide-gap: 30px !important;
+        }
+        --slide-gap: 16px !important;
+    }
+
+    $half-item: 0.5;
+    $larger-item: 6;
+    $large-item: 4;
+    $medium-item: 3;
+    $small-item: 2;
+
+    @include breakpoint("large") {
+        &:not(:has(._brand-item:nth-child(#{$larger-item + 1}))) {
+            .blaze-track {
+                justify-content: center;
+            }
+
+            .blaze-button {
+                display: none;
+            }
+        }
+    }
+
+    @media (min-width: screenSize("medium")) and (max-width: screenSize("large") - 1px) {
+        &.blaze-slider {
+            --slides-to-show: #{$large-item} !important;
+        }
+        &:not(:has(._brand-item:nth-child(#{$large-item + 1}))) {
+            .blaze-track {
+                justify-content: center;
+            }
+
+            .blaze-button {
+                display: none;
+            }
+        }
+    }
+
+    @media (min-width: screenSize("small")) and (max-width: screenSize("medium") - 1px) {
+        &.blaze-slider {
+            --slides-to-show: #{$medium-item + $half-item} !important;
+        }
+        &:not(:has(._brand-item:nth-child(#{$medium-item + 1}))) {
+            .blaze-track {
+                justify-content: center;
+            }
+
+            .blaze-button {
+                display: none;
+            }
+        }
+    }
+
+    @media (max-width: screenSize("small") - 1px) {
+        &.blaze-slider {
+            --slides-to-show: #{$small-item + $half-item} !important;
+        }
+
+        &:not(:has(._brand-item:nth-child(#{$small-item + 1}))) {
+            .blaze-track {
+                justify-content: center;
+            }
+
+            .blaze-button {
+                display: none;
+            }
+        }
+    }
+
+    ._brand-item {
+        position: relative;
+        border-radius: $global-radius;
+        overflow: hidden;
+        text-decoration: none;
+
+        ._brand-img-wrapper {
+            @include lazy-loaded-padding("brand_size");
+            display: block;
+            position: relative;
+            max-width: get-width(stencilString("brand_size"));
+
+            img {
+                @include lazy-loaded-img;
+                border: 0;
+                width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+                font-family: "object-fit: contain";
+            }
+        }
+
+        ._brand-name {
+            @if $theme-variant == "game" {
+                display: none;
+            }
+            @else {
+                display: block;
+                font-size: fontSize("smallest");
+                color: $color-textBase;
+                text-align: center;
+                margin-top: spacing("base");
+            }
+
+            &:hover {
+                color: $color-textLink;
+            }
+        }
+
+        &:focus-visible {
+            outline-offset: -2px !important;
+        }
+    }
+
+    .featuredBrands-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        list-style-type: none;
+        gap: 20px;
+
+        @media (max-width: screenSize("medium") - 1px) {
+            margin: 0 (- spacing("half"));
+            overflow: auto;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            -webkit-overflow-scrolling: touch;
+            padding: spacing("third") spacing("half");
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        .featuredBrands-item {
+            overflow: unset;
+            background: none;
+
+            a {
+                text-decoration: unset;
+                color: $color-textBase;
+                display: block;
+                padding: remCalc(10) remCalc(20);
+                font-weight: $font-weight-bold;
+                white-space: nowrap;
+                background: rgba($container-fill-dark, 0.5);
+                border-radius: $global-radius;
+
+                &:hover,
+                &:focus-visible {
+                    color: $color-textLink;
+                }
+            }
+        }
+    }
+}

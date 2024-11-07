@@ -1,0 +1,18 @@
+<div class="papathemes-productsFilter {{#or category.faceted_search_enabled brand.faceted_search_enabled product_results.faceted_search_enabled}}papathemes-productsFilter--faceted{{/or}}">
+    <form class="actionBar" id="papathemes-productsFilter-form" method="get" data-sort-by>
+        {{> components/category/sort-box sort=sort}}
+        {{> components/category/products-per-page products_per_page=products_per_page}}
+        <!-- {{> components/beautify/grid-list}} -->
+        {{> components/category/grid-list}}
+        <a href="#" class="button button--primary _filters-toggle
+            {{#and (if theme_settings.show_shop_by_price '==' 'hide') (if theme_settings.sidebar_shop_by_brand '<=' 9)}}
+                u-hidden
+            {{/and}}
+        " data-toggle="sidebar-top">
+            <span>
+                <svg class="icon"><use href="#icon-filter"></use></svg>
+            </span>
+            {{lang 'search.faceted.filters'}}
+        </a>
+    </form>
+</div>

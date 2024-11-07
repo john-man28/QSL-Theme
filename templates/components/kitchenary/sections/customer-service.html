@@ -1,0 +1,52 @@
+{{#or theme_settings.footer_email theme_settings.footer_whatsapp settings.phone_number}}
+<div class="beautify__section {{#if index}}beautify__section--index{{index}}{{/if}} beautify__section--customer-service">
+    <div class="container">
+        {{#unless hide_heading}}
+        <h2 class="page-heading">{{theme_settings.homepage_service_heading}}</h2>
+        {{/unless}}
+
+        {{#if region_name}}
+        {{{region name=region_name}}}
+        {{/if}}
+
+        <div class="body-service">
+            {{#if theme_settings.footer_email}}
+            <a class="customer-service" href="mailto:{{ theme_settings.footer_email }}" title="{{ lang 'customer_service.email_address' email=theme_settings.footer_email }}">
+                {{#if theme_settings.variant '!==' 'game' }}
+                    <svg class="icon">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" href="#icon-email"></use>
+                    </svg>   
+                {{else}}         
+                    <img class="icon" src="{{cdn 'img/enjoy-email.png'}}" alt="{{ lang 'customer_service.email' }}" title="{{ lang 'customer_service.email' }}" />
+                {{/if}}
+                <span class="title-service">{{ lang 'customer_service.email' }}</span>
+            </a>
+            {{/if}}
+            {{#if theme_settings.footer_whatsapp}}
+            <a class="customer-service" href="https://wa.me/{{ theme_settings.footer_whatsapp }}" title="{{ lang 'customer_service.whatsapp_address' whatsapp=theme_settings.footer_whatsapp }}">
+                {{#if theme_settings.variant '!==' 'game' }} 
+                    <svg class="icon">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" href="#icon-live-chat"></use>
+                    </svg>
+                {{else}}
+                    <img class="icon" src="{{cdn 'img/enjoy-live.png'}}" alt="{{lang 'customer_service.whatsapp'}}" title="{{lang 'customer_service.whatsapp'}}" />
+                 {{/if}}
+                <span class="title-service">{{ lang 'customer_service.whatsapp' }}</span>
+            </a>
+            {{/if}}
+            {{#if settings.phone_number}}
+            <a class="customer-service" href="tel:{{settings.phone_number}}" title="{{ lang 'customer_service.call_us' phone_number=settings.phone_number }}">
+                 {{#if theme_settings.variant '!==' 'game' }}
+                    <svg class="icon">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" href="#icon-phone-service"></use>
+                    </svg>
+                {{else}}
+                    <img class="icon icon-contact" src="{{cdn 'img/enjoy-phone.png'}}" alt="{{ settings.phone_number }}" title="{{ settings.phone_number }}" />
+                {{/if}}
+                <span class="title-service">{{ settings.phone_number }}</span>
+            </a>
+            {{/if}}
+        </div>
+    </div>
+</div>
+{{/or}}

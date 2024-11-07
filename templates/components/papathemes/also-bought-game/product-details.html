@@ -1,0 +1,139 @@
+<article>
+    <button id="optionClose" aria-label="{{lang 'common.close'}}" role="button">
+        <svg class="icon"><use href="#icon-close" /></svg>
+    </button>
+    <div class="papathemes-productView-optionsContent">
+        <div class="alertBox alertBox--error u-hiddenVisually" data-error-box>
+            <div class="alertBox-column alertBox-icon">
+                <icon glyph="ic-error" class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg></icon>
+            </div>
+            <p class="alertBox-column alertBox-message">
+                <span data-error-message></span>
+            </p>
+        </div>
+
+        <section class="productView-images" data-image-gallery>
+            {{#if product.images}}
+                <div class="productView-imageCarousel-main" id="productView-imageCarousel-main-{{product.id}}" data-image-gallery-main>
+                    <div class="productView-imageCarousel-main-item slick-current">
+                        <a href="{{getImageSrcset product.main_image 'zoom_size' (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size}}&amp;imbypass=on"
+                            data-original-zoom="{{getImageSrcset product.main_image 'zoom_size' (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size}}&amp;imbypass=on"
+                            data-original-img="{{getImageSrcset product.main_image 'product_size' (cdn theme_settings.default_image_product) 1x=theme_settings.product_size}}"
+                            data-original-srcset="{{getImageSrcset product.main_image use_default_sizes=true }}">
+                            {{> components/common/responsive-img
+                                image=product.main_image
+                                lazyload=theme_settings.lazyload_mode
+                                default_image=theme_settings.default_image_product
+                            }}
+                        </a>
+                    </div>
+                </div>
+            {{else}}
+                <div class="productView-imageCarousel-main" id="productView-imageCarousel-main-{{product.id}}" data-image-gallery-main>
+                    <div class="productView-imageCarousel-main-item slick-current">
+                        {{> components/common/responsive-img
+                            image=product.main_image
+                            fallback_size=theme_settings.product_size
+                            lazyload=theme_settings.lazyload_mode
+                            default_image=theme_settings.default_image_product
+                        }}
+                    </div>
+                </div>
+            {{/if}}
+        </section>
+        <section class="productView-details">
+            <div class="productView-product">
+                <h1 class="productView-title">{{product.title}}</h1>
+                <div class="productView-price">
+                    {{#if product.call_for_price}}
+                        <span class="price--call">{{product.call_for_price}}</span>
+                    {{else}}
+                        {{#or customer (unless settings.hide_price_from_guests)}}
+                            {{> components/products/price price=product.price}}
+                        {{else}}
+                            {{> components/common/login-for-pricing}}
+                        {{/or}}
+                    {{/if}}
+                </div>
+            </div>
+        </section>
+
+        <form class="form form--addToCart {{#unless product.can_purchase}}_unPurchase{{/unless}}" method="post" action="{{product.cart_url}}" enctype="multipart/form-data" data-cart-item-add>
+            <input type="hidden" name="action" value="add">
+            <input type="hidden" name="product_id" value="{{product.id}}"/>
+    
+            <div class="papathemes-productView-optionsGrid">
+                <div data-product-option-change>
+                    {{#each product.options}}
+                        {{{dynamicComponent 'components/products/options'}}}
+                    {{/each}}
+                </div>
+    
+                <div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">
+                    <label class="form-label form-label--alternate">
+                        {{lang 'products.current_stock'}}
+                        <span data-product-stock>{{product.stock_level}}</span>
+                    </label>
+    
+                </div>
+    
+                {{#if theme_settings.card_show_qty}}
+                    <div class="form-field form-field--increments">
+                        <label class="form-label form-label--alternate is-srOnly"
+                                for="qty[{{product.id}}]">{{lang 'products.quantity'}}</label>
+    
+                        <div class="form-increment" data-quantity-also-bought-change>
+                            <button class="button button--icon" data-action="dec">
+                                <span class="is-srOnly">{{lang 'products.quantity_decrease' name=product.title}}</span>
+                                <i class="icon" aria-hidden="true">
+                                    <svg>
+                                        <use href="#icon-minus"/>
+                                    </svg>
+                                </i>
+                            </button>
+                            <input class="form-input form-input--incrementTotal"
+                                    data-product-quantity
+                                    id="qty[{{product.id}}]"
+                                    name="qty[]"
+                                    type="tel"
+                                    value="{{#if product.min_purchase_quantity}}{{product.min_purchase_quantity}}{{else}}0{{/if}}"
+                                    data-quantity-min="{{product.min_purchase_quantity}}"
+                                    data-quantity-max="{{product.max_purchase_quantity}}"
+                                    min="0"
+                                    pattern="[0-9]*"
+                                    aria-live="polite">
+                            <button class="button button--icon" data-action="inc">
+                                <span class="is-srOnly">{{lang 'products.quantity_increase' name=product.title}}</span>
+                                <i class="icon" aria-hidden="true">
+                                    <svg>
+                                        <use href="#icon-add"/>
+                                    </svg>
+                                </i>
+                            </button>
+                        </div>
+                    </div>
+                {{/if}}
+            </div>
+    
+            <div class="alertBox productAttributes-message alertBox--error" style="display:none">
+                <div class="alertBox-column alertBox-icon">
+                    <icon glyph="ic-success" class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg></icon>
+                </div>
+                <p class="alertBox-column alertBox-message"></p>
+            </div>
+
+            {{#if product.out_of_stock}}
+                {{#if product.out_of_stock_message}}
+                    {{>components/common/alert-error product.out_of_stock_message}}
+                {{else}}
+                    {{>components/common/alert-error (lang 'products.sold_out')}}
+                {{/if}}
+            {{else}}
+                {{#unless product.can_purchase}}
+                    {{>components/common/alert-error (lang 'products.unavailable')}}
+                {{/unless}}
+            {{/if}}
+        </form>
+        <button id="optionDone" class="button button--primary button--small">{{lang 'products.done'}}</button>
+    </div>
+</article>

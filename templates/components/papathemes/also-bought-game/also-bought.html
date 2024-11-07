@@ -1,0 +1,57 @@
+{{#unless (getVar 'isCrawlerAndSpeedTestMode')}}
+<section class="productView-alsoBought productView-alsoBought--{{theme_settings.alsobought_position}} " data-also-bought='{
+    {{#or customer (unless settings.hide_price_from_guests)}}
+        "samplePriceWithTax": "{{product.price.with_tax.formatted}}",
+        "samplePriceWithoutTax": "{{product.price.without_tax.formatted}}",
+    {{/or}}
+    "requireLogin": {{#or customer (unless settings.hide_price_from_guests)}}false{{else}}true{{/or}},
+    "includeTax": {{#if product.price.with_tax}}true{{else}}false{{/if}},
+    "showTaxLabel": {{#and product.price.with_tax product.price.without_tax}}true{{else}}false{{/and}}
+}'>
+    <div class="productView-alsoBought-heading"><h2 class="_heading">{{lang 'also_bought.heading'}}</h2></div>
+    <div class="productView-alsoBought-list">
+        {{#if theme_settings.alsobought_product '==' 'related'}}
+            {{#each product.related_products}}
+                <div class="productView-alsoBought-item" data-product-id="{{id}}">
+                    {{> components/papathemes/also-bought-game/also-bought-placeholder product=product}}
+                </div>
+                {{inject 'enableAlsoBought' true}}
+            {{/each}}
+        {{else if theme_settings.alsobought_product '==' 'similar'}}
+            {{#each product.similar_by_views}}
+                <div class="productView-alsoBought-item" data-product-id="{{id}}">
+                    {{> components/papathemes/also-bought-game/also-bought-placeholder product=product}}
+                </div>
+                {{inject 'enableAlsoBought' true}}
+            {{/each}}
+            {{else}}
+            {{#each product.custom_fields}}
+                {{#if name '===' '__alsobought'}}
+                    <div class="productView-alsoBought-item" data-product-id="{{value}}">
+                        {{> components/papathemes/also-bought-game/also-bought-placeholder product=product}}
+                    </div>
+                    {{inject 'enableAlsoBought' true}}
+                {{/if}}
+            {{/each}}
+        {{/if}}
+    </div>
+    {{#or customer (unless settings.hide_price_from_guests)}}
+        <div class="productView-alsoBought-buttons" data-buttons>
+            {{!-- <a class="button button--small button--primary" href="#" data-add-all>{{lang 'also_bought.add_all'}}</a> --}}
+            <div class="productView-alsoBought-total">
+                <div class="price-section price-section--withTax" data-total-with-tax>
+                    {{lang 'cart.checkout.total'}}: <span class="price price--withTax" data-price></span>
+                    <abbr title="{{lang 'products.including_tax'}}" data-tax-label>{{lang 'products.price_with_tax' tax_label=product.price.tax_label}}</abbr>
+                </div>
+                <div class="price-section price-section--withoutTax" data-total-without-tax>
+                    <span>{{lang 'cart.checkout.subtotal'}}: </span>
+                    <span class="price price--withoutTax" data-price></span>
+                    <abbr title="{{lang 'products.excluding_tax'}}" data-tax-label>{{lang 'products.price_without_tax' tax_label=product.price.tax_label}}</abbr>
+                </div>
+            </div>
+            <button type="button" data-wait-message="{{lang 'products.adding_to_cart'}}" class="button button--small button--primary" data-add-selected>{{#if theme_settings.variant '==' 'game'}}{{lang 'also_bought.add_selected_to_cart'}}{{else}}{{lang 'compare.add_to_cart'}}{{/if}}</button>
+        </div>
+    {{/or}}
+</section>
+{{inject 'enableAlsoBought' true}}
+{{/unless}}

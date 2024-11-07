@@ -1,0 +1,22 @@
+<nav>
+    {{#if category.faceted_search_enabled}}
+        {{> components/faceted-search/index
+            category
+            collapsed=collapsed
+            layout=theme_settings.categorypage_layout
+            currency_token=settings.money.currency_token
+            show_price_slider=(if theme_settings.show_shop_by_price '==' 'slider')
+        }}
+    {{else}}
+        {{#if theme_settings.show_shop_by_price '!=' 'hide'}}
+            {{> components/category/shop-by-price shop_by_price=category.shop_by_price category_url=category.url layout=theme_settings.categorypage_layout}}
+        {{/if}}
+        {{#if shop_by_brand}}
+            {{#if theme_settings.sidebar_shop_by_brand '>' 9}}
+                {{> components/supermarket/sidebar/brands
+                    layout=theme_settings.categorypage_layout
+                }}
+            {{/if}}
+        {{/if}}
+    {{/if}}
+</nav>

@@ -1,0 +1,280 @@
+.footer {
+    padding-top: 0;
+    background: stencilColor("footer-backgroundColor");
+    color: stencilColor("footer-color");
+
+    a {
+        color: stencilColor("footer-linkColor");
+        text-decoration: none;
+
+        &:hover,
+        &:focus,
+        &:active {
+            color: stencilColor("footer-linkColor-hover");
+        }
+    }
+
+    [data-content-region="footer_top--global"]:has([data-widget-id]) {
+        +.footer-map,
+        +.footer-info {
+            padding-top: 0;
+        }
+    }
+
+    .footer-copyright a {
+        text-decoration: underline;
+        color: inherit;
+    }
+
+    .beautify__footerIcons {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+
+
+    .footer-info-heading {
+        a {
+            color: inherit;
+            font-size: inherit;
+
+            &:hover,
+            &:focus,
+            &:active {
+                color: inherit;
+            }
+        }
+    }
+
+    .footer-below {
+        background-color: stencilColor("copyright-backgroundColor");
+        padding: spacing("base") 0;
+
+        @include breakpoint("medium") {
+            padding: remCalc(30) 0;
+        }
+
+        ._col-copyright-footer+._col-powered-by {
+            margin-top: spacing("eighth");
+        }
+
+        &:has(.footer-payments .footer-payment-icons svg) {
+            @media (max-width: (screenSize("medium") - 1px)) {
+                .powered-by ._col-copyright-footer,
+                .powered-by ._col-powered-by {
+                    margin-top: spacing("base");
+                }
+
+                ._col-copyright-footer+._col-powered-by {
+                    margin-top: spacing("quarter");
+                }
+            }
+        }
+
+        >.container {
+            display: flex;
+            justify-content: space-between;
+
+            @media (max-width: (screenSize("medium") - 1px)) {
+                flex-direction: column-reverse;
+                align-items: center;
+
+            }
+        }
+    }
+
+    .footer-map__col--info {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .socialLinks {
+        .icon {
+            width: remCalc(28);
+            height: remCalc(28);
+            background: #fff;
+            padding: spacing("quarter");
+            margin-bottom: spacing("half");
+            margin-right: spacing("half");
+            border-radius: $global-radius;
+            box-sizing: content-box;
+        }
+    }
+}
+
+.footer-info-heading {
+    font-family: $body-font-family;
+    font-weight: fontWeight("semibold");
+    font-size: fontSize("small");
+    color: stencilColor("footer-headingColor");
+    margin-top: 0;
+    margin-bottom: spacing("base"); // papathemes-kitchenary edited
+
+    @include breakpoint("medium") {
+        font-size: fontSize("large");
+        margin-bottom: spacing("single"); // papathemes-kitchenary edited
+    }
+}
+
+.footer-info-list {
+    column-gap: spacing("single");
+    margin-bottom: 0;
+
+    li {
+        margin-bottom: spacing("third");
+    }
+}
+
+
+$footer_show_categories: stencilNumber("footer_show_categories", "");
+$footer_show_pages: stencilNumber("footer_show_pages", "");
+$footer_shop_by_brand: stencilNumber("footer_shop_by_brand", "")+1;
+
+@if ($footer_shop_by_brand % 3==0 or $footer_shop_by_brand==100) {
+    .footer-list--brands {
+        column-count: 2;
+
+        @include breakpoint("small") {
+            column-count: 3;
+        }
+    }
+}
+
+@else if ($footer_shop_by_brand % 2==0) {
+    .footer-list--brands {
+        column-count: 2;
+    }
+}
+
+@else {
+    .footer-list--brands {
+        column-count: 1;
+    }
+}
+
+//footer_show_categories
+@if ($footer_show_categories % 3==0 or $footer_show_categories==100) {
+    .footer-list--category {
+        column-count: 2;
+
+        @include breakpoint("small") {
+            column-count: 3;
+        }
+    }
+}
+
+@else if ($footer_show_categories % 2==0) {
+    .footer-list--category {
+        column-count: 2;
+    }
+}
+
+@else {
+    .footer-list--category {
+        column-count: 1;
+    }
+}
+
+//footer_show_pages
+@if ($footer_show_pages % 3==0 or $footer_show_pages==100) {
+    .footer-list--navigate {
+        column-count: 2;
+
+        @include breakpoint("small") {
+            column-count: 3;
+        }
+    }
+}
+
+@else if ($footer_show_pages % 2==0) {
+    .footer-list--navigate {
+        column-count: 2;
+    }
+}
+
+@else {
+    .footer-list--navigate {
+        column-count: 1;
+    }
+}
+
+
+[data-content-region="footer_contact--global"] {
+    font-size: fontSize("smaller");
+
+    &:has([data-widget-id]) {
+        padding-top: spacing("single");
+    }
+
+    [data-widget-id] {
+        p {
+            margin-left: 32px;
+
+            .icon {
+                float: left;
+                margin-left: -32px;
+                margin-top: 2px;
+                width: 15px;
+                height: 20px;
+            }
+
+            br {
+                content: "";
+                display: block;
+                margin-bottom: spacing("quarter");
+            }
+        }
+    }
+}
+
+#consent-manager {
+    >div {
+        background-color: stencilColor("copyright-backgroundColor");
+        padding: 0 spacing("half");
+
+        >div {
+            background-color: stencilColor("copyright-backgroundColor");
+            padding: 0 0 spacing("single");
+
+            @include breakpoint("medium") {
+                @include beautify__container;
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
+            }
+
+            >div {
+                margin-top: 0 !important;
+                border-top: 1px solid rgba(stencilColor("copyright-color"), 0.2);
+                align-items: center !important;
+
+                >div:first-child {
+                    @include breakpoint("medium") {
+                        margin-top: 0 !important;
+                    }
+                }
+            }
+        }
+    }
+
+    button {
+        margin: 0 spacing("half") spacing("half") 0;
+    }
+}
+
+#consent-manager-update-banner {
+    background-color: stencilColor("copyright-backgroundColor") !important;
+    padding: 0 spacing("half") spacing("single");
+    position: static !important;
+    line-height: lineHeight("base") !important;
+    height: auto !important;
+
+    >a {
+        display: block;
+        padding: spacing("half") 0 spacing("single");
+        margin: 0 auto !important;
+
+        @include breakpoint("medium") {
+            @include beautify__container;
+        }
+    }
+}

@@ -1,0 +1,87 @@
+{{assignVar 'hasImage' 0}}
+{{#each categories}}
+    {{#if image}}
+        {{assignVar 'hasImage' 1}}
+    {{/if}}
+{{/each}}
+
+{{#if (getVar 'hasImage')}}
+    <div class="beautify__section kitchenary__topCategories {{#if index}}beautify__section--index{{index}}{{/if}} productCarousel--responsiveCol blaze-slider"
+    {{#if settings.data_tag_enabled}} data-list-name="{{list}}"{{/if}}
+    data-blaze-slider='{
+        "all": {
+            "enableAutoplay": true,
+            "autoplayInterval": 5000,
+            "transitionDuration": 500,
+            "slidesToShow": 6,
+            "slidesToScroll": 6,
+            "slideGap": "30px",
+            "loop": true
+        },
+        "(max-width: 1260px)": {
+            "slidesToShow": 4,
+            "slidesToScroll": 4
+        },
+        "(max-width: 800px)": {
+            "slidesToShow": 3.5,
+            "slidesToScroll": 3,
+            "slideGap": "16px"
+        },
+        "(max-width: 550px)": {
+            "slidesToShow": 2.5,
+            "slidesToScroll": 2
+        }
+    }'
+    >
+    <div class="container">
+        {{#if theme_settings.top_categories_heading}}
+            <h2 class="page-heading">{{theme_settings.top_categories_heading}}</h2>
+        {{else}}
+            <h2 class="page-heading is-srOnly">{{lang 'papathemes.categories_list.heading'}}</h2>
+        {{/if}}
+        <div class="blaze-container">
+            <button class="blaze-button blaze-prev" aria-label="{{lang 'common.previous'}}"></button>
+            <div class="blaze-track-container">
+                <div class="blaze-track">
+                    {{#each categories}}
+                        <a class="topCategories-item" href="{{url}}" aria-label="{{name}}">
+                            {{> components/common/responsive-img
+                                image=image
+                                fallback_size=theme_settings.categorythumb_size
+                                lazyload=theme_settings.lazyload_mode
+                                default_alt=name
+                                otherAttributes=(getVar 'categoryImageSizeAttrs')
+                                default_image=../theme_settings.default_image_product
+                            }}
+                            <div class="topCategories-item-name"> <span>{{name}}</span> </div>
+                        </a>
+                    {{/each}}
+                </div>
+            </div>
+            <button class="blaze-button blaze-next" aria-label="{{lang 'common.next'}}"></button>
+        </div>
+    </div>
+    </div>
+{{else}}
+  <div class="beautify__section kitchenary__topCategories {{#if index}}beautify__section--index{{index}}{{/if}} productCarousel--responsiveCol blaze-slider"
+    {{#if settings.data_tag_enabled}} data-list-name="{{list}}"{{/if}}
+    >
+    <div class="container">
+        {{#if theme_settings.top_categories_heading}}
+            <h2 class="page-heading">{{theme_settings.top_categories_heading}}</h2>
+        {{else}}
+            <h2 class="page-heading is-srOnly">{{lang 'papathemes.categories_list.heading'}}</h2>
+        {{/if}}
+        <ul class="topCategories-list">
+            {{#each categories}}
+                <li class="topCategories-item">
+                    <a href="{{url}}">{{name}}</a>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+    </div>
+{{/if}}
+
+
+

@@ -1,0 +1,173 @@
+{{#unless theme_settings.productpage_custom_fields_tab}}
+    {{#if theme_settings.productpage_custom_fields_hide_special}}
+        {{#if (merge this __region='')}}{{/if}}
+        {{#each product.custom_fields}}
+            {{#startsWith 'region' (lowercase name)}}
+                {{#if (merge ../../this __region=(get 'string' (concat ../../__region value)))}}{{/if}}
+            {{/startsWith}}
+
+            {{#startsWith '__' name}}
+            {{else}}
+                {{#or
+                    (if (lowercase name) '==' 'region')
+                    (if (lowercase name) '==' 'platform')
+                    (if (lowercase name) '==' 'activation label')
+                    (if (lowercase name) '==' 'activation link')
+                    (if (lowercase name) '==' 'language')
+                    (if (lowercase name) '==' 'developer')
+                    (if (lowercase name) '==' 'release date')
+                    (if (lowercase name) '==' 'publisher')
+                    (if (lowercase name) '==' 'type')
+                    (if (lowercase name) '==' 'delivery')}}
+                {{else}}
+                    <li {{#if (lowercase name) '==' 'version'}} class="_special-info _special-info--version"{{/if}}
+                        {{#if (lowercase name) '==' 'item type'}} class="_special-info _special-info--itemType"{{/if}}
+                        {{#if (lowercase name) '==' 'promo'}} class="_special-info _special-info--promo"{{/if}}>
+                        <span class="productView-info-name productView-info-name--cf{{pascalcase name}}">{{name}}:</span>
+                        <span class="productView-info-value productView-info-value--cf{{pascalcase name}}">{{value}}</span>
+                        <svg class="icon"><use href="#icon-{{lowercase (hyphenate name)}}"></svg>
+                    </li>
+                {{/or}}
+            {{/startsWith}}
+        {{/each}}
+        {{#if __region}}
+            <li class="_special-info _special-info-region">
+                <span class="productView-info-value productView-info-value--cf{{pascalcase name}}"
+                    data-customfield-region="{{uppercase ../__region}}"
+                    data-cannot-active="{{lang 'products.special_customfield.region_cannot_active'}}">
+                    {{lang 'products.special_customfield.region_can_active'}}
+                </span>
+                <span data-current-region></span>
+                <button data-micromodal-trigger="regionRetrictionModal" type="button" aria-label="{{lang 'products.special_customfield.check_region'}}">{{lang 'products.special_customfield.check_region'}}</button>
+                <svg class="icon"><use href="#icon-region"></svg>
+            </li>
+        {{/if}}
+    {{else}}
+        {{#if (merge this __region='')}}{{/if}}
+        {{#each product.custom_fields}}
+            {{#startsWith 'region' (lowercase name)}}
+                {{#if (merge ../../this __region=(get 'string' (concat ../../__region value)))}}{{/if}}
+            {{/startsWith}}
+
+            {{#or
+                (if (lowercase name) '==' 'region')
+                (if (lowercase name) '==' 'platform')
+                (if (lowercase name) '==' 'activation label')
+                (if (lowercase name) '==' 'activation link')
+                (if (lowercase name) '==' 'language')
+                (if (lowercase name) '==' 'developer')
+                (if (lowercase name) '==' 'release date')
+                (if (lowercase name) '==' 'publisher')
+                (if (lowercase name) '==' 'type')
+                (if (lowercase name) '==' 'delivery')}}
+            {{else}}
+                <li {{#if (lowercase name) '==' 'version'}} class="_special-info _special-info--version"{{/if}}
+                    {{#if (lowercase name) '==' 'item type'}} class="_special-info _special-info--itemType"{{/if}}
+                    {{#if (lowercase name) '==' 'promo'}} class="_special-info _special-info--promo"{{/if}}>
+                    <span class="productView-info-name productView-info-name--cf{{pascalcase name}}">{{name}}:</span>
+                    <span class="productView-info-value productView-info-value--cf{{pascalcase name}}">{{value}}</span>
+                    <svg class="icon"><use href="#icon-{{lowercase (hyphenate name)}}"></svg>
+                </li>
+            {{/or}}
+        {{/each}}
+        {{#if __region}}
+            <li class="_special-info _special-info-region">
+                <span class="productView-info-value productView-info-value--cf{{pascalcase name}}"
+                    data-customfield-region="{{uppercase ../__region}}"
+                    data-cannot-active="{{lang 'products.special_customfield.region_cannot_active'}}">>
+                    {{lang 'products.special_customfield.region_can_active'}}
+                </span>
+                <span data-current-region></span>
+                <button data-micromodal-trigger="regionRetrictionModal" type="button" aria-label="{{lang 'products.special_customfield.check_region'}}">{{lang 'products.special_customfield.check_region'}}</button>
+                <svg class="icon"><use href="#icon-region"></svg>
+            </li>
+        {{/if}}
+    {{/if}}
+{{else}}
+    {{#if theme_settings.productpage_custom_fields_hide_special}}
+            {{#if (merge this __region='')}}{{/if}}
+            {{#each product.custom_fields}}
+                {{#startsWith 'region' (lowercase name)}}
+                    {{#if (merge ../../this __region=(get 'string' (concat ../../__region value)))}}{{/if}}
+                {{/startsWith}}
+
+                {{#startsWith '__' name}}
+                {{else}}
+                    {{#if (lowercase name) '==' 'version'}}
+                        <li class="_special-info _special-info--version">
+                            <span class="productView-info-name productView-info-name--cf{{pascalcase name}}">{{name}}:</span>
+                            <span class="productView-info-value productView-info-value--cf{{pascalcase name}}">{{value}}</span>
+                            <svg class="icon"><use href="#icon-{{lowercase (hyphenate name)}}"></svg>
+                        </li>
+                    {{/if}}
+                    {{#if (lowercase name) '==' 'item type'}}
+                        <li class="_special-info _special-info--itemType">
+                            <span class="productView-info-name productView-info-name--cf{{pascalcase name}}">{{name}}:</span>
+                            <span class="productView-info-value productView-info-value--cf{{pascalcase name}}">{{value}}</span>
+                            <svg class="icon"><use href="#icon-{{lowercase (hyphenate name)}}"></svg>
+                        </li>
+                    {{/if}}
+                    {{#if (lowercase name) '==' 'promo'}}
+                        <li class="_special-info _special-info--promo">
+                            <span class="productView-info-name productView-info-name--cf{{pascalcase name}}">{{name}}:</span>
+                            <span class="productView-info-value productView-info-value--cf{{pascalcase name}}">{{value}}</span>
+                            <svg class="icon"><use href="#icon-{{lowercase (hyphenate name)}}"></svg>
+                        </li>
+                    {{/if}}
+                {{/startsWith}}
+            {{/each}}
+            {{#if __region}}
+                <li class="_special-info _special-info-region">
+                    <span class="productView-info-value productView-info-value--cf{{pascalcase name}}"
+                        data-customfield-region="{{uppercase ../__region}}"
+                        data-cannot-active="{{lang 'products.special_customfield.region_cannot_active'}}">>
+                        {{lang 'products.special_customfield.region_can_active'}}
+                    </span>
+                    <span data-current-region></span>
+                    <button data-micromodal-trigger="regionRetrictionModal" type="button" aria-label="{{lang 'products.special_customfield.check_region'}}">{{lang 'products.special_customfield.check_region'}}</button>
+                    <svg class="icon"><use href="#icon-region"></svg>
+                </li>
+            {{/if}}
+        {{else}}
+            {{#if (merge this __region='')}}{{/if}}
+            {{#each product.custom_fields}}
+                {{#startsWith 'region' (lowercase name)}}
+                    {{#if (merge ../../this __region=(get 'string' (concat ../../__region value)))}}{{/if}}
+                {{/startsWith}}
+
+                {{#if (lowercase name) '==' 'version'}}
+                    <li class="_special-info _special-info--version">
+                        <span class="productView-info-name productView-info-name--cf{{pascalcase name}}">{{name}}:</span>
+                        <span class="productView-info-value productView-info-value--cf{{pascalcase name}}">{{value}}</span>
+                        <svg class="icon"><use href="#icon-{{lowercase (hyphenate name)}}"></svg>
+                    </li>
+                {{/if}}
+                {{#if (lowercase name) '==' 'item type'}}
+                    <li class="_special-info _special-info--itemType">
+                        <span class="productView-info-name productView-info-name--cf{{pascalcase name}}">{{name}}:</span>
+                        <span class="productView-info-value productView-info-value--cf{{pascalcase name}}">{{value}}</span>
+                        <svg class="icon"><use href="#icon-{{lowercase (hyphenate name)}}"></svg>
+                    </li>
+                {{/if}}
+                {{#if (lowercase name) '==' 'promo'}}
+                    <li class="_special-info _special-info--promo">
+                        <span class="productView-info-name productView-info-name--cf{{pascalcase name}}">{{name}}:</span>
+                        <span class="productView-info-value productView-info-value--cf{{pascalcase name}}">{{value}}</span>
+                        <svg class="icon"><use href="#icon-{{lowercase (hyphenate name)}}"></svg>
+                    </li>
+                {{/if}}
+            {{/each}}
+            {{#if __region}}
+                <li class="_special-info _special-info-region">
+                    <span class="productView-info-value productView-info-value--cf{{pascalcase name}}"
+                        data-customfield-region="{{uppercase ../__region}}"
+                        data-cannot-active="{{lang 'products.special_customfield.region_cannot_active'}}">>
+                        {{lang 'products.special_customfield.region_can_active'}}
+                    </span>
+                    <span data-current-region></span>
+                    <button data-micromodal-trigger="regionRetrictionModal" type="button" aria-label="{{lang 'products.special_customfield.check_region'}}">{{lang 'products.special_customfield.check_region'}}</button>
+                    <svg class="icon"><use href="#icon-region"></svg>
+                </li>
+            {{/if}}
+        {{/if}}
+{{/unless}}

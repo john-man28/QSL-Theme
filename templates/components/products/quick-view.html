@@ -1,0 +1,8 @@
+{{> components/supermarket/common/global-vars}}
+<div class="modal-body quickView productView-scope">
+    {{#if theme_settings.variant '==' 'game'}}
+        {{> components/products/product-view-game in_quickview=true}}
+    {{else}}
+        {{> components/products/product-view in_quickview=true}}
+    {{/if}}
+</div>

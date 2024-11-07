@@ -1,0 +1,161 @@
+{{#if children}}
+<a class="navPages-action-toggle" href="#"
+    data-nav-tab="navPages-{{#if page_type '==' 'page'}}page-{{getVar 'navWebPageCount'}}{{/if}}{{id}}{{idSuffix}}">
+    <span class="_more is-srOnly"><span class="is-srOnly">{{lang 'common.nav_more'}}</span><svg class="icon"><use href="#icon-add"></use></svg></span>
+    <span class="_less is-srOnly"><span class="is-srOnly">{{lang 'common.nav_back'}}</span><svg class="icon"><use href="#icon-minus"></use></svg></span>
+    {{name}}
+</a>
+<a class="navPages-action has-subMenu u-hideTablet u-hideMobile {{#if menu_type '==' 'vertical'}}navPages-action--vertical{{/if}}" href="{{url}}"
+    href="{{url}}"
+    {{#if menu_type '!=' 'vertical'}}data-instantload{{/if}}
+    {{#if id '==' category.id}}data-current-category{{/if}}
+>{{name}}</a>
+<a class="navPages-action-toggle-desktop" href="#" data-collapsible="navPages-{{#if page_type '==' 'page'}}page-{{getVar 'navWebPageCount'}}{{/if}}{{id}}{{idSuffix}}" title="{{lang 'common.nav_more'}}"><svg class="icon"><use href="#icon-caret-down"></use></svg></a>
+<div class="navPage-subMenu
+        {{#if menu_type '==' 'vertical'}}
+            navPage-subMenu--vertical
+        {{else if menu_type '==' 'standard'}}
+            navPage-subMenu--standard
+        {{else if menu_type '==' 'column'}}
+            navPage-subMenu--column
+        {{/if}}
+    " id="navPages-{{#if page_type '==' 'page'}}page-{{getVar 'navWebPageCount'}}{{/if}}{{id}}{{idSuffix}}">
+    {{#if page_type '!==' 'page'}}
+        <div class="navPage-subMenu-top">
+            {{{region name=(concat (concat "navPages_" id) "_top--global")}}}
+        </div>
+    {{/if}}
+    <div class="navPages-all-mobile">
+        <a href="{{url}}" class="u-hideDesktop">{{lang 'common.view_all'}} <svg class="icon"><use href="#icon-arrow-view-all"></use></svg></a>
+    </div>
+    <div class="navPage-subMenu-middle">
+        {{#if page_type '!==' 'page'}}
+            {{{region name=(concat (concat "navPages_" id) "_left--global")}}}
+        {{/if}}
+        <ul class="navPage-subMenu-list">
+            {{#each children}}
+                <!-- {{incrementVar 'navWebPageCount'}} -->
+                <li class="navPage-subMenu-item">
+                    {{{region name=(concat (concat "navPages_" id) "_top--global")}}}
+                    {{#if children}}
+                        {{#if ../../theme_settings.navPages_catImg}}
+                            {{#if image}}
+                                <a href="{{url}}" class="u-hideMobile u-hideTablet navPage-linkImg">
+                                    {{> components/kitchenary/navigation-list-img
+                                        image=image
+                                        lazyload=../../../../theme_settings.lazyload_mode
+                                        default_alt=name
+                                    }}
+                                </a>
+                            {{/if}}
+                        {{/if}}
+                        <a class="navPages-action-toggle" href="#"
+                            data-collapsible="navPages-{{#if ../../page_type '==' 'page'}}page-{{getVar 'navWebPageCount'}}{{/if}}{{id}}{{../../idSuffix}}">
+                            <span class="_more is-srOnly"><span class="is-srOnly">{{lang 'common.nav_more'}}</span><svg class="icon"><use href="#icon-add"></use></svg></span>
+                            <span class="_less is-srOnly"><span class="is-srOnly">{{lang 'common.nav_less'}}</span><svg class="icon"><use href="#icon-minus"></use></svg></span>
+                            <svg class="icon _icon-viewAll is-srOnly u-hideDesktop"><use href="#icon-arrow-view-all"></use></svg>
+                            {{#if ../../theme_settings.navPages_catImg}}
+                                {{#if image}}
+                                    <div class="_imgTitle">
+                                        {{> components/kitchenary/navigation-list-img
+                                            image=image
+                                            lazyload=../../../../theme_settings.lazyload_mode
+                                            default_alt=name
+                                        }}
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            <span>{{name}}</span>
+                        </a>
+                        <a
+                            class="navPage-subMenu-action has-subMenu u-hideMobile u-hideTablet"
+                            href="{{url}}"
+                            {{#if ../../menu_type '!=' 'vertical'}}data-instantload{{/if}}
+                            {{#if id '==' ../../category.id}}data-current-category{{/if}}
+                            >
+                                <span>{{name}}</span>
+                        </a>
+                        <a class="navPages-action-toggle-desktop" tabindex="0" href="#" data-collapsible="navPages-{{#if ../../page_type '==' 'page'}}page-{{getVar 'navWebPageCount'}}{{/if}}{{id}}{{../../idSuffix}}" title="{{lang 'common.nav_more'}}">
+                            {{#if theme_settings.navPages_type '==' 'megamenu'}}
+                                <span>{{name}}</span>
+                            {{else}}
+                                <svg class="icon"><use href="#icon-caret-down"></use></svg>
+                            {{/if}}
+                        </a>
+                        <ul class="navPage-childList" id="navPages-{{#if ../../page_type '==' 'page'}}page-{{getVar 'navWebPageCount'}}{{/if}}{{id}}{{../../idSuffix}}">
+                            <div class="_titleSubmenu {{#unless theme_settings.navPages_type '==' 'megamenu'}}u-hideDesktop{{/unless}}">
+                                <a class="navPages-action-toggle" href="#"
+                                    data-collapsible-close="navPages-{{#if ../../page_type '==' 'page'}}page-{{getVar 'navWebPageCount'}}{{/if}}{{id}}{{../../idSuffix}}">
+                                    <span class="_more is-srOnly"><span class="is-srOnly">{{lang 'common.nav_more'}}</span><svg class="icon"><use href="#icon-add"></use></svg></span>
+                                    <span class="_less is-srOnly"><span class="is-srOnly">{{lang 'common.nav_less'}}</span><svg class="icon"><use href="#icon-minus"></use></svg></span>
+                                    <svg class="icon _icon-viewAll u-hideDesktop"><use href="#icon-arrow-view-all"></use></svg>
+                                    <span>{{name}}</span>
+                                </a>
+                                <a
+                                class="navPage-subMenu-action has-subMenu"
+                                href="{{url}}"
+                                {{#if ../../menu_type '!=' 'vertical'}}data-instantload{{/if}}
+                                {{#if id '==' ../../category.id}}data-current-category{{/if}}
+                                >
+                                    <span class="u-hideMobile u-hideTablet">{{name}}</span>
+                                    <span class="u-hideDesktop">{{lang 'common.view_all'}}</span>
+                                    <svg class="icon u-hideDesktop"><use href="#icon-arrow-view-all"></use></svg>
+                                </a>
+                            </div>
+                            {{#each children}}
+                                <!-- {{incrementVar 'navWebPageCount'}} -->
+                                <li class="navPage-childList-item">
+                                    {{> components/beautify/navigation-list-child
+                                            category_id=../../../category.id
+                                            idSuffix=../../../idSuffix
+                                            theme_settings=../../../theme_settings
+                                            menu_type=../../../menu_type
+                                            page_type=../../../page_type}}
+                                </li>
+                            {{/each}}
+                            {{!--
+                            <!--
+                            {{#if ../../menu_type '==' 'mega'}}
+                                <li class="navPage-childList-item">
+                                    <a class="navPage-childList-action" href="{{url}}" data-instantload>{{lang 'common.view_all'}}</a>
+                                </li>
+                            {{/if}}
+                            -->
+                            --}}
+                            <a href="#" class="_hideToggle u-hideDesktop"></a>
+                        </ul>
+                    {{else}}
+                        <a class="navPage-subMenu-action" href="{{url}}" data-instantload {{#if id '==' ../../category.id}}data-current-category{{/if}}>
+                            {{#if ../../theme_settings.navPages_catImg}}
+                                {{#if image}}
+                                    <div class="_imgTitle">
+                                        {{> components/kitchenary/navigation-list-img
+                                            image=image
+                                            lazyload=../../../../theme_settings.lazyload_mode
+                                            default_alt=name
+                                        }}
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            <span>{{name}}</span>
+                        </a>
+                    {{/if}}
+                    {{#if ../page_type '!==' 'page'}}
+                        {{{region name=(concat (concat "navPages_" id) "_bottom--global")}}}
+                    {{/if}}
+                </li>
+            {{/each}}
+        </ul>
+        {{#if page_type '!==' 'page'}}
+            {{{region name=(concat (concat "navPages_" id) "_right--global")}}}
+        {{/if}}
+    </div>
+    {{#if page_type '!==' 'page'}}
+        <div class="navPage-subMenu-bottom">
+            {{{region name=(concat (concat "navPages_" id) "_bottom--global")}}}
+        </div>
+    {{/if}}
+</div>
+{{else}}
+<a class="navPages-action" href="{{url}}" data-instantload {{#if id '==' category.id}}data-current-category{{/if}}>{{name}}</a>
+{{/if}}
