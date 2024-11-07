@@ -87,7 +87,7 @@
 
                     {{#or options configurable_fields}}
                         <a class="_editLink" href="#" data-item-edit="{{id}}" data-product-id="{{product_id}}" aria-label="{{lang 'products.change_product_options' name=name}}"><i class="icon" aria-hidden="true">
-                            <svg><use xlink:href="#icon-edit-cart2" /></svg>
+                            <svg><use href="#icon-edit-cart2" /></svg>
                         </i></a>
                     {{/or}}
                 </div>
@@ -111,16 +111,11 @@
                 <div class="previewCartItem-qtyRemoveRow">
                     <div class="previewCartItem-quantity">
                         <label class="form-label cart-item-label" for="cartpopup-qty-{{id}}">{{lang 'products.quantity'}}</label>
-                        {{#each custom_fields}}
-                                {{#if (toLowerCase name) '===' 'pack size'}}
-                                <input style="display: none;" class="qty_packSize" type="hidden" name="qty_packSize" value="{{value}}" data-pack-value>
-                                {{/if}}
-                            {{/each}}
                         <div class="form-increment">
                             {{#if can_modify}}
                                 <button class="button button--icon" data-cart-update data-cart-itemid="{{id}}" data-action="dec">
                                     <span class="is-srOnly">{{lang 'products.quantity_decrease' name=name}}</span>
-                                    <i class="icon" aria-hidden="true"><svg><use xlink:href="#icon-minus" /></svg></i>
+                                    <i class="icon" aria-hidden="true"><svg><use href="#icon-minus" /></svg></i>
                                 </button>
                             {{/if}}
                             <input class="form-input form-input--incrementTotal cart-item-qty-input"
@@ -137,15 +132,11 @@
                                    data-cart-itemid="{{id}}"
                                    data-action="manualQtyChange"
                                    aria-label="{{name}}"
-                                   aria-live="polite"{{#unless can_modify}} disabled{{/unless}} 
-                                   data-product-qty {{#each custom_fields}}
-                                   {{#if (toLowerCase name) '===' 'pack size'}}
-                                   {{#if value '!==' '1'}}readonly{{/if}}{{/if}}{{/each}}
-                                   >
-                             {{#if can_modify}}
+                                   aria-live="polite"{{#unless can_modify}} disabled{{/unless}}>
+                            {{#if can_modify}}
                                 <button class="button button--icon" data-cart-update data-cart-itemid="{{id}}" data-action="inc">
                                     <span class="is-srOnly">{{lang 'products.quantity_increase' name=name}}</span>
-                                    <i class="icon" aria-hidden="true"><svg><use xlink:href="#icon-add" /></svg></i>
+                                    <i class="icon" aria-hidden="true"><svg><use href="#icon-add" /></svg></i>
                                 </button>
                             {{/if}}
                         </div>
@@ -154,7 +145,7 @@
                     {{#if can_modify}}
                         <span class="previewCartItem-remove">
                             <a class="previewCartItem-remove-icon" title="{{lang 'cart.remove'}}" data-cart-remove data-cart-itemid="{{id}}" href="#" data-confirm-delete="{{lang 'cart.confirm_delete'}}" aria-autoclose="false">
-                                <svg class="icon" aria-hidden="true"><use xlink:href="#icon-recycle" /></svg>
+                                <svg class="icon" aria-hidden="true"><use href="#icon-recycle" /></svg>
                             </a>
                         </span>
                     {{/if}}

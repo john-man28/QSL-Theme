@@ -88,6 +88,7 @@ class Menu {
 
     // On click tab menu left
     onMenuTab(event) {
+        event.preventDefault();
         const $thisNav = $(event.target);
         const $navEleOther = $thisNav.parent().siblings();
         $navEleOther.children('[data-nav-tab]').removeClass('is-open');
@@ -133,7 +134,6 @@ class Menu {
         }
 
         if ($(event.target).closest('.navPage-subMenu-item').length > 0) {
-            const headerHeight = this.$menu.closest('header').height();
             const navToggle = $(event.target).closest('.navPages-action-toggle');
             const navChildlist = $(event.target).closest('.navPage-subMenu-item').find('.navPage-childList');
             const navChildlistId = $(event.target).closest('.navPage-subMenu-item').find('.navPage-childList').attr('id');
@@ -143,7 +143,7 @@ class Menu {
             if (!mediumMediaQueryList.matches) {
                 if (navChildlist.hasClass('is-open') && navChildlistId === navData) {
                     this.$menu.find('.navPage-subMenu.is-open').css('overflow', 'hidden');
-                    navChildlist.css('top', `${headerHeight}px`);
+                    navChildlist.css('top', `${this.$menu.offset().top - $(window).scrollTop()}px`);
                 }
                 if (navChildlist.find('.navPage-childList').hasClass('is-open') && navChildlistItemId === navData) {
                     navChildlist.first().css('overflow-y', 'auto');

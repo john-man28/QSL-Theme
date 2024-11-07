@@ -37,10 +37,11 @@
 }
 
 .facetedSearch-toggle-indicator {
-    color: $color-textSecondary;
+    color: $color-textBase;
     width: auto;
     float: none;
     text-align: left;
+    display: flex;
 
     .toggleLink-text {
         font-size: fontSize("smaller");
@@ -130,6 +131,11 @@
     .navList {
         border: 0;
         margin: 0;
+    }
+
+    .navList--inner {
+        margin-left: spacing("single");
+        margin-top: spacing("quarter");
     }
 
     .navList-item {

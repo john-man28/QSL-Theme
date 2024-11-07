@@ -11,16 +11,6 @@
         {{> components/products/price-range price=price}}
     {{else}}
         {{#if price.with_tax}}
-            {{#if theme_settings.show_rrp}}
-                <div class="price-section price-section--withTax rrp-price--withTax" {{#unless price.rrp_with_tax}}style="display: none;"{{/unless}}>
-                    <span class="price-was-label">{{theme_settings.pdp-retail-price-label}}</span>
-                    <span data-product-rrp-with-tax class="price price--rrp">{{price.rrp_with_tax.formatted}}</span>
-                </div>
-            {{/if}}
-            <div class="price-section price-section--withTax non-sale-price--withTax" {{#unless price.non_sale_price_with_tax}}style="display: none;"{{/unless}}>
-                <span class="price-was-label">{{theme_settings.pdp-non-sale-price-label}}</span>
-                <span data-product-non-sale-price-with-tax class="price price--non-sale">{{price.non_sale_price_with_tax.formatted}}</span>
-            </div>
             <div class="price-section price-section--withTax">
                 <span class="price-label" {{#if price.non_sale_price_with_tax}}style="display: none;"{{/if}}>{{theme_settings.pdp-price-label}}</span>
                 <span class="price-now-label" {{#unless price.non_sale_price_with_tax}}style="display: none;"{{/unless}}>{{theme_settings.pdp-sale-price-label}}</span>
@@ -29,6 +19,16 @@
                     <abbr title="{{lang 'products.including_tax'}}">{{lang 'products.price_with_tax' tax_label=price.tax_label}}</abbr>
                 {{/if}}
             </div>
+            <div class="price-section price-section--withTax non-sale-price--withTax" {{#unless price.non_sale_price_with_tax}}style="display: none;"{{/unless}}>
+                <span class="price-was-label">{{theme_settings.pdp-non-sale-price-label}}</span>
+                <span data-product-non-sale-price-with-tax class="price price--non-sale">{{price.non_sale_price_with_tax.formatted}}</span>
+            </div>
+            {{#if theme_settings.show_rrp}}
+                <div class="price-section price-section--withTax rrp-price--withTax" {{#unless price.rrp_with_tax}}style="display: none;"{{/unless}}>
+                    <span class="price-was-label">{{theme_settings.pdp-retail-price-label}}</span>
+                    <span data-product-rrp-with-tax class="price price--rrp">{{price.rrp_with_tax.formatted}}</span>
+                </div>
+            {{/if}}
         {{/if}}
         {{#and price.with_tax price.without_tax}}<div class="_br"></div>{{/and}}
         {{#if price.without_tax}}

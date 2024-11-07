@@ -470,6 +470,36 @@
             }
         }
     }
+
+    .add-to-cart-wallet-buttons {
+        div[data-smart-button-container-id] {
+            line-height: 0;
+            margin-top: 6px;
+
+            button,
+            div {
+                width: 100%;
+            }
+        }
+
+        button.show-more-button {
+            color: stencilColor("color-textSecondary");
+            display: block;
+            padding: spacing("quarter") 0;
+            text-align: center;
+            text-decoration: underline;
+            width: 100%;
+            margin-bottom: spacing("half");
+
+            @include breakpoint("medium") {
+                margin-top: spacing("half");
+            }
+
+            &:hover {
+                color: stencilColor("color-textSecondary--hover");
+            }
+        }
+    }
 }
 
 

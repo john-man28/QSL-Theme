@@ -16,7 +16,7 @@
     {{else}}
         <div class="cart-total-label _coupon-code-input">
             {{{lang 'cart.coupons.add_title'}}}
-            <button class="coupon-code-cancel" style="display: none;">{{lang 'cart.coupons.cancel'}}<i><svg class='icon'><use xlink:href='#icon-chervon-right-thin'></use></svg></i></button>
+            <button class="coupon-code-cancel" style="display: none;">{{lang 'cart.coupons.cancel'}}<i><svg class='icon'><use href='#icon-chervon-right-thin'></use></svg></i></button>
         </div>
         <div class="cart-form coupon-code" style="display: none;">
             <form class="form form--hiddenLabels coupon-form" method="post" action="{{urls.cart}}">
@@ -46,6 +46,8 @@
         <div class="cart-total-value cart-total-grandTotal">
             {{#or customer (unless settings.hide_price_from_guests)}}
                 <span>{{cart.grand_total.formatted}}</span>
+            {{else}}
+                {{> components/common/login-for-pricing}}
             {{/or}}
         </div>
     </li>

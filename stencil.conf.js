@@ -127,6 +127,20 @@ function validateSchema() {
                     err = true;
                 }
 
+                if (item.type === 'text') {
+                    if (config.settings[item.id].length > 64) {
+                        console.error(`Setting '${item.id}' has value length is greater than 64`);
+                        err = true;
+                    }
+
+                    config.variations.forEach(variation => {
+                        if (typeof variation.settings[item.id] === 'string' && variation.settings[item.id].length > 64) {
+                            console.error(`Setting '${item.id}' of variation '${variation.name}' has value length is greater than 64`);
+                            err = true;
+                        }
+                    });
+                }
+
                 if (item.id && typeof config.settings[item.id] !== valueType) {
                     console.error(`Setting '${item.id}' has value type is not ${valueType}`);
                 }
@@ -144,6 +158,18 @@ function validateSchema() {
                 }
             });
         }
+    });
+
+    config.variations.forEach((variation) => {
+        Object.keys(variation.settings).forEach((key) => {
+            if (typeof config.settings[key] === 'undefined') {
+                console.error(`Setting '${key}' of variation '${variation.name}' is undefined in original settings`);
+                err = true;
+            } else if (typeof variation.settings[key] !== typeof config.settings[key]) {
+                console.error(`Setting '${key}' of variation '${variation.name}' has value type is not ${typeof config.settings[key]}`);
+                err = true;
+            }
+        });
     });
 
     return !err;

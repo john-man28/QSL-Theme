@@ -149,13 +149,14 @@
                 display: block;
                 order: 1;
                 padding: 0 spacing("half") * 1.25 0 0;
+                width: 150px;
 
-                @if stencilString("categorypage_layout")=="left-sidebar" {
-                    width: spacing("base") * 6.25;
+                @include breakpoint("xlarge") {
+                    width: 200px;
                 }
 
-                @else {
-                    width: (spacing("half") + spacing("third")) * 8.75;
+                @include breakpoint("xxlarge") {
+                    width: 250px;
                 }
 
                 .price--main {
@@ -203,8 +204,7 @@
             .card-bulkOrder-qty-and-action {
                 order: 3;
                 display: flex;
-                width: fit-content;
-                min-width: (spacing("half") + spacing("third")) * 8.65;
+                width: 220px;
 
                 &:hover {
                     .card-bulkOrder-qty {
@@ -262,7 +262,7 @@
                         font-weight: fontWeight("bold");
                         outline-offset: -1px !important;
 
-                        &[data-check-qty] {
+                        &:not(.button-out-of-stock) {
                             border-top-left-radius: 0;
                             border-bottom-left-radius: 0;
                         }
@@ -279,17 +279,14 @@
                         &.button-out-of-stock {
                             background-color: stencilColor("button--disabled-backgroundColor");
                             color: stencilColor("button--disabled-color");
+                            height: auto;
+                            min-height: 2.5rem;
+                            padding: spacing("quarter") spacing("half");
+                            white-space: normal;
 
                             &:hover {
                                 background-color: stencilColor("button--disabled-backgroundColor");
                                 color: stencilColor("button--disabled-color");
-                            }
-
-                            span {
-                                padding: 0 spacing("half") * 1.25;
-                                white-space: nowrap;
-                                text-overflow: ellipsis;
-                                overflow: hidden; 
                             }
                         }
                     }
@@ -419,6 +416,14 @@
             padding: 0 $column-gutter / 2;
             width: 12.5%;
         }
+
+        .price-section {
+            display: inline-block;
+        }
+
+        .price {
+            font-size: fontSize("base");
+        }
     }
 
     .card-bulkOrder-subtotal {
@@ -467,6 +472,56 @@
 
 .card-bulkOrder-value {
     display: inline-block;
+}
+
+.card-bulkOrder-options {
+    display: none;
+
+    .mode-bo & {
+        display: block;
+    }
+
+    dl {
+        display: block;
+        margin: spacing("quarter") 0 0;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+
+        @if $theme-style == "modern" {
+            font-size: fontSize("smallest");
+        }
+        @else {
+            font-size: fontSize("smaller");
+        }
+
+        @include breakpoint("medium") {
+            margin-bottom: spacing("quarter");
+        }
+    }
+
+    dt {
+        display: inline-block;
+        margin: 0 spacing("eighth") 0 0;
+
+        &::after {
+            content: ":";
+        }
+    }
+
+    dd {
+        display: inline-block;
+        margin: 0 spacing("quarter") 0 0;
+
+        &::after {
+            content: ";";
+        }
+    }
+
+    .alertBox {
+        margin-top: spacing("quarter");
+        font-size: fontSize("smaller");
+        padding: spacing("quarter") spacing("half");
+    }
 }
 
 .productGrid-bulkOrderHeader-wrapper {

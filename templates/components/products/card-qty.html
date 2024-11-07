@@ -1,4 +1,4 @@
-{{#if theme_settings.show_product_quantity_box}}
+{{#if theme_settings.card_show_qty}}
     {{assignVar 'qtyBoxRand' (random 0 1000000)}}
     <div class="form-field form-field--increments">
         <label class="is-srOnly" for="qty_{{id}}_{{incrementVar 'qtyBoxUID'}}_{{getVar 'qtyBoxRand'}}">{{lang 'products.quantity'}}</label>
@@ -7,7 +7,7 @@
                 <span class="is-srOnly">{{lang 'products.quantity_decrease' name=name}}</span>
                 <i class="icon" aria-hidden="true">
                     <svg>
-                        <use xlink:href="#icon-minus"/>
+                        <use href="#icon-minus"/>
                     </svg>
                 </i>
             </button>
@@ -25,7 +25,7 @@
                 <span class="is-srOnly">{{lang 'products.quantity_increase' name=name}}</span>
                 <i class="icon" aria-hidden="true">
                     <svg>
-                        <use xlink:href="#icon-add"/>
+                        <use href="#icon-add"/>
                     </svg>
                 </i>
             </button>

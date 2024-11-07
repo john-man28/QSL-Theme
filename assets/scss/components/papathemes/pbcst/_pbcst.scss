@@ -24,14 +24,6 @@
     .tab {
         border: 0;
 
-        &:not(:last-of-type) {
-            margin-right: 1.625rem;
-
-            @media (max-width: (screenSize("large") - 1px)) {
-                margin-right: 0;
-            }
-        }
-
         @media (max-width: (screenSize("small") - 1px)) {
             .tab-title {
                 padding-left: 0;
@@ -67,6 +59,19 @@
                 text-decoration: underline;
             }
         }
+
+        + .tab {
+            .tab-title::before {
+                content: "";
+                margin: 0 spacing("half");
+                display: inline-block;
+                width: 4px;
+                height: 4px;
+                border-radius: 2px;
+                background-color: rgba($color-textSecondary, 0.3);
+                vertical-align: middle;
+            }
+        }
     }
 
     .tab-title {
@@ -75,15 +80,15 @@
         padding: 0;
         border-radius: $button-radius;
         white-space: nowrap;
-        font-size: fontSize("smaller");
-        font-weight: fontWeight("semibold");
+        font-size: fontSize("smallest");
 
         @media (max-width: (screenSize("medium") - 1px)) {
             padding: 0 spacing("half");
-            margin: remCalc(2);
+            margin: remCalc(2) 0;
         }
     
         @include breakpoint("medium") {
+            font-size: fontSize("smaller");
             white-space: normal;
         }
     }
@@ -499,11 +504,6 @@
     @media (max-width: (screenSize("medium") - 1px)) {
         .tabs {
             column-gap: 0;
-
-            .tab {
-                padding-left: spacing("half");
-                padding-right: spacing("half");
-            }
         }
     }
 }

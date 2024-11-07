@@ -42,6 +42,11 @@
 }
 
 // papathemes-beautify added
+.productReview-title {
+    font-size: fontSize("base");
+    font-weight: $header-font-weight;
+}
+
 .productReview-author {
     margin-bottom: spacing("quarter");
 }

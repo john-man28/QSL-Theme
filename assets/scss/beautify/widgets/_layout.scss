@@ -4,4 +4,8 @@
         margin-left: auto;
         margin-right: auto;
     }
+
+    &:has([data-layout-name="HOME-BELOW-CAROUSEL"]) {
+        max-width: none;
+    }
 }

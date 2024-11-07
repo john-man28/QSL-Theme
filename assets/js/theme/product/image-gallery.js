@@ -231,6 +231,10 @@ export default class ImageGallery {
         };
 
         const onNavCarouselInit = () => {
+            // papathemes: fix ADA
+            this.$navCarousel.attr('role', 'none');
+            this.$navCarousel.find('li').attr('role', 'none');
+
             this.$navCarousel.find('.slick-slide').on('keypress', event => {
                 const keyCode = event.keyCode || event.which;
                 if (keyCode === 13 || keyCode === 32) {

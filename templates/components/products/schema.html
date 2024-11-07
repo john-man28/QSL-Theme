@@ -20,11 +20,7 @@
             {{/if}}
         },
         {{/if}}
-        {{#if product.description}}
-            "description": {{{JSONstringify (ellipsis (sanitize product.description) 4995)}}},
-        {{else}}
-            "description": "",
-        {{/if}}
+        "description": {{#if product.description}}{{{JSONstringify (ellipsis (sanitize product.description) 4995)}}}{{else}}{{{JSONstringify product.title}}}{{/if}},
         "image": "{{getImage product.main_image 'zoom_size' (cdn theme_settings.default_image_product)}}",
         {{#and settings.show_product_reviews product.reviews.list.length}}
         "aggregateRating": {

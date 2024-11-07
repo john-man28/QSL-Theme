@@ -18,6 +18,7 @@ class RecentlyViewedProductsObserver {
     constructor({
         customerRecentlyViewedProductIds = [],
         customerId = 0,
+        maxProducts = 100,
         ...options
     } = {}) {
         this.onProductViewed = this.onProductViewed.bind(this);
@@ -26,6 +27,7 @@ class RecentlyViewedProductsObserver {
         this.productIds = parseJSON(this.storage.getItem('supermarket_recentlyViewedProducts') || '[]') || [];
         this.customerRecentlyViewedProductIds = customerRecentlyViewedProductIds;
         this.customerId = customerId;
+        this.maxProducts = maxProducts;
         this.options = options;
         this.query = new ProductCardsGraphQLQuery(options);
 
@@ -55,7 +57,7 @@ class RecentlyViewedProductsObserver {
         try {
             if (productId && !this.productIds.includes(productId)) {
                 this.productIds.unshift(productId);
-                this.storage.setItem('supermarket_recentlyViewedProducts', JSON.stringify(this.productIds));
+                this.storage.setItem('supermarket_recentlyViewedProducts', JSON.stringify(this.productIds.slice(0, this.maxProducts)));
                 utils.hooks.emit('product-view', productId);
             }
         } catch (e) {
@@ -79,7 +81,7 @@ class RecentlyViewedProductsObserver {
             });
         }
 
-        const productIds = uniq([...this.customerRecentlyViewedProductIds, ...this.productIds]).filter(productId => productId).slice(0, 100);
+        const productIds = uniq([...this.customerRecentlyViewedProductIds, ...this.productIds]).filter(productId => productId).slice(0, this.maxProducts);
         return this.query.load(productIds);
     }
 }
@@ -248,14 +250,14 @@ class RecentlyViewedProductsSection {
                                 <div class="card-figcaption-body">
                                     <div class="card-buttons card-buttons--alt">
                                         {{#show_product_quick_view}}
-                                            <a class="button card-figcaption-button quickview" tabindex="0" data-event-type="product-click" data-product-id="{{id}}"><svg class="icon"><use xlink:href="#icon-bs-search"></use></svg>{{txtQuickView}}</a>
+                                            <a class="button card-figcaption-button quickview" tabindex="0" data-event-type="product-click" data-product-id="{{id}}"><svg class="icon"><use href="#icon-bs-search"></use></svg>{{txtQuickView}}</a>
                                         {{/show_product_quick_view}}
                                         <button type="button" tabindex="0" class="button card-figcaption-button _compare2" 
                                             data-compare-id="{{id}}"
                                             data-compare-image="{{#defaultImage}}{{url320wide}}{{/defaultImage}}"
                                             data-compare-title="{{name}}"
                                             data-compare-url="{{url}}"
-                                        ><svg class="icon"><use xlink:href="#icon-compare"></use></svg>{{txtCompare}}</button>
+                                        ><svg class="icon"><use href="#icon-compare"></use></svg>{{txtCompare}}</button>
                                     </div>
                                 </div>
                             </figcaption>
@@ -316,7 +318,7 @@ class RecentlyViewedProductsSection {
                                         <a href="{{url}}" target="_blank" title="{{txtChooseOptions}}" data-event-type="product-click" class="button button--primary card-figcaption-button{{#show_product_quick_view}}{{#ajax_add_to_cart}} quickview-alt{{/ajax_add_to_cart}}{{/show_product_quick_view}}" data-product-id="{{id}}">
                                             <span>{{txtChooseOptions}}</span>
                                             <i>
-                                                <svg class="icon"><use xlink:href="#icon-cart-add"></use></svg>
+                                                <svg class="icon"><use href="#icon-cart-add"></use></svg>
                                             </i>
                                         </a>
                                     </div>
@@ -327,7 +329,7 @@ class RecentlyViewedProductsSection {
                                         <a href="{{url}}" title="{{txtPreOrder}}" data-event-type="product-click" class="button button--primary card-figcaption-button">
                                             <span>{{txtPreOrder}}</span>
                                             <i>
-                                                <svg class="icon"><use xlink:href="#icon-cart-add"></use></svg>
+                                                <svg class="icon"><use href="#icon-cart-add"></use></svg>
                                             </i>
                                         </a>
                                     </div>
@@ -338,7 +340,7 @@ class RecentlyViewedProductsSection {
                                         <a href="{{addToCartUrl}}" title="{{txtAddToCart}}"{{^ajax_add_to_cart}} data-event-type="product-click"{{/ajax_add_to_cart}} class="button button--primary card-figcaption-button"{{#ajax_add_to_cart}} data-papathemes-cart-item-add{{/ajax_add_to_cart}}>
                                             <span>{{txtAddToCart}}</span>
                                             <i>
-                                                <svg class="icon"><use xlink:href="#icon-cart-add"></use></svg>
+                                                <svg class="icon"><use href="#icon-cart-add"></use></svg>
                                             </i>
                                         </a>
                                     </div>
@@ -357,7 +359,7 @@ class RecentlyViewedProductsSection {
                                             data-event-type="product-click" 
                                             data-product-id="{{id}}">
                                                 <span class="btn-icon">
-                                                    <svg class="icon"><use xlink:href="#icon-bs-search"></use></svg>
+                                                    <svg class="icon"><use href="#icon-bs-search"></use></svg>
                                                 </span>
                                         </a>
                                     {{/show_product_quick_view}}
@@ -369,7 +371,7 @@ class RecentlyViewedProductsSection {
                                             data-compare-title="{{name}}"
                                             data-compare-url="{{url}}">
                                             <span class="btn-icon">
-                                                <svg class="icon"><use xlink:href="#icon-compare"></use></svg>
+                                                <svg class="icon"><use href="#icon-compare"></use></svg>
                                             </span>
                                         </a>
                                     {{/show_compare}}
@@ -533,6 +535,7 @@ function initObserver(context) {
             ...context,
             customerRecentlyViewedProductIds,
             restrictToLogin,
+            maxProducts: Number(context.product_recentviewed_max) || 100,
         });
     }
 }

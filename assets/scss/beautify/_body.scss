@@ -108,14 +108,26 @@ h1.page-heading {
 }
 
 .breadcrumb {
+    display: inline-flex;
     text-transform: none;
+    font-size: fontSize("smallest");
+
+    @include breakpoint("medium") {
+        font-size: fontSize("smaller");
+    }
 
     .icon {
-        width: remCalc(7);
-        height: remCalc(11);
-        margin: 0 spacing("quarter");
-        fill: rgba($color-textSecondary, 0.7);
+        width: 5px;
+        height: 8px;
+        margin: 0;
+        fill: rgba($color-textSecondary, 0.3);
         vertical-align: unset;
+
+        @include breakpoint("medium") {
+            width: remCalc(7);
+            height: remCalc(11);
+            fill: rgba($color-textSecondary, 0.5);
+        }
     }
 
     .breadcrumb-label {
@@ -151,7 +163,12 @@ h1.page-heading {
 }
 
 .breadcrumb-separator {
-    padding: 0 spacing("third");
+    display: inline-block;
+    padding: 0 spacing("quarter");
+
+    @include breakpoint("medium") {
+        padding: 0 spacing("half");
+    }
 }
 
 .button--toggle {
@@ -1972,19 +1989,21 @@ div.beautify__customerReviews {
         border-radius: unset;
         overflow: hidden;
         
-        @if stencilString("categorythumb_size") != "original" {
-            @include lazy-loaded-padding("categorythumb_size");
-            border-radius: $container-border-radius;
-
-            img {
-                position: absolute;
-                left: 0;
-                top: 0;
-                right: 0;
-                margin: 0 auto;
-                object-fit: contain;
-                height: 100%;
-                width: 100%;
+        &:has(img) {
+            @if stencilString("categorythumb_size") != "original" {
+                @include lazy-loaded-padding("categorythumb_size");
+                border-radius: $container-border-radius;
+    
+                img {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    margin: 0 auto;
+                    object-fit: contain;
+                    height: 100%;
+                    width: 100%;
+                }
             }
         }
 
@@ -2271,13 +2290,18 @@ div.beautify__customerReviews {
     ._blog-title {
         @if $theme-variant == "game" {
             color: stencilColor("color-textBase");
-            line-height: 1.7;
         }
         @else {
             color: stencilColor("color-textLink");
         }
-        font-size: fontSize("base");
+
+        line-height: lineHeight("base");
+        font-size: fontSize("smaller");
         text-decoration: unset;
+
+        @include breakpoint("medium") {
+            font-size: fontSize("base");
+        }
 
         &:hover {
             color: stencilColor("color-textLink--hover");
@@ -2298,13 +2322,14 @@ div.beautify__customerReviews {
 
         a {
             text-decoration: none;
+            font-weight: fontWeight("semibold");
+            font-size: fontSize("smaller");
+
             @if $theme-variant == "game" {
                 color: stencilColor("color-primary");
-                font-weight: fontWeight("semibold");
             }
             @else {
                 color: stencilColor("color-textLink");
-                font-weight: bold;
             }
 
             &:hover,
@@ -2451,7 +2476,7 @@ div.beautify__customerReviews {
 
         a {
             color: stencilColor("color-textLink");
-            font-weight: bold;
+            font-weight: fontWeight("semibold");
             text-decoration: unset;
             display: inline-block;
             margin: 0;
@@ -2530,7 +2555,12 @@ div.beautify__customerReviews {
         margin: 0 0 spacing("half");
         font-family: $body-font-family;
         font-weight: fontWeight("semibold");
-        font-size: inherit;
+        font-size: fontSize("smaller");
+        line-height: lineHeight("base");
+
+        @include breakpoint("medium") {
+            font-size: fontSize("base");
+        }
 
         a {
             color: inherit;
@@ -2545,6 +2575,11 @@ div.beautify__customerReviews {
 
     ._blog-post {
         color: $color-textSecondary;
+        font-size: fontSize("smaller");
+
+        @include breakpoint("medium") {
+            font-size: fontSize("base");
+        }
 
         p {
             margin-bottom: 0;
@@ -2582,12 +2617,6 @@ div.beautify__customerReviews {
     @media (max-width: screenSize("medium") - 1px) {
         ._blog-post-body {
             padding: 0;
-        }
-
-        ._blog-post {
-            p {
-                font-weight: fontWeight("normal");
-            }
         }
     }
 

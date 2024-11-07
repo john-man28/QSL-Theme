@@ -1,11 +1,11 @@
-{{#if theme_settings.hero-carousal-title-1 }}
+{{inject 'hasMainCarousel' true}}
 <section class="heroCarousel-container">
-    <div class="heroCarousel heroCarousel--stretch blaze-slider" 
+    <div class="heroCarousel heroCarousel--{{theme_settings.homepage_carousel_style}} blaze-slider" 
         data-blaze-slider='{
                             "all": {
                                 "enablePagination": true,
                                 "enableAutoplay": true,
-                                "autoplayInterval": 5000,
+                                "autoplayInterval": {{carousel.swap_frequency}},
                                 "transitionDuration": 300,
                                 "slidesToShow": 1,
                                 "slidesToScroll": 1,
@@ -16,199 +16,68 @@
         <div class="blaze-container">
             <div class="blaze-track-container">
                 <div class="blaze-track">
-                     <div class="heroCarousel-slide heroCarousel-slide--1" tabindex="0">
-                        <div class="heroCarousel-image-wrapper heroCarousel-image-wrapper--sized">
-                            <a href="{{theme_settings.hero-carousal-url-1}}" tabindex="-1">
-                                <div class="heroCarousel-image-box" style="width: 3280px;">
-                                    <div class="heroCarousel-image-box-padding" style="padding-bottom: 0px;height:auto;">
-                                        <img
-                                            src="{{theme_settings.hero-carousal-image-1}}"
-                                            alt=""
-                                            title=""
-                                            data-sizes="auto"
-                                            class="heroCarousel-image lazyautosizes lazyloaded"
-                                            loading="lazy"
-                                            width="3280"
-                                            height="1980"
-                                            sizes="214px"
-                                        />
+                    {{#each carousel.slides}}
+                        <div class="heroCarousel-slide heroCarousel-slide--{{@index}}{{#if @first}} heroCarousel-slide--first{{/if}}" tabindex="0">
+                            <div class="heroCarousel-image-wrapper{{#and image_height image_width}} heroCarousel-image-wrapper--sized{{/and}}">
+                                <a href="{{url}}" tabindex="-1">
+                                    <div class="heroCarousel-image-box" style="{{#if image_width}}width:{{image_width}}px{{/if}}">
+                                        {{#and image_height image_width}}<div class="heroCarousel-image-box-padding" style="padding-bottom:{{multiply (divide image_height image_width) 100}}%">{{/and}}
+                                            {{#if @first}}
+                                                {{> components/common/responsive-img
+                                                    image=stencil_image
+                                                    class="heroCarousel-image"
+                                                    fallback_size='1920w'
+                                                    lazyload='disabled'
+                                                    otherAttributes=(concat (concat (concat (concat 'width="' image_width) '" height="') image_height) '"')
+                                                }}
+                                            {{else}}
+                                                {{> components/common/responsive-img
+                                                    image=stencil_image
+                                                    class="heroCarousel-image"
+                                                    fallback_size='1920w'
+                                                    lazyload='lazyload'
+                                                    otherAttributes=(concat (concat (concat (concat 'width="' image_width) '" height="') image_height) '"')
+                                                }}
+                                            {{/if}}
+                                        {{#and image_height image_width}}</div>{{/and}}
+                                        {{#if heading}}
+                                            {{> components/carousel-content-heading-button show_background=true theme_settings=../../theme_settings}}
+                                        {{else}}
+                                            {{#if button_text}}
+                                                {{> components/carousel-content-heading-button show_background=false theme_settings=../../../../theme_settings}}
+                                            {{/if}}
+                                        {{/if}}
                                     </div>
-                                    <div class="heroCarousel-content _head-button-mobile {{theme_settings.hero-carousal-position-1}}">
-                                        <h2 class="heroCarousel-title">{{theme_settings.hero-carousal-title-1}}</h2>
-                                        <span class="heroCarousel-action button button--primary button--large">{{theme_settings.hero-carousal-button-text-1}}</span>
-                                    </div>
-                                </div>
-                                <div class="heroCarousel-content {{theme_settings.hero-carousal-position-1}}">
-                                    <h2 class="heroCarousel-title">{{theme_settings.hero-carousal-title-1}}</h2>
-                                    <div class="heroCarousel-description">{{{theme_settings.hero-carousal-desc-1}}}</div>
-                                    <span class="heroCarousel-action button button--primary button--large">{{theme_settings.hero-carousal-button-text-1}}</span>
-                                </div>
-                                <div class="heroCarousel-content _desc-mobile {{theme_settings.hero-carousal-position-1}}">
-                                    <div class="heroCarousel-description">{{{theme_settings.hero-carousal-desc-1}}}</div>
-                                </div>
-                            </a>
+                                    {{#if heading}}
+                                        {{> components/carousel-content show_background=true theme_settings=../../theme_settings}}
+                                    {{else}}
+                                        {{#if text}}
+                                            {{> components/carousel-content show_background=true theme_settings=../../../theme_settings}}
+                                        {{else}}
+                                            {{#if button_text}}
+                                                {{> components/carousel-content show_background=false theme_settings=../../../../theme_settings}}
+                                            {{/if}}
+                                        {{/if}}
+                                    {{/if}}
+                                    {{#if text}}
+                                        {{> components/carousel-content-desc show_background=true theme_settings=../../../theme_settings}}
+                                    {{/if}}
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                     <div class="heroCarousel-slide heroCarousel-slide--2" tabindex="1">
-                       <div class="heroCarousel-image-wrapper heroCarousel-image-wrapper--sized">
-                            <a href="{{theme_settings.hero-carousal-url-2}}" tabindex="-1">
-                                <div class="heroCarousel-image-box" style="width: 3280px;">
-                                    <div class="heroCarousel-image-box-padding" style="padding-bottom: 0px;height:auto;">
-                                        <img
-                                            src="{{theme_settings.hero-carousal-image-2}}"
-                                            alt=""
-                                            title=""
-                                            data-sizes="auto"
-                                            class="heroCarousel-image lazyautosizes lazyloaded"
-                                            loading="lazy"
-                                            width="3280"
-                                            height="1980" 
-                                            sizes="214px"
-                                        />
-                                    </div>
-                                    <div class="heroCarousel-content _head-button-mobile  {{theme_settings.hero-carousal-position-2}}">
-                                        <h2 class="heroCarousel-title">{{theme_settings.hero-carousal-title-2}}</h2>
-                                        <span class="heroCarousel-action button button--primary button--large">{{theme_settings.hero-carousal-button-text-2}}</span>
-                                    </div>
-                                </div>
-                                <div class="heroCarousel-content {{theme_settings.hero-carousal-position-2}}">
-                                    <h2 class="heroCarousel-title">{{theme_settings.hero-carousal-title-2}}</h2>
-                                    <div class="heroCarousel-description">{{{theme_settings.hero-carousal-desc-2}}}</div>
-                                    <span class="heroCarousel-action button button--primary button--large">{{theme_settings.hero-carousal-button-text-2}}</span>
-                                </div>
-                                <div class="heroCarousel-content _desc-mobile {{theme_settings.hero-carousal-position-2}}">
-                                    <div class="heroCarousel-description ">{{{theme_settings.hero-carousal-desc-2}}}</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                     <div class="heroCarousel-slide heroCarousel-slide--3" tabindex="3">
-                        <div class="heroCarousel-image-wrapper heroCarousel-image-wrapper--sized">
-                            <a href="{{theme_settings.hero-carousal-url-3}}" tabindex="-1">
-                                <div class="heroCarousel-image-box" style="width: 3280px;">
-                                    <div class="heroCarousel-image-box-padding" style="padding-bottom: 0px;height:auto;">
-                                        <img
-                                            src="{{theme_settings.hero-carousal-image-3}}"
-                                            alt=""
-                                            title=""
-                                            data-sizes="auto"
-                                            class="heroCarousel-image lazyautosizes lazyloaded"
-                                            loading="lazy"
-                                            width="3280"
-                                            height="1980"
-                                            sizes="214px"
-                                        />
-                                    </div>
-                                    <div class="heroCarousel-content _head-button-mobile {{theme_settings.hero-carousal-position-3}}">
-                                        <h2 class="heroCarousel-title">{{theme_settings.hero-carousal-title-3}}</h2>
-                                        <span class="heroCarousel-action button button--primary button--large">{{theme_settings.hero-carousal-button-text-3}}</span>
-                                    </div>
-                                </div>
-                                <div class="heroCarousel-content {{theme_settings.hero-carousal-position-3}}">
-                                    <h2 class="heroCarousel-title">{{theme_settings.hero-carousal-title-3}}</h2>
-                                    <div class="heroCarousel-description">{{{theme_settings.hero-carousal-desc-3}}}</div>
-                                    <span class="heroCarousel-action button button--primary button--large">{{theme_settings.hero-carousal-button-text-3}}</span>
-                                </div>
-                                <div class="heroCarousel-content _desc-mobile {{theme_settings.hero-carousal-position-3}} ">
-                                    <div class="heroCarousel-description">{{{theme_settings.hero-carousal-desc-3}}}</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                     <div class="heroCarousel-slide heroCarousel-slide--4" tabindex="4">
-                        <div class="heroCarousel-image-wrapper heroCarousel-image-wrapper--sized">
-                            <a href="{{theme_settings.hero-carousal-url-4}}" tabindex="-1">
-                                <div class="heroCarousel-image-box" style="width: 3280px;">
-                                    <div class="heroCarousel-image-box-padding" style="padding-bottom: 0px;height:auto;" >
-                                        <img
-                                            src="{{theme_settings.hero-carousal-image-4}}"
-                                            alt=""
-                                            title=""
-                                            data-sizes="auto"
-                                            class="heroCarousel-image lazyautosizes lazyloaded"
-                                            loading="lazy"
-                                            width="3280"
-                                            height="1980"
-                                            sizes="214px"
-                                        />
-                                    </div>
-                                    <div class="heroCarousel-content _head-button-mobile {{theme_settings.hero-carousal-position-4}}">
-                                        <h2 class="heroCarousel-title">{{theme_settings.hero-carousal-title-4}}</h2>
-                                        <span class="heroCarousel-action button button--primary button--large">{{theme_settings.hero-carousal-button-text-4}}</span>
-                                    </div>
-                                </div>
-                                <div class="heroCarousel-content {{theme_settings.hero-carousal-position-4}}">
-                                    <h2 class="heroCarousel-title">{{theme_settings.hero-carousal-title-4}}</h2>
-                                    <div class="heroCarousel-description">{{{theme_settings.hero-carousal-desc-4}}}</div>
-                                    <span class="heroCarousel-action button button--primary button--large">{{theme_settings.hero-carousal-button-text-4}}</span>
-                                </div>
-                                <div class="heroCarousel-content _desc-mobile {{theme_settings.hero-carousal-position-4}}">
-                                    <div class="heroCarousel-description ">{{{theme_settings.hero-carousal-desc-4}}}</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
+                    {{/each}}
                 </div>
             </div>
 
             <!-- navigation buttons -->
-            <button class="blaze-prev" aria-label="Previous"></button>
-            <button class="blaze-next" aria-label="Next"></button>
+            <button class="blaze-prev" aria-label="{{lang 'common.previous'}}"></button>
+            <button class="blaze-next" aria-label="{{lang 'common.next'}}"></button>
 
             <!-- pagination container -->
             <div class="blaze-pagination"></div>
         </div>
     </div>
     <div class="beautify__heroCarouselMobile">
-        <div data-content-region="home_carousel_mobile"></div>
+        {{{region name="home_carousel_mobile"}}}
     </div>
 </section>
-{{/if}}
-<style type="text/css">
-    .heroCarousel-image {
-    width: auto!important;
-    }
-    .heroCarousel-image-box-padding {
-        height: auto;
-    }
-    .heroCarousel-content.right {
-      right: 10%;
-      left: 50%;
-    }
-     .heroCarousel-content.left {
-      right: 50%;
-      left: 10%;
-    }
-    .heroCarousel--stretch .heroCarousel-image {
-    width: 100% !important;
-    }
-
-    
-@media (max-width:1260px){
-    
-    .heroCarousel-description ul {
-    margin-left: 140px;
-}
-
-.heroCarousel-description ul li {
-    text-align: left;
-}
-}
-
-@media (max-width:767px){
-    .heroCarousel-description ul {
-    margin-left: 30px;
- }
- .heroCarousel-content.right {
-    right: 5px;
-    left: 50%;
- }
- .heroCarousel-content.left {
-    right: 50%;
-    left: 5px;
- }
-}
- 
-
-</style>

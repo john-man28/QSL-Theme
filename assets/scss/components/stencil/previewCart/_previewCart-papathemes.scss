@@ -91,6 +91,10 @@
     .CheckoutButton {
         margin-top: spacing("half");
 
+        * {
+            max-width: 100%;
+        }
+
         + .CheckoutButton {
             margin-top: 0;
         }

@@ -356,7 +356,7 @@ $cart-item-label-offset:                $cart-thumbnail-maxWidth + $cart-item-sp
 }
 
 .cart-item-brand {
-    color: color("greys", "light");
+    color: $color-textSecondary; // papathemes-supermarket
     margin-bottom: spacing("eighth");
 }
 

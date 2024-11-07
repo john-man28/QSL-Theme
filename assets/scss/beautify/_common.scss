@@ -42,52 +42,52 @@
 }
 
 .button--light {
-    @include buttonVariant("primary");
-    color: stencilColor("button--primary-color");
+    // @include buttonVariant("primary");
+    color: stencilColor("button--light-color");
     background-color: stencilColor("button--light-backgroundColor");
     border-color: stencilColor("button--light-backgroundColor");
 
     &:hover,
     &:focus,
     &:active {
-        color: stencilColor("button--primary-colorHover");
+        color: stencilColor("button--light-colorHover");
         background-color: stencilColor("button--light-backgroundColorHover");
         border-color: stencilColor("button--light-backgroundColorHover");
     }
 }
 
 .button--dark {
-    @include buttonVariant("primary");
-    color: stencilColor("button--primary-color");
+    // @include buttonVariant("primary");
+    color: stencilColor("button--dark-color");
     background-color: stencilColor("button--dark-backgroundColor");
     border-color: stencilColor("button--dark-backgroundColor");
 
     &:hover,
     &:focus,
     &:active {
-        color: stencilColor("button--primary-colorHover");
+        color: stencilColor("button--dark-colorHover");
         background-color: stencilColor("button--dark-backgroundColorHover");
         border-color: stencilColor("button--dark-backgroundColorHover");
     }
 }
 
 .button--black {
-    @include buttonVariant("primary");
-    color: stencilColor("button--primary-color");
+    // @include buttonVariant("primary");
+    color: stencilColor("button--black-color");
     background-color: stencilColor("button--black-backgroundColor");
     border-color: stencilColor("button--black-backgroundColor");
 
     &:hover,
     &:focus,
     &:active {
-        color: stencilColor("button--primary-colorHover");
+        color: stencilColor("button--black-colorHover");
         background-color: stencilColor("button--black-backgroundColorHover");
         border-color: stencilColor("button--black-backgroundColorHover");
     }
 }
 
 .button--white {
-    @include buttonVariant("primary");
+    // @include buttonVariant("primary");
     color: stencilColor("button--white-color");
     background-color: stencilColor("button--white-backgroundColor");
     border-color: stencilColor("button--white-backgroundColor");
@@ -132,7 +132,7 @@
 .button--link {
     color: $color-textLink;
     text-decoration: underline;
-    text-underline-position: under;
+    text-underline-offset: 0.2em;
     background-color: transparent;
     border-color: transparent;
     border: 0;

@@ -1,4 +1,4 @@
-<article class="card card--placeholder {{#if alternate}}card--alternate{{/if}} {{#if theme_settings.card_show_border}}_border{{/if}} {{#unless theme_settings.card_show_button}}_hideBtn{{/unless}}">
+<article class="card card--placeholder {{#if theme_settings.card_show_border}}_border{{/if}} {{#unless theme_settings.card_show_button}}_hideBtn{{/unless}}">
     <figure class="card-figure">
         <div class="card-img-container">
             <img class="card-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" alt="loading" {{getVar 'productCardImageSizeAttrs'}} />
@@ -8,11 +8,11 @@
                 <div class="card-buttons card-buttons--alt">
                     {{#unless hide_product_quick_view}}
                         {{#if theme_settings.show_product_quick_view}}
-                            <a class="button card-figcaption-button quickview" tabindex="-1"><svg class="icon"><use xlink:href="#icon-bs-search"></use></svg>{{lang 'products.quick_view'}}</a>
+                            <a class="button card-figcaption-button quickview" tabindex="-1"><svg class="icon"><use href="#icon-bs-search"></use></svg>{{lang 'products.quick_view'}}</a>
                         {{/if}}
                     {{/unless}}
                     {{#if show_compare}}
-                        <button type="button" class="button card-figcaption-button _compare2" disabled><svg class="icon"><use xlink:href="#icon-compare"></use></svg>{{lang 'products.compare'}}</button>
+                        <button type="button" class="button card-figcaption-button _compare2" disabled><svg class="icon"><use href="#icon-compare"></use></svg>{{lang 'products.compare'}}</button>
                     {{/if}}
                 </div>
             </div>
@@ -63,7 +63,7 @@
                 {{/or}}
 
                 {{#if show_compare}}
-                    <button type="button" class="button card-figcaption-button _compare" disabled><svg class="icon"><use xlink:href="#icon-compare"></use></svg>{{lang 'products.compare'}}</button>
+                    <button type="button" class="button card-figcaption-button _compare" disabled><svg class="icon"><use href="#icon-compare"></use></svg>{{lang 'products.compare'}}</button>
                 {{/if}}
             </div>
     </div>
@@ -82,7 +82,7 @@
                         <button class="button button--icon" data-action="dec" type="button" disabled>
                             <i class="icon" aria-hidden="true">
                                 <svg>
-                                    <use xlink:href="#icon-minus"/>
+                                    <use href="#icon-minus"/>
                                 </svg>
                             </i>
                         </button>
@@ -98,7 +98,7 @@
                         <button class="button button--icon" data-action="inc" type="button" disabled>
                             <i class="icon" aria-hidden="true">
                                 <svg>
-                                    <use xlink:href="#icon-add"/>
+                                    <use href="#icon-add"/>
                                 </svg>
                             </i>
                         </button>

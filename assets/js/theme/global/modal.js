@@ -214,6 +214,8 @@ export class Modal {
 
     onModalClose() {
         $('body').removeClass(bodyActiveClass);
+
+        // this.clearContent(); // papathemes-kansha: commented out as it causes rewrite a review modal reopen empty after closing
     }
 
     onModalClosed() {

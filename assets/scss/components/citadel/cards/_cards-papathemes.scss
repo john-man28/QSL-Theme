@@ -206,6 +206,14 @@
 .card-figure {
     position: relative;
     overflow: hidden;
+
+    > a {
+        display: block;
+    }
+
+    &:has(> a:focus-visible) {
+        overflow: visible;
+    }
 }
 
 .card-image ~ .card-image {

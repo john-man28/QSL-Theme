@@ -5,7 +5,7 @@
             <li class="navPages-item">
                 <a class="navPages-action" {{#if children}}has-subMenu{{/if}} href="{{url}}" data-instantload {{#if id '==' ../category.id}}data-current-category{{/if}}>
                     {{name}}
-                    {{#if children}}<i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-down" /></svg></i>{{/if}}
+                    {{#if children}}<i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use href="#icon-chevron-down" /></svg></i>{{/if}}
                 </a>
             </li>
         {{/each}}
@@ -18,7 +18,7 @@
                 <li class="navPages-item">
                     <a class="navPages-action" {{#if children}}has-subMenu{{/if}} href="{{url}}" data-instantload>
                         {{name}}
-                        {{#if children}}<i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-down" /></svg></i>{{/if}}
+                        {{#if children}}<i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use href="#icon-chevron-down" /></svg></i>{{/if}}
                     </a>
                 </li>
             {{/each}}

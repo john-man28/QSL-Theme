@@ -559,11 +559,20 @@
         line-height: 1.55;
         font-size: fontSize("smaller");
 
+        &:has(.shipping-estimate-value) {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
         &:active,
         &:focus {
             border-color: $outline-color;
             background-color: stencilColor("button--primary-backgroundColor");
         }
+    }
+
+    .shipping-estimate-value {
+        font-size: fontSize("base");
     }
 
     .cart-total--coupons .cart-total-label {
@@ -769,15 +778,28 @@ div.previewCart-additionalCheckoutButtons {
         }
     }
 
-    .FloatRight div {
-        float: none;
-        width: 100%;
-        max-width: 550px;
-        margin: 0 auto;
+    .FloatRight {
+        margin-bottom: spacing("half");
 
-        .paypal-buttons-layout-vertical {
-            width: 100% !important;
+        p {
+            text-align: center;
         }
+
+        div {
+            float: none;
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto;
+            vertical-align: middle;
+
+            .paypal-buttons-layout-vertical {
+                width: 100% !important;
+            }
+        }
+    }
+
+    .GooglePayCheckout button {
+        margin: 0;
     }
 }
 
@@ -801,6 +823,8 @@ div.previewCart-additionalCheckoutButtons {
 }
 
 .shipping-estimator {
+    width: 100%;
+
     .shipping-quotes {
         font-size: fontSize("smaller");
         text-align: left;

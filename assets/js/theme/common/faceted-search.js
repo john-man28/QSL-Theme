@@ -365,7 +365,7 @@ class FacetedSearch {
         const id = $navList.attr('id');
 
         // Toggle depending on `collapsed` flag
-        if (_.includes(this.collapsedFacetItems, id)) {
+        if (this.collapsedFacetItems.includes(id)) {
             this.getMoreFacetResults($navList);
             return true;
         }
@@ -553,7 +553,7 @@ class FacetedSearch {
         $navLists.each((index, navList) => {
             const $navList = $(navList);
             const id = $navList.attr('id');
-            const shouldCollapse = _.includes(this.collapsedFacetItems, id);
+            const shouldCollapse = this.collapsedFacetItems.includes(id);
 
             if (shouldCollapse) {
                 this.collapseFacetItems($navList);
@@ -570,7 +570,7 @@ class FacetedSearch {
             const $accordionToggle = $(accordionToggle);
             const collapsible = $accordionToggle.data('collapsibleInstance');
             const id = collapsible.targetId;
-            const shouldCollapse = _.includes(this.collapsedFacets, id);
+            const shouldCollapse = this.collapsedFacets.includes(id);
 
             if (shouldCollapse) {
                 this.collapseFacet($accordionToggle);
@@ -802,6 +802,7 @@ class FacetedSearch {
     onAccordionToggle(event) {
         const $accordionToggle = $(event.currentTarget);
         const collapsible = $accordionToggle.data('collapsibleInstance');
+        if (!collapsible) return; // papathemes-supermarket: fix issue when adding disabled-breakpoint to #facetedSearch-navList
         const id = collapsible.targetId;
 
         if (collapsible.isCollapsed) {

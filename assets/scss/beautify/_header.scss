@@ -343,6 +343,11 @@
     background-color: $header-bg;
     width: 100%;
 
+    .has-quickSearchOpen &:not(.sticky-header-loaded) {
+        position: relative;
+        z-index: zIndex("high");
+    }
+
     &.sticky-header-loaded {
         position: fixed;
         z-index: zIndex("high");
@@ -634,7 +639,7 @@ body.editing-menu-widgets {
 
         ._value {
             text-decoration: underline;
-            text-underline-position: under;
+            text-underline-offset: 0.2em;
             margin-right: spacing("quarter");
         }
 
@@ -1219,7 +1224,7 @@ body.editing-menu-widgets {
         }
 
         ._value {
-            text-underline-position: under;
+            text-underline-offset: 0.2em;
             margin-right: spacing("quarter");
             margin-left: spacing("half");
         }
@@ -1521,7 +1526,7 @@ body.editing-menu-widgets {
         }
 
         &::placeholder {
-            color: rgba(stencilColor("quickSearch-text-color"), 0.6);
+            color: rgba(stencilColor("quickSearch-text-color"), 0.3);
             @if $theme-variant == "game" {
                 font-size: fontSize("base");
             }
@@ -1790,7 +1795,6 @@ body.editing-menu-widgets {
             ._total-items {
                 display: flex;
                 align-items: center;
-                min-width: 55px;
                 @if $theme-variant == "fashion" or $theme-variant == "game" {
                     font-weight: fontWeight("semibold");
                 }
@@ -3643,7 +3647,7 @@ body.editing-menu-widgets {
             overflow-y: auto;
             left: 156px;
             height: calc(100% - 135px);
-            transition: all 0.2s ease;
+            transition: left 0.2s ease;
             position: fixed;
             opacity: 1;
             visibility: visible;
@@ -3750,7 +3754,7 @@ body.editing-menu-widgets {
 }
 
 .beautify__belowMobileMenu {
-    margin: auto (-(spacing("single"))) 0;
+    margin: auto 0 0;
     @include breakpoint("medium") {
         display: none;
     }

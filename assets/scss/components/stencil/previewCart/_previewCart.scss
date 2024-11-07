@@ -79,6 +79,11 @@
     margin-top: spacing("single");
 }
 
+.previewCartCheckout-acceleratedCheckoutButtons {
+    width: 100%;
+    margin-bottom: spacing("half");
+}
+
 .previewCartCheckout-additionalCheckoutButtons {
     p {
         // scss-lint:disable ImportantRule

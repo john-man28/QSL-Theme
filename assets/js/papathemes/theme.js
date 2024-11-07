@@ -82,7 +82,7 @@ export default function (context) {
     // ------------------------------------------------------------------------
     // Instant Load Pages
     // ------------------------------------------------------------------------
-    if (context.instantload) {
+    if (context.instantload && !window.previewSdk) {
         import('./instant-load').then(module => {
             module.default(context);
         });

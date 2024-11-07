@@ -330,7 +330,7 @@ export class ProductCardsGraphQLQuery {
         txtQuantityIncrease = 'Increase Quantity of {name}',
         ratingStarHtmlFunc = (isFull = true) => `
             <span class="icon icon--rating${isFull ? 'Full' : 'Empty'}">
-                <svg><use xlink:href="#icon-star" /></svg>
+                <svg><use href="#icon-star" /></svg>
             </span>
         `,
         qtyBoxHtmlFunc = (id, min, max, qtyLabel, decLabel, incLabel) => `
@@ -340,7 +340,7 @@ export class ProductCardsGraphQLQuery {
                         <span class="is-srOnly">${decLabel}</span>
                         <i class="icon" aria-hidden="true">
                             <svg>
-                                <use xlink:href="#icon-minus"/>
+                                <use href="#icon-minus"/>
                             </svg>
                         </i>
                     </button>
@@ -358,7 +358,7 @@ export class ProductCardsGraphQLQuery {
                         <span class="is-srOnly">${incLabel}</span>
                         <i class="icon" aria-hidden="true">
                             <svg>
-                                <use xlink:href="#icon-add"/>
+                                <use href="#icon-add"/>
                             </svg>
                         </i>
                     </button>
@@ -418,49 +418,49 @@ export class ProductCardsGraphQLQuery {
                     <abbr class="_title-labelTax" title="${prices.labelPriceWithoutTax}">${prices.labelPriceWithoutTax}</abbr>
                 </div>
                 ` : `
-                ${show_rrp && prices.priceWithTax.retailPrice ? `<div class="price-section price-section--withTax rrp-price--withTax">
-                    <span class="price-was-label">${retail_price_label}</span>
-                    <span data-product-rrp-with-tax class="price price--rrp">${currencyFormat(prices.priceWithTax.retailPrice.value, currency)}</span>
-                </div>` : ''}
                     ${prices.priceWithTax.basePrice.value !== prices.priceWithTax.price.value ? `
+                        <div class="price-section">
+                            ${pdp_sale_price_label && `<span class="price-label">${pdp_sale_price_label}</span>`}
+                            <span class="price price--main">${currencyFormat(prices.priceWithTax.price.value, currency)}</span>
+                            <abbr class="_title-labelTax" title="${prices.labePriceWithTax}">${prices.labePriceWithTax}</abbr>
+                        </div>
                         <div class="price-section non-sale-price">
                             ${pdp_non_sale_price_label && `<span class="price-was-label">${pdp_non_sale_price_label}</span>`}
                             <span class="price price--non-sale">
                                 ${currencyFormat(prices.priceWithTax.basePrice.value)}
                             </span>
                         </div>
-                        <div class="price-section">
-                            ${pdp_sale_price_label && `<span class="price-label">${pdp_sale_price_label}</span>`}
-                            <span class="price price--main">${currencyFormat(prices.priceWithTax.price.value, currency)}</span>
-                            <abbr class="_title-labelTax" title="${prices.labePriceWithTax}">${prices.labePriceWithTax}</abbr>
-                        </div>
                     ` : `<div class="price-section">
                             ${pdp_price_label && `<span class="price-label">${pdp_price_label}</span>`}
                             <span class="price price--main">${currencyFormat(prices.priceWithTax.price.value, currency)}</span>
                             <abbr class="_title-labelTax" title="${prices.labePriceWithTax}">${prices.labePriceWithTax}</abbr>
                         </div>`}
-                    <div class="_br"></div>
-                    ${show_rrp && prices.priceWithoutTax.retailPrice ? `<div class="price-section price-section--withTax rrp-price--withTax">
+                    ${show_rrp && prices.priceWithTax.retailPrice ? `<div class="price-section price-section--withTax rrp-price--withTax">
                         <span class="price-was-label">${retail_price_label}</span>
-                        <span data-product-rrp-with-tax class="price price--rrp">${currencyFormat(prices.priceWithoutTax.retailPrice.value, currency)}</span>
+                        <span data-product-rrp-with-tax class="price price--rrp">${currencyFormat(prices.priceWithTax.retailPrice.value, currency)}</span>
                     </div>` : ''}
+                    <div class="_br"></div>
                     ${prices.priceWithoutTax.basePrice.value !== prices.priceWithoutTax.price.value ? `
+                        <div class="price-section">
+                            ${pdp_sale_price_label && `<span class="price-label">${pdp_sale_price_label}</span>`}
+                            <span class="price price--main">${currencyFormat(prices.priceWithoutTax.price.value, currency)}</span>
+                            <abbr class="_title-labelTax" title="${prices.labelPriceWithoutTax}">${prices.labelPriceWithoutTax}</abbr>
+                        </div>
                         <div class="price-section non-sale-price">
                             ${pdp_non_sale_price_label && `<span class="price-was-label">${pdp_non_sale_price_label}</span>`}
                             <span class="price price--non-sale">
                                 ${currencyFormat(prices.priceWithoutTax.basePrice.value)}
                             </span>
                         </div>
-                        <div class="price-section">
-                            ${pdp_sale_price_label && `<span class="price-label">${pdp_sale_price_label}</span>`}
-                            <span class="price price--main">${currencyFormat(prices.priceWithoutTax.price.value, currency)}</span>
-                            <abbr class="_title-labelTax" title="${prices.labelPriceWithoutTax}">${prices.labelPriceWithoutTax}</abbr>
-                        </div>
                     ` : `<div class="price-section">
                             ${pdp_price_label && `<span class="price-label">${pdp_price_label}</span>`}
                             <span class="price price--main">${currencyFormat(prices.priceWithoutTax.price.value, currency)}</span>
                             <abbr class="_title-labelTax" title="${prices.labelPriceWithoutTax}">${prices.labelPriceWithoutTax}</abbr>
                         </div>`}
+                    ${show_rrp && prices.priceWithoutTax.retailPrice ? `<div class="price-section price-section--withTax rrp-price--withTax">
+                        <span class="price-was-label">${retail_price_label}</span>
+                        <span data-product-rrp-with-tax class="price price--rrp">${currencyFormat(prices.priceWithoutTax.retailPrice.value, currency)}</span>
+                    </div>` : ''}
                 `;
         }
         return prices.priceRange.min.value !== prices.priceRange.max.value && price_ranges ? `
@@ -469,25 +469,25 @@ export class ProductCardsGraphQLQuery {
                 <span class="price price--main">${currencyFormat(prices.priceRange.min.value, currency)}  - ${currencyFormat(prices.priceRange.max.value, currency)}</span>
             </div>
         ` : `
-            ${show_rrp && prices.retailPrice ? `<div class="price-section price-section--withTax rrp-price--withTax">
-                ${retail_price_label && `<span class="price-was-label">${retail_price_label}</span>`}
-                <span data-product-rrp-with-tax class="price price--rrp">${currencyFormat(prices.retailPrice.value, currency)}</span>
-            </div>` : ''}
             ${prices.basePrice.value !== prices.price.value ? `
+                <div class="price-section">
+                    ${pdp_sale_price_label && `<span class="price-label">${pdp_sale_price_label}</span>`}
+                    <span class="price price--main">${currencyFormat(prices.price.value, currency)}</span>
+                </div>
                 <div class="price-section non-sale-price">
                     ${pdp_non_sale_price_label && `<span class="price-was-label">${pdp_non_sale_price_label}</span>`}
                     <span class="price price--non-sale">
                         ${currencyFormat(prices.basePrice.value)}
                     </span>
                 </div>
-                <div class="price-section">
-                    ${pdp_sale_price_label && `<span class="price-label">${pdp_sale_price_label}</span>`}
-                    <span class="price price--main">${currencyFormat(prices.price.value, currency)}</span>
-                </div>
             ` : `<div class="price-section">
                     ${pdp_price_label && `<span class="price-label">${pdp_price_label}</span>`}
                     <span class="price price--main">${currencyFormat(prices.price.value, currency)}</span>
                 </div>`}
+            ${show_rrp && prices.retailPrice ? `<div class="price-section price-section--withTax rrp-price--withTax">
+                ${retail_price_label && `<span class="price-was-label">${retail_price_label}</span>`}
+                <span data-product-rrp-with-tax class="price price--rrp">${currencyFormat(prices.retailPrice.value, currency)}</span>
+            </div>` : ''}
         `;
     }
 

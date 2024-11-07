@@ -1,8 +1,8 @@
 {{#if children}}
 <a class="navPages-action-toggle" href="#"
     data-nav-tab="navPages-{{#if page_type '==' 'page'}}page-{{getVar 'navWebPageCount'}}{{/if}}{{id}}{{idSuffix}}">
-    <span class="_more is-srOnly"><span class="is-srOnly">{{lang 'common.nav_more'}}</span><svg class="icon"><use xlink:href="#icon-add"></use></svg></span>
-    <span class="_less is-srOnly"><span class="is-srOnly">{{lang 'common.nav_back'}}</span><svg class="icon"><use xlink:href="#icon-minus"></use></svg></span>
+    <span class="_more is-srOnly"><span class="is-srOnly">{{lang 'common.nav_more'}}</span><svg class="icon"><use href="#icon-add"></use></svg></span>
+    <span class="_less is-srOnly"><span class="is-srOnly">{{lang 'common.nav_back'}}</span><svg class="icon"><use href="#icon-minus"></use></svg></span>
     {{name}}
 </a>
 <a class="navPages-action has-subMenu u-hideTablet u-hideMobile {{#if menu_type '==' 'vertical'}}navPages-action--vertical{{/if}}" href="{{url}}"
@@ -10,7 +10,7 @@
     {{#if menu_type '!=' 'vertical'}}data-instantload{{/if}}
     {{#if id '==' category.id}}data-current-category{{/if}}
 >{{name}}</a>
-<a class="navPages-action-toggle-desktop" href="#" data-collapsible="navPages-{{#if page_type '==' 'page'}}page-{{getVar 'navWebPageCount'}}{{/if}}{{id}}{{idSuffix}}" title="{{lang 'common.nav_more'}}"><svg class="icon"><use xlink:href="#icon-caret-down"></use></svg></a>
+<a class="navPages-action-toggle-desktop" href="#" data-collapsible="navPages-{{#if page_type '==' 'page'}}page-{{getVar 'navWebPageCount'}}{{/if}}{{id}}{{idSuffix}}" title="{{lang 'common.nav_more'}}"><svg class="icon"><use href="#icon-caret-down"></use></svg></a>
 <div class="navPage-subMenu
         {{#if menu_type '==' 'vertical'}}
             navPage-subMenu--vertical
@@ -26,7 +26,7 @@
         </div>
     {{/if}}
     <div class="navPages-all-mobile">
-        <a href="{{url}}" class="u-hideDesktop">{{lang 'common.view_all'}} <svg class="icon"><use xlink:href="#icon-arrow-view-all"></use></svg></a>
+        <a href="{{url}}" class="u-hideDesktop">{{lang 'common.view_all'}} <svg class="icon"><use href="#icon-arrow-view-all"></use></svg></a>
     </div>
     <div class="navPage-subMenu-middle">
         {{#if page_type '!==' 'page'}}
@@ -51,9 +51,9 @@
                         {{/if}}
                         <a class="navPages-action-toggle" href="#"
                             data-collapsible="navPages-{{#if ../../page_type '==' 'page'}}page-{{getVar 'navWebPageCount'}}{{/if}}{{id}}{{../../idSuffix}}">
-                            <span class="_more is-srOnly"><span class="is-srOnly">{{lang 'common.nav_more'}}</span><svg class="icon"><use xlink:href="#icon-add"></use></svg></span>
-                            <span class="_less is-srOnly"><span class="is-srOnly">{{lang 'common.nav_less'}}</span><svg class="icon"><use xlink:href="#icon-minus"></use></svg></span>
-                            <svg class="icon _icon-viewAll is-srOnly u-hideDesktop"><use xlink:href="#icon-arrow-view-all"></use></svg>
+                            <span class="_more is-srOnly"><span class="is-srOnly">{{lang 'common.nav_more'}}</span><svg class="icon"><use href="#icon-add"></use></svg></span>
+                            <span class="_less is-srOnly"><span class="is-srOnly">{{lang 'common.nav_less'}}</span><svg class="icon"><use href="#icon-minus"></use></svg></span>
+                            <svg class="icon _icon-viewAll is-srOnly u-hideDesktop"><use href="#icon-arrow-view-all"></use></svg>
                             {{#if ../../theme_settings.navPages_catImg}}
                                 {{#if image}}
                                     <div class="_imgTitle">
@@ -79,16 +79,16 @@
                             {{#if theme_settings.navPages_type '==' 'megamenu'}}
                                 <span>{{name}}</span>
                             {{else}}
-                                <svg class="icon"><use xlink:href="#icon-caret-down"></use></svg>
+                                <svg class="icon"><use href="#icon-caret-down"></use></svg>
                             {{/if}}
                         </a>
                         <ul class="navPage-childList" id="navPages-{{#if ../../page_type '==' 'page'}}page-{{getVar 'navWebPageCount'}}{{/if}}{{id}}{{../../idSuffix}}">
                             <div class="_titleSubmenu {{#unless theme_settings.navPages_type '==' 'megamenu'}}u-hideDesktop{{/unless}}">
                                 <a class="navPages-action-toggle" href="#"
                                     data-collapsible-close="navPages-{{#if ../../page_type '==' 'page'}}page-{{getVar 'navWebPageCount'}}{{/if}}{{id}}{{../../idSuffix}}">
-                                    <span class="_more is-srOnly"><span class="is-srOnly">{{lang 'common.nav_more'}}</span><svg class="icon"><use xlink:href="#icon-add"></use></svg></span>
-                                    <span class="_less is-srOnly"><span class="is-srOnly">{{lang 'common.nav_less'}}</span><svg class="icon"><use xlink:href="#icon-minus"></use></svg></span>
-                                    <svg class="icon _icon-viewAll u-hideDesktop"><use xlink:href="#icon-arrow-view-all"></use></svg>
+                                    <span class="_more is-srOnly"><span class="is-srOnly">{{lang 'common.nav_more'}}</span><svg class="icon"><use href="#icon-add"></use></svg></span>
+                                    <span class="_less is-srOnly"><span class="is-srOnly">{{lang 'common.nav_less'}}</span><svg class="icon"><use href="#icon-minus"></use></svg></span>
+                                    <svg class="icon _icon-viewAll u-hideDesktop"><use href="#icon-arrow-view-all"></use></svg>
                                     <span>{{name}}</span>
                                 </a>
                                 <a
@@ -99,7 +99,7 @@
                                 >
                                     <span class="u-hideMobile u-hideTablet">{{name}}</span>
                                     <span class="u-hideDesktop">{{lang 'common.view_all'}}</span>
-                                    <svg class="icon u-hideDesktop"><use xlink:href="#icon-arrow-view-all"></use></svg>
+                                    <svg class="icon u-hideDesktop"><use href="#icon-arrow-view-all"></use></svg>
                                 </a>
                             </div>
                             {{#each children}}

@@ -1,20 +1,3 @@
-{{#and price.price_range.min.with_tax price.price_range.max.with_tax}}{{! Added by Papathemes to fix display tax/non-tax retail price when select product option }}
-{{#and price.retail_price_range.min.with_tax price.retail_price_range.max.with_tax}}
-    <div class="price-section price-section--withTax rrp-price--withTax">
-        <span class="price-was-label">{{theme_settings.pdp-retail-price-label}}</span>
-        <span data-product-rrp-price-with-tax class="price price--rrp">{{price.retail_price_range.min.with_tax.formatted}} - {{price.retail_price_range.max.with_tax.formatted}}</span>
-    </div>
-{{else}}
-    {{#if price.with_tax}}
-        <div class="price-section price-section--withTax rrp-price--withTax" style="display: none;">
-            <span class="price-was-label">{{theme_settings.pdp-retail-price-label}}</span>
-            <span data-product-rrp-with-tax class="price price--rrp">
-                {{price.rrp_with_tax.formatted}}
-            </span>
-        </div>
-    {{/if}}
-{{/and}}
-{{/and}}
 {{#and price.price_range.min.with_tax price.price_range.max.with_tax}}
     <div class="price-section price-section--withTax">
         <span class="price-label">{{theme_settings.pdp-price-label}}</span>
@@ -31,6 +14,23 @@
             {{price.non_sale_price_with_tax.formatted}}
         </span>
     </div>
+{{/and}}
+{{#and price.price_range.min.with_tax price.price_range.max.with_tax}}{{! Added by Papathemes to fix display tax/non-tax retail price when select product option }}
+{{#and price.retail_price_range.min.with_tax price.retail_price_range.max.with_tax}}
+    <div class="price-section price-section--withTax rrp-price--withTax">
+        <span class="price-was-label">{{theme_settings.pdp-retail-price-label}}</span>
+        <span data-product-rrp-price-with-tax class="price price--rrp">{{price.retail_price_range.min.with_tax.formatted}} - {{price.retail_price_range.max.with_tax.formatted}}</span>
+    </div>
+{{else}}
+    {{#if price.with_tax}}
+        <div class="price-section price-section--withTax rrp-price--withTax" style="display: none;">
+            <span class="price-was-label">{{theme_settings.pdp-retail-price-label}}</span>
+            <span data-product-rrp-with-tax class="price price--rrp">
+                {{price.rrp_with_tax.formatted}}
+            </span>
+        </div>
+    {{/if}}
+{{/and}}
 {{/and}}
 {{#and price.price_range.min.with_tax price.price_range.min.without_tax}}
     <div class="_br"></div>
@@ -67,4 +67,3 @@
         </div>
     {{/if}}
 {{/and}}
-

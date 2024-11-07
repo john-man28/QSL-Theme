@@ -54,7 +54,7 @@ module.exports = {
                 test: require.resolve('jquery'),
                 loader: 'expose-loader',
                 options: {
-                  exposes: ['$'],
+                    exposes: ['$'],
                 },
             },
         ],
@@ -98,7 +98,7 @@ module.exports = {
         }),
     ],
     resolve: {
-        fallback: { "url": require.resolve("url/") },
+        fallback: { url: require.resolve('url/') },
         alias: {
             jquery: path.resolve(__dirname, 'node_modules/jquery/dist/jquery.min.js'),
             jstree: path.resolve(__dirname, 'node_modules/jstree/dist/jstree.min.js'),
@@ -113,6 +113,7 @@ module.exports = {
             mustache: path.resolve(__dirname, 'node_modules/mustache/mustache.min.js'),
             selectize: path.resolve(__dirname, 'node_modules/selectize/dist/js/standalone/selectize.min.js'),
             'selectize-css': path.resolve(__dirname, 'node_modules/selectize/dist/css/selectize.css'),
+            'blaze-slider': path.resolve(__dirname, 'node_modules/blaze-slider/dist/blaze-slider.esm.js'),
         },
     },
 };

@@ -61,8 +61,8 @@ function applyModalAutoClose(modal) {
                 sec--;
                 $count.html(sec);
             } else {
+                window.clearInterval(modal.autoCloseTimer);
                 modal.autoCloseTimer = null; // eslint-disable-line
-                modal.close();
                 modal.close();
             }
         }, 1000);

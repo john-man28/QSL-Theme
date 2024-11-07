@@ -422,6 +422,7 @@ div.productView-imageCarousel-main {
         &[data-image-gallery-nav-disable-slider] {
             padding: 0;
             width: 100%;
+            overflow: auto;
 
             @include breakpoint("medium") {
                 flex-wrap: wrap;

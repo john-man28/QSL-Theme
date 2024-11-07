@@ -130,6 +130,13 @@
     a {
         display: block;
     }
+
+    // Fix ADA
+    &[aria-hidden="true"] {
+        * {
+            pointer-events: none !important;
+        }
+    }
 }
 
 .heroCarousel-image-box {

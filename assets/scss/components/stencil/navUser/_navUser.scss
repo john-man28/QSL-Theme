@@ -45,7 +45,7 @@
                 @include css-triangle(
                     $triangle-direction: "bottom",
                     $triangle-size: 10px,
-                    $triangle-color: stencilColor("color-secondary")
+                    $triangle-color: stencilColor("navUser-dropdown-borderColor")
                 );
                 bottom: 100%;
                 left: spacing("half");
@@ -56,7 +56,7 @@
                 @include css-triangle(
                     $triangle-direction: "bottom",
                     $triangle-size: 8px,
-                    $triangle-color: stencilColor("color-secondary")
+                    $triangle-color: stencilColor("navUser-dropdown-backgroundColor")
                 );
                 bottom: 100%;
                 left: spacing("half") + remCalc(2px);
@@ -408,9 +408,11 @@
 
     @include breakpoint("medium") {
         height: 14px;
-        min-width: 14px;
+        min-width: auto;
         line-height: 14px;
         font-size: fontSize("smaller");
+        margin-right: spacing("quarter");
+        padding: 0;
     }
 
     @media (max-width: (screenSize("medium") - 1px)) {

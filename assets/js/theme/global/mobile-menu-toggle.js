@@ -39,7 +39,7 @@ export class MobileMenuToggle {
         this.$menu = $(menuSelector);
         this.$containerMenu = $('#bf-fix-menu-mobile', menuSelector);
         this.$navList = $('.navPages-list.navPages-list-depth-max');
-        this.$header = $(headerSelector);
+        this.$header = $(headerSelector).first();
         this.$scrollView = $(scrollViewSelector, this.$menu);
         this.$subMenus = this.$navList.find('.navPages-action');
         this.$toggle = $toggle;
@@ -109,7 +109,11 @@ export class MobileMenuToggle {
         this.$body.addClass('has-activeNavPages');
 
         // papathemes-inhealth: update menu position
-        this.$menu.css('top', `${$('header').first().outerHeight()}px`);
+        if (this.$header.hasClass('.sticky-header-loaded')) {
+            this.$menu.css('top', `${this.$header.outerHeight()}px`);
+        } else {
+            this.$menu.css('top', `${this.$header.outerHeight() + this.$header.offset().top - $(window).scrollTop()}px`);
+        }
         _.delay(() => {
             this.$body.children().not('header, .modal').prop('inert', true);
         }, 400);
@@ -132,10 +136,12 @@ export class MobileMenuToggle {
 
     hide() {
         this.$body.removeClass('has-activeNavPages');
-        if (this.$header.hasClass('_shadow')) {
-            this.$menu.css('top', `${$('header').first().outerHeight()}px`);
-        } else {
-            this.$menu.css('top', `${$('header').first().outerHeight() + $('.banners-wrapper').first().outerHeight()}px`);
+        if (this.$header.hasClass('.sticky-header-loaded')) {
+            if (this.$header.hasClass('_shadow')) {
+                this.$menu.css('top', `${this.$header.outerHeight()}px`);
+            } else {
+                this.$menu.css('top', `${this.$header.outerHeight() + $('.banners-wrapper').first().outerHeight()}px`);
+            }
         }
 
         // papathemes-inhealth: Accessibility - Restore other elements focusable

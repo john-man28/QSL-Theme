@@ -13,6 +13,7 @@ import {
 } from './common/utils/form-utils';
 import { createTranslationDictionary } from './common/utils/translations-utils';
 import { creditCardType, storeInstrument, Validators as CCValidators, Formatters as CCFormatters } from './common/payment-method';
+import { showAlertModal } from './global/modal';
 import swal from './global/sweet-alert';
 // Supermarket Mod
 // import compareProducts from './global/compare-products';
@@ -34,6 +35,7 @@ export default class Account extends PageManager {
         const $paymentMethodForm = classifyForm('form[data-payment-method-form]');
         const $reorderForm = classifyForm('[data-account-reorder-form]');
         const $invoiceButton = $('[data-print-invoice]');
+        const $bigCommerce = window.BigCommerce;
 
         // Supermarket Mod
         // compareProducts(this.context.urls);
@@ -84,6 +86,99 @@ export default class Account extends PageManager {
 
         if ($reorderForm.length) {
             this.initReorderForm($reorderForm);
+        }
+
+        if ($bigCommerce && $bigCommerce.renderAccountPayments) {
+            const {
+                countries,
+                paymentsUrl,
+                storeHash,
+                storeLocale,
+                vaultToken,
+                shopperId,
+                customerEmail,
+                providerId,
+                currencyCode,
+                paymentMethodsUrl,
+                paymentProviderInitializationData,
+                themeSettings,
+            } = this.context;
+
+            $bigCommerce.renderAccountPayments({
+                styles: {
+                    inputBase: {
+                        color: themeSettings['input-font-color'],
+                        borderColor: themeSettings['input-border-color'],
+                    },
+                    inputValidationError: {
+                        color: themeSettings['color-error'],
+                        borderColor: themeSettings['color-error'],
+                    },
+                    inputValidationSuccess: {
+                        color: themeSettings['color-success'],
+                        borderColor: themeSettings['color-success'],
+                    },
+                    submitButton: {
+                        color: themeSettings['button--primary-color'],
+                        backgroundColor: themeSettings['button--primary-backgroundColor'],
+                        borderColor: themeSettings['button--primary-backgroundColor'],
+                        '&:hover': {
+                            color: themeSettings['button--primary-colorHover'],
+                            backgroundColor: themeSettings['button--primary-backgroundColorHover'],
+                            borderColor: themeSettings['button--primary-backgroundColorHover'],
+                        },
+                        '&:active': {
+                            color: themeSettings['button--primary-colorHover'],
+                            backgroundColor: themeSettings['button--primary-backgroundColorHover'],
+                            borderColor: themeSettings['button--primary-backgroundColorHover'],
+                        },
+                        '&[disabled]': {
+                            backgroundColor: themeSettings['button--disabled-backgroundColor'],
+                            borderColor: themeSettings['button--disabled-borderColor'],
+                            color: themeSettings['button--disabled-color'],
+                            cursor: 'not-allowed',
+                        },
+                    },
+                    cancelButton: {
+                        color: themeSettings['button--default-color'],
+                        backgroundColor: 'transparent',
+                        borderColor: themeSettings['button--default-borderColor'],
+                        '&:hover': {
+                            color: themeSettings['button--default-colorHover'],
+                            backgroundColor: 'transparent',
+                            borderColor: themeSettings['button--default-borderColorHover'],
+                        },
+                        '&:active': {
+                            color: themeSettings['button--default-colorHover'],
+                            backgroundColor: 'transparent',
+                            borderColor: themeSettings['button--default-borderColorHover'],
+                        },
+                    },
+                    label: {
+                        color: themeSettings['form-label-font-color'],
+                    },
+                    validationError: {
+                        color: themeSettings['color-error'],
+                    },
+                    heading: {
+                        color: themeSettings['color-textHeading'],
+                    },
+                },
+                storeContextData: {
+                    countries,
+                    paymentsUrl,
+                    storeHash,
+                    storeLocale,
+                    vaultToken,
+                    shopperId,
+                    customerEmail,
+                    providerId,
+                    currencyCode,
+                    paymentMethodsUrl,
+                    paymentProviderInitializationData,
+                },
+                errorHandler: showAlertModal,
+            });
         }
 
         this.bindDeleteAddress();
@@ -331,7 +426,7 @@ export default class Account extends PageManager {
         const formEditSelector = 'form[data-edit-account-form]';
         const editValidator = nod({
             submit: '${formEditSelector} input[type="submit"]',
-            tap: announceInputErrorMessage,
+            delay: 900,
         });
         const emailSelector = `${formEditSelector} [data-field-type="EmailAddress"]`;
         const $emailElement = $(emailSelector);
@@ -409,13 +504,17 @@ export default class Account extends PageManager {
             }
 
             event.preventDefault();
+            setTimeout(() => {
+                const earliestError = $('span.form-inlineMessage:first').prev('input');
+                earliestError.focus();
+            }, 900);
         });
     }
 
     registerInboxValidation($inboxForm) {
         const inboxValidator = nod({
             submit: 'form[data-inbox-form] input[type="submit"]',
-            tap: announceInputErrorMessage,
+            delay: 900,
         });
 
         inboxValidator.add([
@@ -456,6 +555,11 @@ export default class Account extends PageManager {
             }
 
             event.preventDefault();
+
+            setTimeout(() => {
+                const earliestError = $('span.form-inlineMessage:first').prev('input');
+                earliestError.focus();
+            }, 900);
         });
     }
 }

@@ -21,24 +21,24 @@ $exportCSS--buttons:                    true; // 1
 
 $buttonStyle-default-color:                  stencilColor("button--default-color");
 $buttonStyle-default-colorHover:             stencilColor("button--default-colorHover");
-$buttonStyle-default-colorActive:            stencilColor("button--default-colorHover"); // papathemes-kansha
+$buttonStyle-default-colorActive:            stencilColor("button--default-colorHover");
 // papathemes-beautify edited:
 $buttonStyle-default-backgroundColor:        stencilColor("button--default-backgroundColor");
 $buttonStyle-default-backgroundColorHover:   stencilColor("button--default-backgroundColorHover");
-$buttonStyle-default-backgroundColorActive:  stencilColor("button--default-backgroundColorHover"); // papathemes-kansha
+$buttonStyle-default-backgroundColorActive:  stencilColor("button--default-backgroundColorHover");
 $buttonStyle-default-borderColor:            stencilColor("button--default-backgroundColor");
 $buttonStyle-default-borderColorHover:       stencilColor("button--default-backgroundColorHover");
-$buttonStyle-default-borderColorActive:      stencilColor("button--default-backgroundColorHover"); // papathemes-kansha
+$buttonStyle-default-borderColorActive:      stencilColor("button--default-backgroundColorHover");
 
 $buttonStyle-primary-color:                  stencilColor("button--primary-color");
 $buttonStyle-primary-colorHover:             stencilColor("button--primary-colorHover");
-$buttonStyle-primary-colorActive:            stencilColor("button--primary-colorHover"); // papathemes-kansha
+$buttonStyle-primary-colorActive:            stencilColor("button--primary-colorHover");
 $buttonStyle-primary-backgroundColor:        stencilColor("button--primary-backgroundColor");
 $buttonStyle-primary-backgroundColorHover:   stencilColor("button--primary-backgroundColorHover");
-$buttonStyle-primary-backgroundColorActive:  stencilColor("button--primary-backgroundColorHover"); // papathemes-kansha
+$buttonStyle-primary-backgroundColorActive:  stencilColor("button--primary-backgroundColorHover");
 $buttonStyle-primary-borderColor:            stencilColor("button--primary-backgroundColor");
 $buttonStyle-primary-borderColorHover:       stencilColor("button--primary-backgroundColorHover");
-$buttonStyle-primary-borderColorActive:      stencilColor("button--primary-backgroundColorHover"); // papathemes-kansha
+$buttonStyle-primary-borderColorActive:      stencilColor("button--primary-backgroundColorHover");
 
 $buttonStyle-disabled-color:                 stencilColor("button--disabled-color");
 $buttonStyle-disabled-colorHover:            null;
@@ -53,7 +53,7 @@ $buttonStyle-disabled-borderColorActive:     null;
 // supermarket defines tertiary button:
 $buttonStyle-tertiary-color:                 stencilColor("button--default-color");
 $buttonStyle-tertiary-colorHover:            stencilColor("button--default-colorHover");
-$buttonStyle-tertiary-colorActive:           stencilColor("button--default-colorHover"); // papathemes-kansha
+$buttonStyle-tertiary-colorActive:           stencilColor("button--default-colorHover");
 $buttonStyle-tertiary-backgroundColor:       color("greys", "lighter");
 $buttonStyle-tertiary-backgroundColorHover:  color("greys", "light");
 $buttonStyle-tertiary-backgroundColorActive: color("greys", "light");
@@ -81,7 +81,7 @@ $buttonSize-default-verticalPadding:    spacing("third") + spacing("quarter");
 
 // Supermarket
 @if $theme-style == "compact" {
-    $buttonSize-default-verticalPadding:    spacing("half");
+    $buttonSize-default-verticalPadding:    spacing("base");
 }
 
 $buttonSize-large-fontSize:             fontSize("small"); // papathemes-beautify mod

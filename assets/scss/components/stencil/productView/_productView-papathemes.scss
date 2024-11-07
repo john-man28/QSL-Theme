@@ -93,6 +93,10 @@
         @include ie-only() {
             height: 100%;
         }
+
+        &[data-lazy] {
+            opacity: 1 !important;
+        }
     }
 }
 
@@ -773,6 +777,29 @@
     }
 }
 
+#form-action-addToCartLater {
+    margin-bottom: spacing("half");
+}
+
+.productView-addToCartExtras {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .button {
+        margin: 0 0 spacing("base");
+        width: 100%;
+        display: block;
+    }
+
+    &._quickview-alt {
+        .button,
+        #form-action-addToCartLater {
+            margin-top: spacing("base");
+            margin-bottom: 0;
+        }
+    }
+}
 
 // Product list (with images)
 // -----------------------------------------------------------------------------

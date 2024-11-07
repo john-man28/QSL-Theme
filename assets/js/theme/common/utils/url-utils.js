@@ -63,7 +63,8 @@ const urlUtils = {
     // supermarket: Fix faceted value contains both + and a spacing character (ie. "DVD+R DL")
     encodeParam: (val) => encodeURIComponent(val).split('%20').join('+').replace(/[!'()*]/g, c => `%${c.charCodeAt(0).toString(16)}`),
 
-    buildQueryString: (queryData) => {
+    buildQueryString: (_queryData) => {
+        const queryData = Object.assign({}, _queryData); // papathemes: fix queryData.hasOwnProperty is not a function
         let out = '';
         let key;
         for (key in queryData) {

@@ -179,7 +179,7 @@ export default class AlsoBoughtGame {
                 <label class="form-label" for="productView-alsoBought-item-checkbox-{{id}}" data-label-collapsible></label>
                 <a class="button button--primary" href="#productView-alsoBought-item-form-{{id}}" data-choose-option="{{chooseOptionsTxt}}" data-options-collapsible>
                     <span>{{chooseOptionsTxt}}</span>
-                    <svg class="icon"><use xlink:href="#icon-cart-add"></use></svg>
+                    <svg class="icon"><use href="#icon-cart-add"></use></svg>
                 </a>
             </div>
         `,
@@ -188,7 +188,7 @@ export default class AlsoBoughtGame {
                 <label class="form-label" for="productView-alsoBought-item-checkbox-{{id}}" data-label-collapsible></label>
                 <label for="productView-alsoBought-item-checkbox-{{id}}" class="button button--primary" data-label-collapsible>
                     <span>{{txtSelect}}</span>
-                    <svg class="icon"><use xlink:href="#icon-cart-add"></use></svg>
+                    <svg class="icon"><use href="#icon-cart-add"></use></svg>
                 </label>
                 {{#purchasability}}
                     <button class="button button--outstock">{{purchasability}}</button>
@@ -204,7 +204,7 @@ export default class AlsoBoughtGame {
                         <span class="is-srOnly">{{quantityDecreaseTxt}}</span>
                         <i class="icon" aria-hidden="true">
                             <svg>
-                                <use xlink:href="#icon-minus"/>
+                                <use href="#icon-minus"/>
                             </svg>
                         </i>
                     </button>
@@ -223,7 +223,7 @@ export default class AlsoBoughtGame {
                         <span class="is-srOnly">{{quantityIncreaseTxt}}</span>
                         <i class="icon" aria-hidden="true">
                             <svg>
-                                <use xlink:href="#icon-add"/>
+                                <use href="#icon-add"/>
                             </svg>
                         </i>
                     </button>
@@ -239,7 +239,7 @@ export default class AlsoBoughtGame {
         templateCustomTags = null,
         ratingStarHtmlFunc = (isFull = true) => `
             <span class="icon icon--rating${isFull ? 'Full' : 'Empty'}">
-                <svg><use xlink:href="#icon-star" /></svg>
+                <svg><use href="#icon-star" /></svg>
             </span>
         `,
         customBadgeTemplate = (value) => `

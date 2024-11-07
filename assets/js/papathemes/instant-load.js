@@ -6,6 +6,7 @@ import 'slick-carousel';
 import foundation from '../theme/global/foundation';
 import collapsibleFactory from '../theme/common/collapsible';
 import { checkTouchDevice } from './theme-utils';
+import { initBulkOrderQuickView } from '../theme/global/quick-view';
 
 const isTouchDevice = checkTouchDevice();
 const history = window.history;
@@ -123,13 +124,14 @@ class InstantQuickView {
                 this.modal.updateContent(response);
                 this.modal.$content.find('.productView').addClass('productView--quickView');
                 this.modal.$content.find('[data-slick]').slick();
+                const newContext = initBulkOrderQuickView($el[0], this.modal, this.context);
                 _.delay(() => {
                     const $quickView = this.modal.$content.find('.quickView');
                     let product;
                     if ($('[data-also-bought] .productView-alsoBought-item', $quickView).length > 0) {
-                        product = new ProductDetails($quickView, _.extend(this.context, { enableAlsoBought: true }));
+                        product = new ProductDetails($quickView, { ...newContext, enableAlsoBought: true });
                     } else {
-                        product = new ProductDetails($quickView, this.context);
+                        product = new ProductDetails($quickView, newContext);
                     }
                     $('body').trigger('loaded.quickview', [product]);
                     return product;
@@ -310,6 +312,9 @@ class InstantLoad {
 
                 this.$body.trigger('beforeload.instantload', [response]);
 
+                // if some context variables cannot be supplied in ajax response
+                window.themeInstantLoad_jsContext = this.context;
+
                 const $response = $(response);
                 const $respBody = $response.find('#instantload-body-element');
 
@@ -342,6 +347,15 @@ class InstantLoad {
                 if ($pageBody.length > 0) {
                     this.$pageBody.empty().append($pageBody.children());
                     this.initGlobal(this.$pageBody);
+                }
+
+                // Close or expand the vertical categories menu on the header
+                if (this.context.themeSettings.homepage_expand_categories_menu) {
+                    if (pageType === 'home') {
+                        $('#emthemesModez-verticalCategories').addClass('emthemesModez-verticalCategories--open');
+                    } else {
+                        $('#emthemesModez-verticalCategories').removeClass('emthemesModez-verticalCategories--open');
+                    }
                 }
 
                 // Replace top & bottom banners
