@@ -173,24 +173,11 @@ export class BulkOrder {
         }
         $input.val(qty);
 
-        if (qty <= 0) {
-            this.clearErrorMsg($input[0]);
-        }
-
         this.calculate();
     }
 
-    onQuantityChange(event) {
-        const qty = parseInt(event.currentTarget.value, 10);
-        if (qty <= 0) {
-            this.clearErrorMsg(event.currentTarget);
-        }
-
+    onQuantityChange() {
         this.calculate();
-    }
-
-    clearErrorMsg(input) {
-        $(input).closest('.card').find('[data-bulkorder-options] .alertBox').remove();
     }
 
     calculate() {
@@ -204,15 +191,15 @@ export class BulkOrder {
             const productId = $input.data('bulkorderQtyId');
             const $price = this.$scope.find(`[data-bulkorder-price-id='${productId}']`);
             const priceVal = parseFloat($price.data('bulkorderPriceValue'));
-            const priceFmt = $price.data('bulkorderPriceFormatted');
-            const subtotal = priceVal ? Math.round(priceVal * qty * 100) / 100 : 0;
+            const priceFmt = `${$price.data('bulkorderPriceFormatted')}`;
+            const subtotal = Math.round(priceVal * qty * 100) / 100;
             const $subtotal = this.$scope.find(`[data-bulkorder-subtotal-id='${productId}']`);
 
             if (priceFmt) {
                 money = extractMoney(priceFmt);
             }
 
-            $subtotal.html(priceFmt ? currencyFormat(subtotal, money) : '');
+            $subtotal.html(currencyFormat(subtotal, money));
 
             total += subtotal;
             count += qty;
@@ -225,31 +212,6 @@ export class BulkOrder {
     }
 
     addAllProducts() {
-        let valid = true;
-
-        // check products which have options much choose options before add to cart
-        this.$scope.find('[data-bulkorder-options]').each((i, el) => {
-            const $el = $(el);
-            const qty = Number($el.closest('.card').find('[data-bulkorder-qty-id]').val()) || 0;
-
-            if (qty > 0 && $el.find('form').length === 0) {
-                $el.html(`
-                    <div class="alertBox alertBox--error">
-                        <div class="alertBox-column alertBox-icon">
-                            <icon glyph="ic-error" class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg></icon>
-                        </div>
-                        <p class="alertBox-column alertBox-message">
-                            <span>${this.context.bulkOrderChooseOptions}</span>
-                        </p>
-                    </div>
-                `);
-                $el.find('.alertBox').hide().fadeIn(300);
-                valid = false;
-            }
-        });
-
-        if (!valid) return;
-
         const promises = [];
         this.progressCurrent = 0;
 
@@ -257,14 +219,13 @@ export class BulkOrder {
             const $input = $(el);
             const qty = parseInt($input.val(), 10);
             const productId = $input.data('bulkorderQtyId');
-            const form = $input.closest('.card').find('[data-bulkorder-options] form')[0];
 
             if (qty > 0) {
                 promises.push(async () => {
                     this.progressCurrent++;
                     this.updateProgressPopup();
 
-                    await this.addProduct(productId, qty, form); // eslint-disable-line no-unused-expressions
+                    await this.addProduct(productId, qty); // eslint-disable-line no-unused-expressions
 
                     $input.val(0);
                     this.calculate();
@@ -287,27 +248,19 @@ export class BulkOrder {
         });
     }
 
-    async addProduct(productId, qty, form = undefined) {
+    async addProduct(productId, qty) {
         // Do not do AJAX if browser doesn't support FormData
         if (window.FormData === undefined) {
             return;
         }
 
-        const formData = new FormData(form || undefined);
-        formData.set('product_id', productId);
-        formData.set('qty[]', qty);
+        const formData = new FormData();
+        formData.append('product_id', productId);
+        formData.append('qty[]', qty);
 
         const promise = new Promise((resolve) => {
             utils.api.cart.itemAdd(formData, (err, response) => {
-                let errorMessage = err || response.data.error;
-
-                if (response?.data?.error?.minqty) {
-                    errorMessage = this.context.txtMinQty.replace('%qty%', response.data.error.minqty);
-                }
-
-                if (response?.data?.error?.maxqty) {
-                    errorMessage = this.context.txtMaxQty.replace('%qty%', response.data.error.maxqty);
-                }
+                const errorMessage = err || response.data.error;
 
                 // Guard statement
                 if (errorMessage) {
@@ -364,13 +317,11 @@ export class BulkOrder {
             // Update cart counter
             const $body = $('body');
             const $cartQuantity = $('[data-cart-quantity]', resp);
-            const $cartPrice = $('[data-cart-price]', resp);
             const $cartCounter = $('.navUser-action .cart-count');
             const quantity = $cartQuantity.data('cart-quantity') || 0;
-            const price = $cartPrice.data('cartPrice') || 0;
 
             $cartCounter.addClass('cart-count--positive');
-            $body.trigger('cart-quantity-update', [quantity, price]);
+            $body.trigger('cart-quantity-update', quantity);
         });
     }
 }

@@ -1,7 +1,7 @@
 <fieldset class="form-fieldset actionBar-section actionBar-section--sort">
     <div class="form-field">
-        <label class="form-label" for="sort{{id_prefix}}">{{lang 'common.sorter.sort_by'}}</label>
-        <select class="form-select" name="sort" id="sort{{id_prefix}}">
+        <label class="form-label" for="sort">{{lang 'common.sorter.sort_by'}}</label>
+        <select class="form-select" name="sort" id="sort">
             <option value="featured" {{#if sort '==' 'featured'}}selected{{/if}}>{{lang 'common.sorter.featured'}}</option>
             <option value="newest" {{#if sort '==' 'newest'}}selected{{/if}}>{{lang 'common.sorter.newest'}}</option>
             <option value="bestselling" {{#if sort '==' 'bestselling'}}selected{{/if}}>{{lang 'common.sorter.top_sellers'}}</option>
@@ -28,9 +28,9 @@
             <li><button type="button" {{#if sort '==' 'alphadesc'}}disabled{{/if}} class="button" data-sort="alphadesc">{{lang 'common.sorter.alpha_desc'}}</button>
             <li><button type="button" {{#if sort '==' 'avgcustomerreview'}}disablx`ed{{/if}} class="button" data-sort="avgcustomerreview">{{lang 'common.sorter.reviews'}}</button>
             <li><button type="button" {{#if sort '==' 'priceasc'}}disabled{{/if}} class="button" data-sort="priceasc" >{{{lang 'common.sorter.price_asc2'}}} 
-                <svg class="icon"><use href="#icon-arrow-sort-up" /></svg></button>
+                <svg class="icon"><use xlink:href="#icon-arrow-sort-up" /></svg></button>
             <li><button type="button" {{#if sort '==' 'pricedesc'}}disabled{{/if}} class="button" data-sort="pricedesc" >{{{lang 'common.sorter.price_desc2'}}} 
-                <svg class="icon"><use href="#icon-arrow-sort-down" /></svg></button>
+                <svg class="icon"><use xlink:href="#icon-arrow-sort-down" /></svg></button>
         </ul>
     </div>
 </fieldset>

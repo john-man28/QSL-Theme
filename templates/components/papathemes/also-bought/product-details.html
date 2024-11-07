@@ -27,8 +27,7 @@
 
             </div>
 
-            {{#if product.can_purchase}}
-            {{#if product.show_quantity_input}}
+            {{#if theme_settings.show_product_quantity_box}}
                 <div class="form-field form-field--increments">
                     <label class="form-label form-label--alternate is-srOnly"
                             for="qty[{{product.id}}]">{{lang 'products.quantity'}}</label>
@@ -38,7 +37,7 @@
                             <span class="is-srOnly">{{lang 'products.quantity_decrease' name=product.title}}</span>
                             <i class="icon" aria-hidden="true">
                                 <svg>
-                                    <use href="#icon-minus"/>
+                                    <use xlink:href="#icon-minus"/>
                                 </svg>
                             </i>
                         </button>
@@ -57,13 +56,12 @@
                             <span class="is-srOnly">{{lang 'products.quantity_increase' name=product.title}}</span>
                             <i class="icon" aria-hidden="true">
                                 <svg>
-                                    <use href="#icon-add"/>
+                                    <use xlink:href="#icon-add"/>
                                 </svg>
                             </i>
                         </button>
                     </div>
                 </div>
-            {{/if}}
             {{/if}}
         </div>
 

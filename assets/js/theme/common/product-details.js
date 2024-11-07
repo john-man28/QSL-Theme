@@ -5,7 +5,7 @@ import foundation from '../global/foundation'; // Supermarket
 import 'slick-carousel';
 import ImageGallery from '../product/image-gallery';
 import modalFactory, { defaultModal, ModalEvents, showAlertModal } from '../global/modal';
-import { isEmpty, isPlainObject } from 'lodash';
+import _ from 'lodash';
 import Wishlist from '../wishlist';
 import bannerUtils from './utils/banner-utils';
 import currencySelector from '../global/currency-selector';
@@ -74,12 +74,6 @@ export default class ProductDetails {
         this.$overlay = $('[data-cart-item-add] .loadingOverlay');
         this.$scope = $scope;
         this.context = context;
-
-        // papathemes: need for bulk-order layout
-        this.$card = context.$card;
-        this.$cardBulkOrderOptions = context.$cardBulkOrderOptions;
-        this.closeQuickView = context.closeQuickView;
-
         this.imageGallery = new ImageGallery($('[data-image-gallery]', this.$scope));
         this.imageGallery.init();
         this.listenQuantityChange();
@@ -97,6 +91,7 @@ export default class ProductDetails {
             closeTrigger: 'data-micromodal-close',
         });
 
+        // Papathemes - AlsoBought
         if (context.enableAlsoBought) {
             try {
                 const { alsoBoughtOptions } = window.supermarketThemeExtraConfig || {};
@@ -115,11 +110,6 @@ export default class ProductDetails {
         const hasOptions = ($productOptionsElement.html() || '').trim().length;
         const hasDefaultOptions = $productOptionsElement.find('[data-default]').length;
 
-        if ($form[0].checkValidity()) {
-            this.updateProductDetailsData();
-        } else {
-            this.toggleWalletButtonsVisibility(false);
-        }
 
         // papathemes-chiara edited for also-bought
         this.price = null;
@@ -174,26 +164,20 @@ export default class ProductDetails {
             this.addProductToCart(event, $form[0]);
         });
 
-        // papathemes: need for bulk-order layout
-        $form.find('#form-action-addToCartLater').on('click', (event) => {
-            event.preventDefault();
-            this.addProductToCartLater(event, $form[0]);
-        });
-
         $('#form-action-buyNow', $scope).on('click', () => {
             $form.find('input[name=action]').val('buy');
         });
 
         // Update product attributes. Also update the initial view in case items are oos
         // or have default variant properties that change the view
-        if ((isEmpty(productAttributesData) || hasDefaultOptions) && hasOptions) {
+        if ((_.isEmpty(productAttributesData) || hasDefaultOptions) && hasOptions) {
             const $productId = $('[name="product_id"]', $form).val();
 
             utils.api.productAttributes.optionChange($productId, supermarketSerialize($form), 'products/bulk-discount-rates', (err, response) => {
                 const attributesData = response.data || {};
                 const attributesContent = response.content || {};
                 this.updateProductAttributes(attributesData);
-                if (hasDefaultOptions || context.forceUpdateView) { // papathemes: bulk-order layout edited
+                if (hasDefaultOptions) {
                     this.updateView(attributesData, attributesContent);
                 } else {
                     this.updateDefaultAttributesForOOS(attributesData);
@@ -728,7 +712,7 @@ export default class ProductDetails {
         const unsatisfiedRequiredFields = [];
         const options = [];
 
-        this.$scope.find('[data-product-attribute]').each((index, value) => { // papathemes: fix selector don't respect the scope
+        $.each($('[data-product-attribute]'), (index, value) => {
             const optionLabel = value.children[0].innerText;
             const optionTitle = optionLabel.split(':')[0].trim();
             const required = optionLabel.toLowerCase().includes('required');
@@ -820,75 +804,6 @@ export default class ProductDetails {
         }
     }
 
-    // papathemes: need for bulk-order layout
-    createSelectedOptionsHtml() {
-        const $dl = $('<dl></dl>');
-
-        this.$scope.find('[data-product-attribute]').each((index, el) => {
-            const optionTitle = el.children[0]?.childNodes[0]?.nodeValue?.split(':')[0].trim();
-            const type = el.getAttribute('data-product-attribute');
-
-            if (type === 'date') {
-                const isSatisfied = Array.from(el.querySelectorAll('select')).every((select) => select.selectedIndex !== 0);
-
-                if (isSatisfied) {
-                    const dateString = Array.from(el.querySelectorAll('select')).map((x) => x.value).join('-');
-                    $('<dt></dt>').text(optionTitle).appendTo($dl);
-                    $('<dd></dd>').text(dateString).appendTo($dl);
-                }
-            } else if (type === 'set-select') {
-                const select = el.querySelector('select');
-                const selectedIndex = select.selectedIndex;
-
-                if (selectedIndex !== 0) {
-                    $('<dt></dt>').text(optionTitle).appendTo($dl);
-                    $('<dd></dd>').text(select.options[selectedIndex].textContent).appendTo($dl);
-                }
-            } else if (type === 'set-rectangle' || type === 'set-radio' || type === 'swatch' || type === 'input-checkbox' || type === 'product-list') {
-                const checked = el.querySelector(':checked');
-                if (checked) {
-                    if (type === 'set-rectangle' || type === 'set-radio' || type === 'product-list' || type === 'input-checkbox') {
-                        const label = checked.labels ? checked.labels[0].textContent : $(`label[for=${checked.id}]`).first().text();
-                        $('<dt></dt>').text(optionTitle).appendTo($dl);
-                        $('<dd></dd>').text(label).appendTo($dl);
-                    }
-
-                    if (type === 'swatch') {
-                        let valueLabel;
-                        if (checked.tagName === 'OPTION') {
-                            valueLabel = checked.textContent;
-                        } else {
-                            const label = checked.labels ? checked.labels[0].children[0] : $(`label[for=${checked.id}]`).children().get(0);
-                            valueLabel = label.title;
-                        }
-                        $('<dt></dt>').text(optionTitle).appendTo($dl);
-                        $('<dd></dd>').text(valueLabel).appendTo($dl);
-                    }
-                }
-            } else if (type === 'input-file') {
-                const input = el.querySelector('input[type="file"]');
-                if (input.files.length) {
-                    $('<dt></dt>').text(optionTitle).appendTo($dl);
-                    $('<dd></dd>').text(input.files[0].name).appendTo($dl);
-                }
-            } else if (type === 'textarea') {
-                const textarea = el.querySelector('textarea');
-                if (textarea.value) {
-                    $('<dt></dt>').text(optionTitle).appendTo($dl);
-                    $('<dd></dd>').text(textarea.value).appendTo($dl);
-                }
-            } else {
-                const input = el.querySelector('input');
-                if (input.value) {
-                    $('<dt></dt>').text(optionTitle).appendTo($dl);
-                    $('<dd></dd>').text(input.value).appendTo($dl);
-                }
-            }
-        });
-
-        return $dl.children().length > 0 ? $dl.prop('outerHTML') : '';
-    }
-
     /**
      * Since $productView can be dynamically inserted using render_with,
      * We have to retrieve the respective elements
@@ -952,7 +867,6 @@ export default class ProductDetails {
                 $input: $('[name=qty\\[\\]]', $scope),
             },
             $bulkPricing: $('.productView-info-bulkPricing', $scope),
-            $walletButtons: $('[data-add-to-cart-wallet-buttons]', $scope),
             saleCountdown: {
                 $div: $('.productView-saleCount', $scope),
                 $spanSale: $('._labelTime__title ._priceSale', $scope),
@@ -1012,13 +926,12 @@ export default class ProductDetails {
             const productAttributesContent = response?.content || {};
             this.updateProductAttributes(productAttributesData);
             this.updateView(productAttributesData, productAttributesContent);
-            this.updateProductDetailsData();
             bannerUtils.dispatchProductBannerEvent(productAttributesData);
         });
     }
 
     showProductImage(image) {
-        if (isPlainObject(image)) {
+        if (_.isPlainObject(image)) {
             const zoomImageUrl = utils.tools.imageSrcset.getSrcset(
                 image.data,
                 { '1x': this.context.zoom_size },
@@ -1060,7 +973,7 @@ export default class ProductDetails {
      * Handle action when the shopper clicks on + / - for quantity
      *
      */
-    listenQuantityChange() {
+   listenQuantityChange() {
         this.$scope.on('click', '[data-quantity-change] button', event => {
             event.preventDefault();
             const $target = $(event.currentTarget);
@@ -1069,48 +982,69 @@ export default class ProductDetails {
             const quantityMin = parseInt($input.data('quantityMin'), 10);
             const quantityMax = parseInt($input.data('quantityMax'), 10);
             let qty = parseInt($input.val(), 10);
-
-            // If action is incrementing
-            if ($target.data('action') === 'inc') {
-                // If quantity max option is set
-                if (quantityMax > 0) {
-                    // Check quantity does not exceed max
-                    if ((qty + 1) <= quantityMax) {
+              // Start Ticket 1002
+            let getPackValue = $('body').find('[data-pack-value]').val();
+            //console.log('getPackValue '+getPackValue);
+            if(getPackValue && getPackValue !== undefined){
+                if(getPackValue){
+                    getPackValue = parseInt(getPackValue);
+                }
+                let getQtyInput = $('body').find('[data-product-qty]');
+                if ($target.data('action') === 'inc') {
+                    // If quantity max option is set
+                    if (quantityMax > 0) {
+                        // Check quantity does not exceed max
+                        if ((qty + 1) <= quantityMax) {
+                            //qty++;
+                        }
+                    } else {
+                        //qty++;
+                    }
+                    let qty_updated =  qty + getPackValue;
+                    setTimeout(function(){
+                        $(getQtyInput).val(qty_updated);
+                        $(getQtyInput).removeClass('tempClassActive');
+                    },250);
+                } else if (qty > 1) {
+                    $(getQtyInput).addClass('tempClassActive');
+                    if (qty > getPackValue) {
+                        let qty_updated =  qty - getPackValue;
+                        setTimeout(function(){
+                            $(getQtyInput).val(qty_updated);
+                            $(getQtyInput).removeClass('tempClassActive');
+                        },250);
+                    } else {
+                        setTimeout(function(){
+                            $(getQtyInput).val(getPackValue);
+                            $(getQtyInput).removeClass('tempClassActive');
+                        },250);
+                    }
+                }
+            }else{
+                // If action is incrementing
+                if ($target.data('action') === 'inc') {
+                    // If quantity max option is set
+                    if (quantityMax > 0) {
+                        // Check quantity does not exceed max
+                        if ((qty + 1) <= quantityMax) {
+                            qty++;
+                        }
+                    } else {
                         qty++;
                     }
-                } else {
-                    qty++;
-                }
-            } else if (qty > 1) {
-                // If quantity min option is set
-                if (quantityMin > 0) {
-                    // Check quantity does not fall below min
-                    if ((qty - 1) >= quantityMin) {
+                } else if (qty > 1) {
+                    // If quantity min option is set
+                    if (quantityMin > 0) {
+                        // Check quantity does not fall below min
+                        if ((qty - 1) >= quantityMin) {
+                            qty--;
+                        }
+                    } else {
                         qty--;
                     }
-                } else {
-                    qty--;
                 }
-            }
-
-            // update hidden input
-            viewModel.quantity.$input.val(qty);
-            // update text
-            viewModel.quantity.$text.text(qty);
-
-            this.updateProductDetailsData();
-        });
-
-        // mooncat: check input quantity
-        this.$scope.on('change', '[data-quantity-change] input', event => {
-            const viewModel = this.getViewModel(this.$scope);
-            const $input = $(event.currentTarget);
-            let qty = parseInt($input.val(), 10);
-
-            if (qty <= 0 || !qty) {
-                qty = 1;
-            }
-
+            } 
+            // End Ticket 1002
             viewModel.quantity.$input.val(qty);
             viewModel.quantity.$text.text(qty);
         });
@@ -1126,10 +1060,6 @@ export default class ProductDetails {
         });
 
         // --------------------------------------------------------------------
-
-        this.$scope.on('keyup', '.form-input--incrementTotal', () => {
-            this.updateProductDetailsData();
-        });
     }
 
     // papathemes-chiara added for also-bought
@@ -1255,86 +1185,6 @@ export default class ProductDetails {
         });
     }
 
-    // papathemes: need for bulk-order layout
-    addProductToCartLater(event, form) {
-        if (form.reportValidity && !form.reportValidity()) {
-            return;
-        }
-
-        if (this.$cardBulkOrderOptions) {
-            const $form = this.$scope.find('form[data-cart-item-add]');
-            $form.addClass('u-hiddenVisually');
-
-            // Update price and qty of the bulk-order item
-            if (this.$card) {
-                const viewModel = this.getViewModel(this.$scope);
-                const $cardPriceWithTax = this.$card.find('[data-product-price-with-tax]');
-                const $cardPriceWithoutTax = this.$card.find('[data-product-price-without-tax]');
-                const $boPriceFormatted = this.$card.find('[data-bulkorder-price-formatted]');
-                const $boPriceValue = this.$card.find('[data-bulkorder-price-value]');
-
-                if (viewModel.$priceWithTax.length > 0) {
-                    const priceFormatted = viewModel.$priceWithTax.html();
-                    const priceValue = viewModel.$priceWithTax.data('priceValue');
-
-                    $cardPriceWithTax.html(priceFormatted);
-
-                    if ($cardPriceWithTax.length > 0) {
-                        $boPriceFormatted.data('bulkorderPriceFormatted', priceFormatted);
-
-                        if (priceValue) {
-                            $boPriceValue.data('bulkorderPriceValue', priceValue);
-                        }
-                    }
-                }
-
-                if (viewModel.$priceWithoutTax.length > 0) {
-                    const priceFormatted = viewModel.$priceWithoutTax.html();
-                    const priceValue = viewModel.$priceWithoutTax.data('priceValue');
-
-                    $cardPriceWithoutTax.html(priceFormatted);
-
-                    if ($cardPriceWithoutTax.length > 0 && $cardPriceWithTax.length === 0) {
-                        $boPriceFormatted.data('bulkorderPriceFormatted', priceFormatted);
-
-                        if (priceValue) {
-                            $boPriceValue.data('bulkorderPriceValue', priceValue);
-                        }
-                    }
-                }
-
-                // Update card quantity box
-                const qty = viewModel.quantity.$input.val() || 1;
-                const minQty = viewModel.quantity.$input.data('quantityMin');
-                const maxQty = viewModel.quantity.$input.data('quantityMax');
-                const $cardQty = this.$card.find('[data-quantity-change] input');
-                if (minQty) {
-                    $cardQty.attr('data-quantity-min', minQty);
-                }
-                if (maxQty) {
-                    $cardQty.attr('data-quantity-max', maxQty);
-                }
-                $cardQty.val(qty).trigger('change');
-            }
-
-            // Insert the add to cart form to the bulk-order item
-            this.$cardBulkOrderOptions
-                .html(this.createSelectedOptionsHtml())
-                .append($form);
-
-            // remove ID to avoid duplicate ID in the DOM
-            $form.find('[id]').each((_index, el) => {
-                const $el = $(el);
-                $el.attr('data-last-element-id', $el.attr('id'))
-                    .removeAttr('id');
-            });
-        }
-
-        if (typeof this.closeQuickView === 'function') {
-            this.closeQuickView();
-        }
-    }
-
     /**
      * Get cart contents
      *
@@ -1449,7 +1299,6 @@ export default class ProductDetails {
         if (price.with_tax) {
             viewModel.priceLabel.$span.show();
             viewModel.$priceWithTax.html(price.with_tax.formatted);
-            viewModel.$priceWithTax.data('priceValue', price.with_tax.value); // papathemes: need for bulk-order layout
 
             // papathemes-beautify
             if (price.rrp_with_tax || price.non_sale_price_with_tax) {
@@ -1469,7 +1318,6 @@ export default class ProductDetails {
         if (price.without_tax) {
             viewModel.priceLabel.$span.show();
             viewModel.$priceWithoutTax.html(price.without_tax.formatted);
-            viewModel.$priceWithoutTax.data('priceValue', price.without_tax.value); // papathemes: need for bulk-order layout
 
             // papathemes-beautify
             if (price.rrp_without_tax || price.non_sale_price_without_tax) {
@@ -1525,11 +1373,11 @@ export default class ProductDetails {
 
         this.showMessageBox(data.stock_message || data.purchasing_message);
 
-        if (data.price instanceof Object) {
+        if (_.isObject(data.price)) {
             this.updatePriceView(viewModel, data.price);
         }
 
-        if (data.weight instanceof Object) {
+        if (_.isObject(data.weight)) {
             viewModel.$weight.html(data.weight.formatted);
         }
 
@@ -1569,7 +1417,7 @@ export default class ProductDetails {
         }
 
         // if stock view is on (CP settings)
-        if (viewModel.stock.$container.length && typeof data.stock === 'number') {
+        if (viewModel.stock.$container.length && _.isNumber(data.stock)) {
             // if the stock container is hidden, show
             viewModel.stock.$container.removeClass('u-hiddenVisually');
 
@@ -1599,7 +1447,6 @@ export default class ProductDetails {
         }
 
         this.updateDefaultAttributesForOOS(data);
-        this.updateWalletButtonsView(data);
 
         // If Bulk Pricing rendered HTML is available
         if (data.bulk_discount_rates && content) {
@@ -1618,20 +1465,6 @@ export default class ProductDetails {
 
         // papathemes-kitchenary: dispatch event for also-bought
         this.$scope.trigger('product-view-update', [data]);
-    }
-
-    updateWalletButtonsView(data) {
-        this.toggleWalletButtonsVisibility(data.purchasable && data.instock);
-    }
-
-    toggleWalletButtonsVisibility(shouldShow) {
-        const viewModel = this.getViewModel(this.$scope);
-
-        if (shouldShow) {
-            viewModel.$walletButtons.show();
-        } else {
-            viewModel.$walletButtons.hide();
-        }
     }
 
     updateDefaultAttributesForOOS(data) {
@@ -1654,8 +1487,7 @@ export default class ProductDetails {
     updateProductAttributes(data) {
         const behavior = data.out_of_stock_behavior;
         const inStockIds = data.in_stock_attributes;
-        const outOfStockDefaultMessage = this.context.outOfStockDefaultMessage;
-        let outOfStockMessage = data.out_of_stock_message;
+        const outOfStockMessage = ` (${data.out_of_stock_message})`;
 
         // papathemes-chiara edited for also-bought
         this.price = data.price;
@@ -1665,12 +1497,6 @@ export default class ProductDetails {
 
         if (behavior !== 'hide_option' && behavior !== 'label_option') {
             return;
-        }
-
-        if (outOfStockMessage) {
-            outOfStockMessage = ` (${outOfStockMessage})`;
-        } else {
-            outOfStockMessage = ` (${outOfStockDefaultMessage})`;
         }
 
         $('[data-product-attribute-value]', this.$scope).each((i, attribute) => {
@@ -1686,47 +1512,6 @@ export default class ProductDetails {
         });
 
         this.$scope.trigger('updateProductAttributes'); // papathemes-beautify for dropdown-swatches
-    }
-
-    updateProductDetailsData() {
-        // papathemes-supermarket:
-        // Stop if product is also-bought product (FBT) to prevent incorrect price from quick payment button
-        if (this.$scope.closest('[data-also-bought]').length > 0) {
-            return;
-        }
-
-        const $form = this.$scope.find('form[data-cart-item-add]'); // papathemes: fix selector don't respect the scope
-        const formDataItems = $form.serializeArray();
-
-        const productDetails = {};
-
-        for (const formDataItem of formDataItems) {
-            const { name, value } = formDataItem;
-
-            if (name === 'product_id') {
-                productDetails.productId = Number(value);
-            }
-
-            if (name === 'qty[]') {
-                productDetails.quantity = Number(value);
-            }
-
-            if (name.match(/attribute/)) {
-                const productOption = {
-                    optionId: Number(name.match(/\d+/g)[0]),
-                    optionValue: value,
-                };
-
-                productDetails.optionSelections = productDetails?.optionSelections
-                    ? [...productDetails.optionSelections, productOption]
-                    : [productOption];
-            }
-        }
-
-        document.dispatchEvent(new CustomEvent('onProductUpdate', {
-            bubbles: true,
-            detail: { productDetails },
-        }));
     }
 
     disableAttribute($attribute, behavior, outOfStockMessage) {
@@ -1751,6 +1536,7 @@ export default class ProductDetails {
                 $select[0].selectedIndex = 0;
             }
         } else {
+            $attribute.attr('disabled', 'disabled');
             $attribute.html($attribute.html().replace(outOfStockMessage, '') + outOfStockMessage);
         }
     }
@@ -1771,6 +1557,7 @@ export default class ProductDetails {
         if (behavior === 'hide_option') {
             $attribute.toggleOption(true);
         } else {
+            $attribute.prop('disabled', false);
             $attribute.html($attribute.html().replace(outOfStockMessage, ''));
         }
     }
@@ -1871,7 +1658,7 @@ export default class ProductDetails {
             $el.remove();
 
             $tabs.children().append(`<li class="tab tab--custom tab--custom-${i}" role="presentation"><a class="tab-title" href="#tab-custom-${i}" role="tab">${title}</a></li>`);
-            $tabsContent.append(`<div class="tab-content tab-content--custom tab-content--custom-${i}" id="tab-custom-${i}" aria-hidden="true" role="tabpanel" aria-label="${txtTitle}"><div class="container"><a class="productView-description-tabHeading" data-tab-mobile href="#tab-custom-${i}">${title}<svg class="icon"><use href="#icon-product-tab-arrow"></svg></a><div class="productView-description-tabContent">${content}</div></div></div>`);
+            $tabsContent.append(`<div class="tab-content tab-content--custom tab-content--custom-${i}" id="tab-custom-${i}" aria-hidden="true" role="tabpanel" aria-label="${txtTitle}"><div class="container"><a class="productView-description-tabHeading" data-tab-mobile href="#tab-custom-${i}">${title}<svg class="icon"><use xlink:href="#icon-product-tab-arrow"></svg></a><div class="productView-description-tabContent">${content}</div></div></div>`);
         });
     }
 

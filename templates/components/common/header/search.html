@@ -11,7 +11,7 @@
                     {{/each}}
                 {{else}}
                     {{#each (limit pages theme_settings.navPages_webpageLimit)}}
-                        <li class="navPages-item navPages-item--page">
+                        <li class="navPages-item navPages-item--page unique-class-{{@index}}">
                             {{> components/beautify/navigation-list theme_settings=../theme_settings menu_type='standard' page_type='page' idSuffix='-navUser'}}
                         </li>
                     {{/each}}
@@ -20,7 +20,7 @@
             {{#if settings.gift_certificates_enabled}}
                 <li class="navUser-item navUser-item--giftCert">
                     <a class="navUser-action navUser-action--giftCert" href="{{urls.gift_certificate.purchase}}" title="{{lang 'common.gift_cert'}}">
-                        <svg class="icon"><use href="#icon-gift" /></svg>
+                        <svg class="icon"><use xlink:href="#icon-gift" /></svg>
                         <span class="_label">{{lang 'common.gift_cert'}}</span>
                     </a>
                 </li>

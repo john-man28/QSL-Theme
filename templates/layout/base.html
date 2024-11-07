@@ -47,10 +47,10 @@
                                 }
                                 return _fonts;
                             }, []);
-                        var families = fonts.map(function(font) {
-                            return 'family=' + font[0] + (font[1] ? ':wght@' + String(font[1]).replace(/,/g, ';') : '');
-                        }).join('&');
-                        function addLink(href, rel, crossorigin) {
+                            var families = fonts.map(function(font) {
+                                return 'family=' + font[0] + (font[1] ? ':wght@' + String(font[1]).replace(/,/g, ';') : '');
+                            }).join('&');
+                            function addLink(href, rel, crossorigin) {
                             var link = document.createElement('link');
                             link.href = href;
                             link.rel = rel;
@@ -125,7 +125,6 @@
         {{~inject 'pdp_retail_price_label' theme_settings.pdp-retail-price-label}}
         {{~inject 'alsobought_checked' theme_settings.alsobought_checked}}
         {{~inject 'homepage_show_carousel' theme_settings.homepage_show_carousel}}
-        {{~inject 'product_recentviewed_max' theme_settings.product_recentviewed_max}}
         {{~inject 'product_recentviewed_count' theme_settings.product_recentviewed_count}}
         {{~inject 'product_cartsuggested_count' theme_settings.product_cartsuggested_count}}
         {{~inject 'product_new_count' theme_settings.product_new_count}}
@@ -160,7 +159,7 @@
         {{~inject 'card_show_border' theme_settings.card_show_border}}
         {{~inject 'card_show_button' theme_settings.card_show_button}}
         {{~inject 'show_product_quick_view' theme_settings.show_product_quick_view}}
-        {{~inject 'show_product_quantity_box' theme_settings.card_show_qty}}
+        {{~inject 'show_product_quantity_box' theme_settings.show_product_quantity_box}}
         {{~inject 'ajax_add_to_cart' theme_settings.ajax_add_to_cart}}
         {{~inject 'product_sale_badges' theme_settings.product_sale_badges}}
         {{~inject 'product_sale_label' theme_settings.product_sale_label}}
@@ -181,9 +180,6 @@
         {{~inject 'validationDefaultDictionaryJSON' (langJson 'validation_default_messages')}}
         {{~inject 'ajaxAddToCartEnterQty' (lang 'bulk_order.validate.enter_qty')}}
         {{~inject 'bulkOrderEnterQty' (lang 'bulk_order.validate.enter_qty')}}
-        {{~inject 'bulkOrderChooseOptions' (lang 'bulk_order.validate.choose_options')}}
-        {{~inject 'txtMinQty' (lang 'products.quantity_min' quantity='%qty%')}}
-        {{~inject 'txtMaxQty' (lang 'products.quantity_max' quantity='%qty%')}}
         {{~inject 'compareAddonLang_compare' (lang 'common.compare')}}
         {{~inject 'compareAddonLang_quick_view' (lang 'products.quick_view')}}
         {{~inject 'compareAddonLang_remove' (lang 'compare.remove')}}
@@ -230,12 +226,6 @@
         {{~inject 'txtSoldOut' (lang 'products.sold_out')}}
         {{~inject 'country_code' settings.country_code}}
         {{~inject 'isCrawlerAndSpeedTestMode' (getVar 'isCrawlerAndSpeedTestMode')}}
-        {{~inject 'hidePriceFromGuests' settings.hide_price_from_guests}}
-        {{~inject 'outOfStockDefaultMessage' (lang 'products.out_of_stock_default_message')}}
-        {{~inject 'pdp_price_label' theme_settings.pdp-price-label}}
-        {{~inject 'pdp_sale_price_label' theme_settings.pdp-sale-price-label}}
-        {{~inject 'pdp_non_sale_price_label' theme_settings.pdp-non-sale-price-label}}
-        {{~inject 'pdp_retail_price_label' theme_settings.pdp-retail-price-label}}
         {{~inject 'isDevelopment' in_development}}
         {{#if theme_settings.infiniteScroll '!==' 'no'}}
             {{~inject 'txtLoadMore' (lang 'common.load_more')}}

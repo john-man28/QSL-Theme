@@ -16,7 +16,6 @@ export default function (secureBaseUrl, cartId, context) {
     const $labelPrice = $('[data-cart-preview-price]');
     const $singleItem = $('._single-item', '[data-cart-preview]');
     const $pluralItem = $('._plural-item', '[data-cart-preview]');
-
     const $body = $('body');
 
     if (window.ApplePaySession) {
@@ -24,27 +23,29 @@ export default function (secureBaseUrl, cartId, context) {
     }
 
     $body.on('cart-quantity-update', (event, quantity, price) => {
-        $('.cart-quantity').text(quantity || '0');
-        $labelPrice.text(price);
+        $('.cart-quantity')
+            .text(quantity)
+            .toggleClass('countPill--positive', quantity && quantity > 0);
+        $labelPrice.text(price).toggleClass('price--positive', !!price);
 
-        if (quantity && quantity > 0) {
-            $('.cart-quantity').addClass('countPill--positive');
-            $labelPrice.addClass('price--positive');
-        } else {
-            $('.cart-quantity').removeClass('countPill--positive');
-            $labelPrice.removeClass('price--positive');
+        // Ensure quantity is always displayed
+        if (!quantity) {
+            $('.cart-quantity').text('0');
         }
 
+        // Update visibility of single and plural item indicators
+        if (quantity === 1) {
+            $singleItem.show();
+            $pluralItem.hide();
+        } else {
+            $singleItem.hide();
+            $pluralItem.show();
+        }
+
+        // Store quantity and price in localStorage if available
         if (utils.tools.storage.localStorageAvailable()) {
             localStorage.setItem('cart-quantity', quantity);
             localStorage.setItem('cart-price', price);
-        }
-        if (quantity > 1) {
-            $singleItem.hide();
-            $pluralItem.show();
-        } else {
-            $pluralItem.hide();
-            $singleItem.show();
         }
     });
 
@@ -53,64 +54,49 @@ export default function (secureBaseUrl, cartId, context) {
             template: 'common/cart-preview',
         };
 
-        // Redirect to full cart page
-        //
-        // https://developer.mozilla.org/en-US/docs/Browser_detection_using_the_user_agent
-        // In summary, we recommend looking for the string 'Mobi' anywhere in the User Agent to detect a mobile device.
-
-        // mooncat: comment out to display cart preview popup on mobile
+        // Redirect to full cart page for mobile devices
         // if (/Mobi/i.test(navigator.userAgent)) {
         //     return event.stopPropagation();
         // }
 
         event.preventDefault();
 
-        // mooncat: stop if cart the click event is closing the cart popup
+        // Prevent re-triggering if cart is already open
         if ($cart.hasClass('is-open')) return;
 
-        $cartDropdown
-            .addClass(loadingClass)
-            .html($cartLoading);
-        $cartLoading
-            .show();
+        // Show loading overlay while fetching cart content
+        $cartDropdown.addClass(loadingClass).html($cartLoading);
+        $cartLoading.show();
 
         utils.api.cart.getContent(options, (err, response) => {
-            $cartDropdown
-                .removeClass(loadingClass)
-                .html(response);
-            $cartLoading
-                .hide();
+            $cartDropdown.removeClass(loadingClass).html(response);
+            $cartLoading.hide();
 
-
-            // mooncart: full functionality cart popup
+            // Initialize full functionality cart popup and slick slider
             initCartPopup(context, $cartDropdown);
-
-            // mooncat: init slick slider inside
             $cartDropdown.find('[data-slick]').not('.slick-initialized').slick();
 
-            $('body').trigger('cartpreviewshown', [$cartDropdown]); // papathemes-mooncat
+            $('body').trigger('cartpreviewshown', [$cartDropdown]);
         });
     });
 
-    // papathemes-inhealth: close cart preview popup when click outside the cart preview popup or other modal
+    // Close cart preview popup when clicking outside
     $body.on('click', event => {
         if ($cartDropdown.is('.is-open') && $(event.target).closest('[data-cart-preview], #cart-preview-dropdown, [data-reveal]').length === 0) {
             $cart.first().trigger('click');
         }
     });
 
-    // papathemes-inhealth {{{
+    // Accessibility enhancements
     $cartDropdown.on('open.toggle', (event, $toggle) => {
         $('body').addClass('has-previewCartOpened');
-        // Accessibility - Make other elements not focusable
         inert($cartDropdown);
         $cartDropdown.data('lastToggle', $toggle);
-        $cartDropdown.find('a,button[tabindex!="-1"]').first().each((i, el) => el.focus());
+        $cartDropdown.find('a,button[tabindex!="-1"]').first().focus();
     });
 
     $cartDropdown.on('close.toggle', () => {
         $('body').removeClass('has-previewCartOpened');
-        // Accessibility - Make other elements not focusable
         inert($cartDropdown, false);
         const $toggle = $cartDropdown.data('lastToggle');
         if ($toggle) {
@@ -118,43 +104,43 @@ export default function (secureBaseUrl, cartId, context) {
             $cartDropdown.data('lastToggle', null);
         }
     });
-    // }}}
 
     let quantity = 0;
     let price = 0;
 
     if (cartId) {
-        // Get existing quantity from localStorage if found
+        // Retrieve existing quantity from localStorage
         if (utils.tools.storage.localStorageAvailable()) {
-            if (localStorage.getItem('cart-quantity')) {
-                quantity = Number(localStorage.getItem('cart-quantity'));
-                price = localStorage.getItem('cart-price');
+            const storedQuantity = localStorage.getItem('cart-quantity');
+            const storedPrice = localStorage.getItem('cart-price');
+            if (storedQuantity) {
+                quantity = Number(storedQuantity);
+                price = storedPrice || '';
                 $body.trigger('cart-quantity-update', [quantity, price]);
             }
         }
 
-        // Get updated cart quantity from the Cart API
+        // Fetch updated cart quantity from Cart API
         const cartQtyPromise = new Promise((resolve) => {
             utils.api.cart.getContent({ baseUrl: secureBaseUrl, cartId, template: 'common/cart-preview' }, (err, response) => {
                 let qty = 0;
                 let cartPrice = '';
                 if (err) {
-                    // If this appears to be a 404 for the cart ID, set cart quantity to 0
+                    resolve([qty, cartPrice]);
+                } else {
+                    qty = Number($('[data-cart-quantity]', response).data('cart-quantity'));
+                    cartPrice = $('[data-cart-formatted]', response).data('cart-formatted') || '';
                     resolve([qty, cartPrice]);
                 }
-                qty = $('[data-cart-quantity]', response).data('cart-quantity');
-                cartPrice = $('[data-cart-formatted]', response).data('cart-formatted');
-                resolve([qty, cartPrice]);
             });
         });
 
-        // If the Cart API gives us a different quantity number, update it
-        cartQtyPromise.then(([qty, cartPrice = '']) => {
+        cartQtyPromise.then(([qty, cartPrice]) => {
             quantity = qty;
             price = cartPrice;
             $body.trigger('cart-quantity-update', [quantity, price]);
         });
     } else {
-        $body.trigger('cart-quantity-update', quantity);
+        $body.trigger('cart-quantity-update', [quantity, price]);
     }
 }

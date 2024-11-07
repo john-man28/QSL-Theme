@@ -6,18 +6,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Draft
 
-## 1.4.1 (10-04-2024)
-
-## 1.4.1 (10-04-2024)
-- Add option to limit maximum recently viewed products
-- delete PayPal test button in data-add-to-cart-wallet-buttons
-
-## 1.4.0 (09-13-2024)
-- Fix Quick Search Overlay Issue on Desktop and Menu Display Issue on Mobile When Sticky Header is disabled #299
-- Fix whatsapp link #293 (#294)
-- Fix top categories on the homepage when no image (#298)
-- Update source code from MoonCat 1.8.0
-
 ## 1.3.4 (08-23-2024)
 - Add data-swatches="{{attributeName}}" to product card swatches
 - Fix missing loading animation when click on subcategories

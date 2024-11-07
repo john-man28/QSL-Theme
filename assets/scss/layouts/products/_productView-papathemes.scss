@@ -199,16 +199,12 @@
 
     .productView-alsoBought-item-detail {
         display: flex;
-        justify-content: center;
+        width: fit-content;
         margin-left: 0;
         margin-top: spacing("third");
-        font-size: fontSize("smallest");
-        color: $color-textSecondary;
+        font-size: fontSize("smaller");
+        color: $color-textBase;
         font-weight: $fontWeight-medium;
-
-        @include breakpoint("medium") {
-            font-size: fontSize("smaller");
-        }
 
         &:hover,
         &:focus-visible {
@@ -234,7 +230,20 @@
     .productView-alsoBought-item-title {
         margin-right: 0;
         color: $color-textBase;
+        font-weight: $fontWeight-medium;
         text-decoration: unset;
+        font-size: fontSize("base");
+        line-height: 1.5;
+        @media (max-width: (screenSize("small") - 1px)) {
+            /* autoprefixer: off */
+            height: 3rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-word;
+        }
 
         &:hover,
         &:focus-visible {
@@ -393,7 +402,7 @@
                 display: block;
                 padding: spacing("base") spacing("double")*1.5;
                 border: 2px solid stencilColor("container-border-global-color-base");
-                border-radius: $button-radius;
+                border-radius: $global-radius;
                 line-height: 1.5;
 
                 .price-section--withoutTax {
@@ -417,7 +426,8 @@
         .button[data-add-selected] {
             min-height: unset;
             padding: spacing("base") spacing("double")*1.25;
-            line-height: lineHeight("base");
+            font-size: fontSize("small");
+            line-height: 1.5;
         }
 
         @media (max-width: (screenSize("medium") - 1px)) {
@@ -428,17 +438,15 @@
                 justify-content: flex-end;
 
                 .button[data-add-selected] {
-                    padding: spacing("base");
+                    width: calc(50% - 10px);
                 }
             }
             display: grid;
-            grid-template-columns: auto 1fr;
+            grid-template-columns: 1fr 1fr;
             grid-gap: spacing("base");
 
             .button[data-add-selected] {
-                padding: spacing("base") spacing("quarter");
-                font-size: fontSize("smaller");
-                min-height: 62px;
+                padding: spacing("base");
             }
 
             .productView-alsoBought-total {
@@ -600,7 +608,7 @@
                         transform: translateY(-50%);
                         border-bottom: 0;
                         transition: all 0.2s ease-in;
-                        fill: rgba($color-textSecondary, 0.5);
+                        fill: rgba(stencilColor("color-textBase"), 0.5);
                     }
 
                     &.is-open {

@@ -42,7 +42,6 @@
 .cart-item-name {
     margin-bottom: spacing("quarter");
     font-size: fontSize("base");
-    font-weight: $header-font-weight;
 
     a {
         text-decoration: none;
@@ -191,7 +190,7 @@
 .gift-certificate-cancel {
     color: $color-textLink;
     text-decoration: none;
-    text-underline-offset: 0.2em;
+    text-underline-position: under;
 
     // papathemes-beautify added
     float: right;

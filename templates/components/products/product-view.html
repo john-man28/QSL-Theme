@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {{assignVar 'productImageSizeAttrs' (get 'string' (concat 'width=' (join (split theme_settings.product_size 'x') ' height=')))}}
 {{assignVar 'productThumbSizeAttrs' (get 'string' (concat 'width=' (join (split theme_settings.productthumb_size 'x') ' height=')))}}
 <div class="productView"
@@ -449,18 +450,36 @@
                                     {{/unless}}
                                     <div class="_wrapper-price-saving">
                                         <div class="price-section price-section--saving" {{#unless product.price.saved}}style="display: none;"{{/unless}}>
-                                            <span class="price">{{lang 'products.you_save_opening_text'}}</span>
-                                            <span data-product-price-saved class="price price--saving">{{product.price.saved.formatted}} ({{#if product.price.rrp_without_tax}}{{round (multiply (subtract 1 (divide product.price.without_tax.value product.price.rrp_without_tax.value)) 100)}}%{{else}}{{round (multiply (subtract 1 (divide product.price.with_tax.value product.price.rrp_with_tax.value)) 100)}}%{{/if}})</span><!--
-                                            --><span class="price">{{lang 'products.you_save_closing_bracket'}}</span>
+                                            <!--<span class="price">{{lang 'products.you_save_opening_text'}}</span>-->
+                                            <span class="price">You save</span>
+                                            <span data-product-price-saved class="price price--saving">{{product.price.saved.formatted}} ({{#if product.price.rrp_without_tax}}{{round (multiply (subtract 1 (divide product.price.without_tax.value product.price.rrp_without_tax.value)) 100)}}%{{else}}{{round (multiply (subtract 1 (divide product.price.with_tax.value product.price.rrp_with_tax.value)) 100)}}%{{/if}})</span>
+                                             <!--<span class="price">{{lang 'products.you_save_closing_bracket'}}</span>-->
                                         </div>
                                     </div>
                                 </div>
                                 {{#if settings.bulk_discount_enabled}}
+                                   {{#if customer}}
                                     {{#or customer (unless settings.hide_price_from_guests)}}
                                         <div class="productView-info-bulkPricing">
                                             {{> components/products/bulk-discount-rates bulk_discount_rates=product.bulk_discount_rates}}
                                         </div>
                                     {{/or}}
+                                    {{else}}
+                                        <div class="productView-info-logout without_login">
+                                            <span id="instant_quote" class="log_in" {{#if product.options.length}}style="display: none;"{{/if}}>
+                                                <a id="instant_quote_link" href="#">CLICK HERE TO GET INSTANT QUOTE</a>
+                                            </span>
+                                            <span id="choose_option" class="log_in" {{#unless product.options.length}}style="display: none;"{{/unless}}>
+                                                <a href="javascript:void(0)">CHOOSE AN OPTION TO GET INSTANT QUOTE</a>
+                                            </span>
+                                            <div id="get_login_price" style="display: none">
+                                                <span class="log_in"><a href="/login.php">LOG IN TO GET THIS PRICE</a></span>
+                                            </div>
+                                            <div id="get_best_price" style="display: none">
+                                                <span class="log_in"><a href="/login.php">LOG IN FOR 0UR BEST PRICING</a></span>
+                                            </div>
+                                        </div>
+                                    {{/if}}
                                 {{/if}}
                                 {{{region name="product_below_price--global"}}}
                                 {{{region name="product_below_price"}}}
@@ -660,7 +679,7 @@
                                                         data-minutes-text="{{{lang 'shipping_countdown.minutes'}}}"
                                                         class="_addToCartVisibility"
                                                         style="display:none">
-                                                            <svg class="icon"><use href="#icon-ih-fast-delivery-icon"></svg>
+                                                            <svg class="icon"><use xlink:href="#icon-ih-fast-delivery-icon"></svg>
                                                             <div data-today-hm>{{{lang 'shipping_countdown.today_hm'}}}</div>
                                                             <div data-today-m>{{{lang 'shipping_countdown.today_h'}}}</div>
                                                             <div data-tomorrow-hm>{{{lang 'shipping_countdown.tomorrow_hm'}}}</div>
@@ -674,12 +693,24 @@
                                                 <p>{{product.release_date}}</p>
                                             {{/if}}
                                             <div class="productView-info--stock">
-                                                <span class="productView-info-name productView-info-name--stock {{#unless product.stock_level}} u-hiddenVisually{{/unless}}{{#if product.stock_level '<' product.low_stock_level}} _lowStock{{/if}}"><span class="_std"><svg class="icon"><use href="#icon-stock"></use></svg>{{lang 'products.current_stock'}}</span><span class="_low"><svg class="icon"><use href="#icon-fire"></use></svg>{{lang 'products.low_stock'}}</span></span>
-                                                <span class="productView-info-value productView-info-value--stock {{#unless product.stock_level}} u-hiddenVisually{{/unless}}" data-product-stock>{{product.stock_level}}</span>
+                                                <span class="productView-info-name productView-info-name--stock {{#if product.stock_level '<' product.low_stock_level}} _lowStock{{/if}}"><span class="_std"><svg class="icon"><use xlink:href="#icon-stock"></use></svg>{{lang 'products.current_stock'}}</span><span class="_low"><svg class="icon"><use xlink:href="#icon-fire"></use></svg>{{lang 'products.low_stock'}}</span></span>
+                                                <span class="productView-info-value productView-info-value--stock" data-product-stock>{{#unless product.stock_level}}Choose Options to see available quantity{{/unless}}{{product.stock_level}}</span>
                                             </div>
                                         </div>
+                                        {{#each product.custom_fields}}
+                                        {{#if (toLowerCase name) '===' 'pack size'}}
+                                        <div class="labelpacksize" style="margin-bottom:20px;">
+                                        <span class="quantitylabel">This item is sold in multiples of {{value}} </span>
+                                        </div>
+                                        {{/if}}
+                                        {{/each}}
                                         <div class="_wrapper-quantityAddToCart">
                                             {{#if product.show_quantity_input}}
+                                                {{#each product.custom_fields}}
+                                                {{#if (toLowerCase name) '===' 'pack size'}}
+                                                 <input style="display: none;" class="qty_packSize" type="hidden" name="qty_packSize" value="{{value}}" data-pack-value>
+                                                {{/if}}
+                                                {{/each}}
                                                 <div class="form-field form-field--increments _addToCartVisibility" {{#unless product.can_purchase}}style="display:none"{{/unless}}>
                                                     <label class="form-label form-label--alternate" for="qty[]">{{lang 'products.qty'}}</label>
                                                     <div class="form-increment" data-quantity-change>
@@ -687,7 +718,7 @@
                                                             <span class="is-srOnly">{{lang 'products.quantity_decrease'}}</span>
                                                             <i class="icon" aria-hidden="true">
                                                                 <svg>
-                                                                    <use href="#icon-keyboard-arrow-down"/>
+                                                                    <use xlink:href="#icon-keyboard-arrow-down"/>
                                                                 </svg>
                                                             </i>
                                                         </button>
@@ -700,52 +731,57 @@
                                                             data-quantity-max="{{product.max_purchase_quantity}}"
                                                             min="1"
                                                             pattern="[0-9]*"
-                                                            aria-live="polite">
+                                                            product-id="{{product.id}}"
+                                                            aria-live="polite" data-product-qty {{#each product.custom_fields}}{{#if (toLowerCase name) '===' 'pack size'}}{{#if value '!==' '1'}}readonly{{/if}}{{/if}}{{/each}} 
+                                                             
+                                                            >
                                                         <button class="button button--icon" data-action="inc">
                                                             <span class="is-srOnly">{{lang 'products.quantity_increase'}}</span>
                                                             <i class="icon" aria-hidden="true">
                                                                 <svg>
-                                                                    <use href="#icon-keyboard-arrow-up"/>
+                                                                    <use xlink:href="#icon-keyboard-arrow-up"/>
                                                                 </svg>
                                                             </i>
                                                         </button>
                                                     </div>
                                                 </div>
                                             {{/if}}
-                                            {{#or customer (unless settings.hide_price_from_guests)}}
-                                                <div class="form-action form-action--addToCart _addToCartVisibility" {{#unless product.can_purchase}}style="display:none"{{/unless}}>
-                                                    <button id="form-action-addToCart" data-wait-message="{{lang 'products.adding_to_cart'}}" class="button button--primary" type="submit">
-                                                        {{#if product.pre_order}}{{lang 'products.pre_order'}}{{else}}{{lang 'products.add_to_cart'}}{{/if}}
-                                                    </button>
-                                                </div>
-                                            {{/or}}
+                                            <div class="form-action form-action--addToCart _addToCartVisibility" {{#unless product.can_purchase}}style="display:none"{{/unless}}>
+                                                <button id="form-action-addToCart" data-wait-message="{{lang 'products.adding_to_cart'}}" class="button button--primary" type="submit">
+                                                    {{#if product.pre_order}}{{lang 'products.pre_order'}}{{else}}{{lang 'products.add_to_cart'}}{{/if}}
+                                                </button>
+                                            </div>
                                         </div>
+                                        <!-- <div class="alertBox--error alertBox productAttributes-message" style="display:none">
+                                            <div class="alertBox-column alertBox-icon">
+                                                <icon glyph="ic-success" class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg></icon>
+                                            </div>
+                                            <p class="alertBox-column alertBox-message"></p>
+                                        </div> -->
                                         {{#or customer (unless settings.hide_price_from_guests)}}
-                                            <div class="productView-addToCartExtras _addToCartVisibility" {{#unless product.can_purchase}}style="display:none"{{/unless}}>
-                                                <div class="add-to-cart-wallet-buttons" data-add-to-cart-wallet-buttons>
-                                                    {{> components/common/wallet-buttons}}
-                                                </div>
-                                            </div>
-                                            <div class="formView-action _addToCartVisibility" {{#unless product.can_purchase}}style="display:none"{{/unless}}>
-                                                {{#if settings.show_wishlist}}
-                                                    <a href="#" aria-controls="wishlist-dropdown--{{product.id}}" aria-expanded="false" class="button dropdown-menu-button" data-dropdown="wishlist-dropdown--{{product.id}}" title="{{lang 'account.wishlists.add_item'}}">
-                                                        <svg class="icon is-srOnly"><use href="#icon-heart" /></svg>
-                                                        <span>{{lang 'account.wishlists.add_item'}}</span>
-                                                    </a>
-                                                {{/if}}
-                                                {{#if theme_settings.productpage_show_compare}}
-                                                    <button type="button" tabindex="0" class="button card-figcaption-button _compare2"
-                                                    data-compare-id="{{product.id}}"
-                                                    data-compare-image="{{getImage product.main_image 'productthumb_size' (cdn theme_settings.default_image_product)}}"
-                                                    data-compare-title="{{product.title}}"
-                                                    data-compare-url="{{product.url}}"
-                                                ><svg class="icon is-srOnly"><use href="#icon-compare"></use></svg>{{lang 'products.compare'}}</button>
-                                                {{/if}}
-                                            </div>
+                                        <div class="formView-action _addToCartVisibility" {{#unless product.can_purchase}}style="display:none"{{/unless}}>
+                                            {{#if settings.show_wishlist}}
+                                                <a href="#" aria-controls="wishlist-dropdown--{{product.id}}" aria-expanded="false" class="button dropdown-menu-button" data-dropdown="wishlist-dropdown--{{product.id}}" title="{{lang 'account.wishlists.add_item'}}">
+                                                     <svg class="icon is-srOnly"><use xlink:href="#icon-heart" /></svg>
+                                                    <span>{{lang 'account.wishlists.add_item'}}</span>
+                                                </a>
+                                            {{/if}}
+                                            {{#if theme_settings.productpage_show_compare}}
+                                                <button type="button" tabindex="0" class="button card-figcaption-button _compare2"
+                                                data-compare-id="{{product.id}}"
+                                                data-compare-image="{{getImage product.main_image 'productthumb_size' (cdn theme_settings.default_image_product)}}"
+                                                data-compare-title="{{product.title}}"
+                                                data-compare-url="{{product.url}}"
+                                            ><svg class="icon is-srOnly"><use xlink:href="#icon-compare"></use></svg>{{lang 'products.compare'}}</button>
+                                            {{/if}}
+                                        </div>
                                             {{{snippet 'product_addtocart'}}}
                                         {{/or}}
                                         {{{region name="product_below_addtocart--global"}}}
                                         {{{region name="product_below_addtocart"}}}
+                                        <div class="tags_field" id="tags_field">
+                                        
+                                        </div>
                                         <div class="_wrapper-productShare">
                                             {{> components/common/product-share}}
                                             <div class="socialLinks socialLinks--alt">
@@ -762,7 +798,7 @@
                                                             >
                                                                 <span class="aria-description--hidden">{{{capitalize service}}}</span>
                                                                 <svg>
-                                                                    <use href="#icon-facebook"/>
+                                                                    <use xlink:href="#icon-facebook"/>
                                                                 </svg>
                                                             </a>
                                                             {{else if service '===' 'email'}}
@@ -775,7 +811,7 @@
                                                             >
                                                                 <span class="aria-description--hidden">{{{capitalize service}}}</span>
                                                                 <svg>
-                                                                    <use href="#icon-envelope"/>
+                                                                    <use xlink:href="#icon-envelope"/>
                                                                 </svg>
                                                             </a>
                                                             {{else if service '===' 'print'}}
@@ -786,20 +822,20 @@
                                                             >
                                                                 <span class="aria-description--hidden">{{{capitalize service}}}</span>
                                                                 <svg>
-                                                                    <use href="#icon-print"/>
+                                                                    <use xlink:href="#icon-print"/>
                                                                 </svg>
                                                             </a>
                                                             {{else if service '===' 'twitter'}}
-                                                            <a class="socialLinks__link icon icon--x"
-                                                            href="https://x.com/intent/tweet/?text={{getVar 'encodedTitle'}}&amp;url={{getVar 'encodedUrl'}}"
+                                                            <a class="socialLinks__link icon icon--{{service}}"
+                                                            href="https://twitter.com/intent/tweet/?text={{getVar 'encodedTitle'}}&amp;url={{getVar 'encodedUrl'}}"
                                                             target="_blank"
                                                             rel="noopener"
-                                                            title="X"
+                                                            title="{{{capitalize service}}}"
                                                             {{{annotation}}}
                                                             >
-                                                                <span class="aria-description--hidden">X</span>
+                                                                <span class="aria-description--hidden">{{{capitalize service}}}</span>
                                                                 <svg>
-                                                                    <use href="#icon-x"/>
+                                                                    <use xlink:href="#icon-twitter"/>
                                                                 </svg>
                                                             </a>
                                                             {{else if service '===' 'linkedin'}}
@@ -812,7 +848,7 @@
                                                             >
                                                                 <span class="aria-description--hidden">{{{capitalize service}}}</span>
                                                                 <svg>
-                                                                    <use href="#icon-linkedin"/>
+                                                                    <use xlink:href="#icon-linkedin"/>
                                                                 </svg>
                                                             </a>
                                                             {{else if service '===' 'pinterest'}}
@@ -825,7 +861,7 @@
                                                             >
                                                                 <span class="aria-description--hidden">{{{capitalize service}}}</span>
                                                                 <svg>
-                                                                    <use href="#icon-pinterest"/>
+                                                                    <use xlink:href="#icon-pinterest"/>
                                                                 </svg>
                                                             </a>
                                                             {{/if}}
@@ -839,6 +875,11 @@
                                     {{#if theme_settings.productpage_sticky_addtocart}}
                                         <div class="productView-qtyAddWrapper _addToCartVisibility{{#if theme_settings.productpage_sticky_addtocart}} _sticky{{/if}}" {{#unless product.can_purchase}}style="display:none"{{/unless}}>
                                             {{#if product.show_quantity_input}}
+                                                {{#each product.custom_fields}}
+                                                {{#if (toLowerCase name) '===' 'pack size'}}
+                                                 <input style="display: none;" class="qty_packSize" type="hidden" name="qty_packSize" value="{{value}}" data-pack-value>
+                                                {{/if}}
+                                                {{/each}}
                                                 <div class="form-field form-field--increments">
                                                     <label class="form-label form-label--alternate">{{lang 'products.qty'}}</label>
                                                     <div class="form-increment" data-quantity-change>
@@ -846,7 +887,7 @@
                                                             <span class="is-srOnly">{{lang 'products.quantity_decrease'}}</span>
                                                             <i class="icon" aria-hidden="true">
                                                                 <svg>
-                                                                    <use href="#icon-keyboard-arrow-down"/>
+                                                                    <use xlink:href="#icon-keyboard-arrow-down"/>
                                                                 </svg>
                                                             </i>
                                                         </button>
@@ -859,12 +900,12 @@
                                                             min="1"
                                                             pattern="[0-9]*"
                                                             aria-label="{{lang 'products.qty'}}"
-                                                            aria-live="polite">
+                                                            aria-live="polite" data-product-qty {{#each product.custom_fields}}{{#if (toLowerCase name) '===' 'pack size'}}{{#if value '!==' '1'}}readonly{{/if}}{{/if}}{{/each}}>
                                                         <button class="button button--icon" data-action="inc">
                                                             <span class="is-srOnly">{{lang 'products.quantity_increase'}}</span>
                                                             <i class="icon" aria-hidden="true">
                                                                 <svg>
-                                                                    <use href="#icon-keyboard-arrow-up"/>
+                                                                    <use xlink:href="#icon-keyboard-arrow-up"/>
                                                                 </svg>
                                                             </i>
                                                         </button>
@@ -953,11 +994,15 @@
                         <a class="tab-title productView-reviewTabLink" href="#tab-reviews-{{product.id}}" aria-selected="false" role="tab" id="productView-tab-reviews-{{product.id}}">{{lang 'products.reviews.title' total=product.num_reviews}}</a>
                     </li>
                     {{/if}}
+                     <!-- Resources and Downloads tab -->
+                    <li class="tab tab--resources" role="presentation" style="display: none;">
+                        <a class="tab-title productView-resourcesTabLink" href="#tab-resources-{{product.id}}" aria-selected="false" role="tab" id="productView-tab-resources">Resources & Downloads</a>
+                    </li>
                 </div>
             </ul>
             <div class="tab-content is-active" id="tab-description-{{product.id}}" aria-hidden="false" role="tabpanel" aria-labelledby="productView-tab-description-{{product.id}}">
                 {{#unless in_quickview}}<div class="container">{{/unless}}
-                <a class="productView-description-tabHeading is-open" data-tab-mobile href="#tab-description-{{product.id}}">{{lang 'products.description'}}<svg class="icon"><use href="#icon-product-tab-arrow"></svg></a>
+                <a class="productView-description-tabHeading is-open" data-tab-mobile href="#tab-description-{{product.id}}">{{lang 'products.description'}}<svg class="icon"><use xlink:href="#icon-product-tab-arrow"></svg></a>
                 <div class="productView-description-tabContent is-open" {{#if settings.data_tag_enabled}} data-event-type="product" {{/if}}>
                     {{{product.description}}}
                     {{{snippet 'product_description'}}}
@@ -970,7 +1015,7 @@
                 {{#if product.videos.list.length}}
                     <div class="tab-content" id="tab-videos-{{product.id}}" aria-hidden="true" role="tabpanel" aria-labelledby="productView-tab-videos-{{product.id}}">
                         {{#unless in_quickview}}<div class="container">{{/unless}}
-                        <a class="productView-description-tabHeading" data-tab-mobile href="#tab-videos-{{product.id}}">{{lang 'products.videos.header'}}<svg class="icon"><use href="#icon-product-tab-arrow"></svg></a>
+                        <a class="productView-description-tabHeading" data-tab-mobile href="#tab-videos-{{product.id}}">{{lang 'products.videos.header'}}<svg class="icon"><use xlink:href="#icon-product-tab-arrow"></svg></a>
                         <div class="productView-description-tabContent">
                             <section class="videoGallery videoGallery--inTab" data-video-gallery>
                                 <div class="videoGallery-main">
@@ -1016,7 +1061,7 @@
                 {{#any (unless theme_settings.productpage_custom_fields_hide_special) (if product.custom_fields.length '>' specialCustomFields )}}
                     <div class="tab-content" id="tab-addition-{{product.id}}" aria-hidden="true" role="tabpanel" aria-labelledby="productView-tab-addition-{{product.id}}">
                         {{#unless in_quickview}}<div class="container">{{/unless}}
-                        <a class="productView-description-tabHeading" data-tab-mobile href="#tab-addition-{{product.id}}">{{theme_settings.productpage_custom_fields_tab_title}}<svg class="icon"><use href="#icon-product-tab-arrow"></svg></a>
+                        <a class="productView-description-tabHeading" data-tab-mobile href="#tab-addition-{{product.id}}">{{theme_settings.productpage_custom_fields_tab_title}}<svg class="icon"><use xlink:href="#icon-product-tab-arrow"></svg></a>
                         <div class="productView-description-tabContent productView-addition-tabContent">
                             <table class="productView-addition-table table">
                                 <tbody class="table-tbody">
@@ -1048,7 +1093,7 @@
             {{#if product.warranty}}
                 <div class="tab-content" id="tab-warranty-{{product.id}}" aria-hidden="true" role="tabpanel" aria-labelledby="productView-tab-warranty-{{product.id}}">
                     {{#unless in_quickview}}<div class="container">{{/unless}}
-                    <a class="productView-description-tabHeading" data-tab-mobile href="#tab-warranty-{{product.id}}">{{lang 'products.warranty'}}<svg class="icon"><use href="#icon-product-tab-arrow"></svg></a>
+                    <a class="productView-description-tabHeading" data-tab-mobile href="#tab-warranty-{{product.id}}">{{lang 'products.warranty'}}<svg class="icon"><use xlink:href="#icon-product-tab-arrow"></svg></a>
                     <div class="productView-description-tabContent">
                         {{{product.warranty}}}
                     </div>
@@ -1059,7 +1104,7 @@
             {{#or in_development theme_settings.productpage_delivery_tab}}
                 <div class="tab-content" id="tab-return-{{product.id}}" aria-hidden="true" role="tabpanel" aria-labelledby="productView-tab-return-{{product.id}}">
                     {{#unless in_quickview}}<div class="container">{{/unless}}
-                    <a class="productView-description-tabHeading" data-tab-mobile href="#tab-return-{{product.id}}">{{theme_settings.productpage_delivery_tab_title}}<svg class="icon"><use href="#icon-product-tab-arrow"></svg></a>
+                    <a class="productView-description-tabHeading" data-tab-mobile href="#tab-return-{{product.id}}">{{theme_settings.productpage_delivery_tab_title}}<svg class="icon"><use xlink:href="#icon-product-tab-arrow"></svg></a>
                     <div class="productView-description-tabContent">
                         {{{region name="product_delivery_tab_content--global"}}}
                         {{{region name="product_delivery_tab_content"}}}
@@ -1099,13 +1144,203 @@
             {{#if settings.show_product_reviews}}
                 <div class="tab-content" id="tab-reviews-{{product.id}}" aria-hidden="true" role="tabpanel" aria-labelledby="productView-tab-reviews-{{product.id}}">
                     {{#unless in_quickview}}<div class="container">{{/unless}}
-                    <a class="productView-description-tabHeading" data-tab-mobile href="#tab-reviews-{{product.id}}">{{lang 'products.reviews.title' total=product.num_reviews}}<svg class="icon"><use href="#icon-product-tab-arrow"></svg></a>
+                    <a class="productView-description-tabHeading" data-tab-mobile href="#tab-reviews-{{product.id}}">{{lang 'products.reviews.title' total=product.num_reviews}}<svg class="icon"><use xlink:href="#icon-product-tab-arrow"></svg></a>
                     <div class="productView-description-tabContent">
                         {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
                     </div>
                     {{#unless in_quickview}}</div><!-- .container -->{{/unless}}
                 </div>
             {{/if}}
+            <!-- Resources and Downloads tab content -->
+            <div class="tab-content" id="tab-resources-{{product.id}}" style="display: none;" aria-hidden="true" role="tabpanel" aria-labelledby="productView-tab-resources-{{product.id}}">
+                <div class="container">
+                    <a class="productView-description-tabHeading" data-tab-mobile href="#tab-resources-{{product.id}}">Resources and Downloads<svg class="icon"><use xlink:href="#icon-product-tab-arrow"></svg></a>
+                    <div class="productView-description-tabContent">
+                     <div class="product-resources-content block_ResDown">
+                        <div class="resourses_grid">
+                            <!-- Resources content will be dynamically added -->
+                        </div>
+                     </div>
+                  </div>
+                </div>
+            </div>
+            
         </article>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="">
+document.addEventListener('DOMContentLoaded', function() {
+    // if ($('.form-select').length) {
+    //     $('#instant_quote').hide();
+    // }
+    $(document).on('click', '#instant_quote', function(event) {
+        event.preventDefault();
+        $.post('https://pim.sdiebiz.net/relight/PriceListsManager/get_login_price.php', {'sku': $('span.productView-info-value--sku').html()}, function(res) {
+            if (res.data && res.data.length > 0) {
+                const price = res.data[0].sale_price || res.data[0].price
+                $('.price--main').html("$" + price.toFixed(2));
+                const rrp = parseFloat($('.price--rrp').html().replace("$", ""));
+                if (rrp) {
+                    const saving = Math.round((rrp - price)*100)/100;
+                    $('.price--saving').html("$" + saving + " (" + Math.round((saving/rrp)*100) + "%)");
+                }
+                
+                $('#get_login_price').show();
+                $('#instant_quote').hide();
+            }
+            else {
+                $('#get_best_price').show();
+                $('#instant_quote').hide();
+            }
+        }, 'json');
+    });
+    
+    $(document).on('change', '.form-select', function() {
+        $('#choose_option').hide();
+        $('#get_login_price').hide();
+        $('#get_best_price').hide();
+        $('#instant_quote').show();
+    });
+    var tabs = document.querySelectorAll('.tabs .tab');
+    var tabContents = document.querySelectorAll('.tab-content');
+
+    // Function to show Resources and Downloads tab and content
+    function showResourcesAndDownloadsTab() {
+        var resourcesTab = document.querySelector('.tab--resources');
+        var resourcesTabContent = document.getElementById('tab-resources-{{product.id}}');
+        var resourcesContentHTML = document.querySelector('.resources_and_downloads').innerHTML.trim();
+        
+        // Only show Resources and Downloads tab if content exists
+        if (resourcesContentHTML) {
+            resourcesTab.style.display = 'block';
+            resourcesTabContent.style.display = 'block';
+            var productResourcesContent = document.querySelector('.resourses_grid');
+            productResourcesContent.innerHTML = resourcesContentHTML;
+        } else {
+            resourcesTab.style.display = 'none'; // Hide tab if no content
+            resourcesTabContent.style.display = 'none';
+        }
+    }
+
+    // Initialize tab states as needed
+    var showResourcesTab = false; // Initially hide Resources and Downloads tab
+    showResourcesAndDownloadsTab(); // Call to set initial state
+
+    // Event listener for tab clicks
+    tabs.forEach(function(tab) {
+        tab.addEventListener('click', function(event) {
+            event.preventDefault();
+            var tabId = this.querySelector('a').getAttribute('href').replace('#', '');
+
+            // Hide all tab contents
+            tabContents.forEach(function(content) {
+                content.style.display = 'none';
+            });
+
+            // Show selected tab content
+            document.getElementById(tabId).style.display = 'block';
+
+            // Handle special case for Resources and Downloads tab
+            if (tabId === 'tab-resources-{{product.id}}') {
+                showResourcesAndDownloadsTab();
+            }
+        });
+    });
+       if (window.innerWidth <= 768) {
+                tabs.forEach(function(tab) {
+                tab.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    var tabId = this.querySelector('a').getAttribute('href').replace('#', '');
+
+                    // Hide all tab contents
+                    tabContents.forEach(function(content) {
+                        content.style.display = 'block';
+                    });
+
+                    // Show selected tab content
+                    document.getElementById(tabId).style.display = 'block';
+
+                    // Handle special case for Resources and Downloads tab
+                    if (tabId === 'tab-resources-{{product.id}}') {
+                        showResourcesAndDownloadsTab();
+                    }
+                });
+            });
+       }
+       
+    // Trigger click on first tab to initialize
+    tabs[0].click(); // Simulate click on the first tab to initialize tab content visibility
+});
+
+
+
+</script>
+<script type="text/javascript">
+   var jsondata = {{{json product}}};
+    
+        var customfield = jsondata.custom_fields;
+
+        var productId = document.getElementById('tags_field');
+
+        customfield.forEach(keyword => {
+            if (keyword.name === '__search_keywords') {
+                
+                var keywordsArray = keyword.value.split(',');
+              
+                let tags = '';
+                keywordsArray.forEach(value => {
+                    var trimmedValue = value.trim();
+                    var encodedValue = encodeURIComponent(trimmedValue).replace(/%20/g, '+');
+                    tags += `<span class="tags_display"><a href="/search.php?search_query=${encodedValue}&section=product"><i class="fa fa-tag"></i>${trimmedValue} </a></span>`;
+                });
+
+                productId.innerHTML = tags;
+            }
+        });
+</script>
+<style>
+    body .productView-description-tabContent .resources_and_downloads{
+    display: none;
+    } 
+    .productView-info-logout.without_login {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0px 15px 0px;
+    }
+    span.log_in_without {
+    color: #ff7700;
+    }
+    span.log_in a {
+    text-decoration: none;
+    font-weight: 700;
+    }
+    span.log_in a:hover {
+    color: #888888;
+    }
+
+    .tags_display {
+    display: inline-block;
+    padding: 8px;
+    margin: 2px 8px 2px 2px;
+    background-color: #e0e0e0;
+    border-radius: 12px;
+    color: #888888 !important;
+    font-size: 14px;
+    border: 1px solid #e0e0e0   ;
+    }
+    .tags_display a {
+    color: #888888 !important;
+    text-decoration: none;
+    }
+    .tags_display:hover:hover a {
+    color: #f70 !important;
+    }
+    .tags_display:hover {
+    border-color: #f70 !important;
+    background-color: transparent;
+    }
+    .tags_display a i.fa.fa-tag {
+     margin-right: 5px;
+    }
+</style>
+

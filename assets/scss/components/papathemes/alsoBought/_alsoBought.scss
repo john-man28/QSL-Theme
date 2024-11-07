@@ -95,13 +95,9 @@
 .productView-alsoBought-item-title {
     display: block;
     margin-right: spacing("half");
-    // font-weight: fontWeight("semibold");
-    font-size: fontSize("smaller");
+    font-weight: fontWeight("semibold");
+    font-size: fontSize("base");
     color: $color-textLink;
-
-    @include breakpoint("medium") {
-        font-size: fontSize("base");
-    }
 
     a {
         text-decoration: none;

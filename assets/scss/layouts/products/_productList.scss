@@ -113,7 +113,7 @@
 }
 
 .listItem-brand {
-    color: $color-textSecondary; // papathemes
+    color: color("greys", "light");
     font-size: fontSize("base");
     margin: 0 0 spacing("eighth");
 

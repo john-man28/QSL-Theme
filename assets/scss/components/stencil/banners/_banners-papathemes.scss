@@ -24,15 +24,6 @@
         padding: spacing("half") + spacing("eighth") 0;
         margin: 0 spacing("eighth");
     }
-
-    a {
-        color: inherit;
-        text-underline-offset: 3px;
-
-        &:hover {
-            opacity: 0.8;
-        }
-    }
 }
 
 .banners--bottom {

@@ -1,6 +1,6 @@
 <article>
     <button id="optionClose" aria-label="{{lang 'common.close'}}" role="button">
-        <svg class="icon"><use href="#icon-close" /></svg>
+        <svg class="icon"><use xlink:href="#icon-close" /></svg>
     </button>
     <div class="papathemes-productView-optionsContent">
         <div class="alertBox alertBox--error u-hiddenVisually" data-error-box>
@@ -77,7 +77,7 @@
     
                 </div>
     
-                {{#if theme_settings.card_show_qty}}
+                {{#if theme_settings.show_product_quantity_box}}
                     <div class="form-field form-field--increments">
                         <label class="form-label form-label--alternate is-srOnly"
                                 for="qty[{{product.id}}]">{{lang 'products.quantity'}}</label>
@@ -87,7 +87,7 @@
                                 <span class="is-srOnly">{{lang 'products.quantity_decrease' name=product.title}}</span>
                                 <i class="icon" aria-hidden="true">
                                     <svg>
-                                        <use href="#icon-minus"/>
+                                        <use xlink:href="#icon-minus"/>
                                     </svg>
                                 </i>
                             </button>
@@ -106,7 +106,7 @@
                                 <span class="is-srOnly">{{lang 'products.quantity_increase' name=product.title}}</span>
                                 <i class="icon" aria-hidden="true">
                                     <svg>
-                                        <use href="#icon-add"/>
+                                        <use xlink:href="#icon-add"/>
                                     </svg>
                                 </i>
                             </button>

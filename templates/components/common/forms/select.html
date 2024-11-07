@@ -3,7 +3,7 @@
     <label class="form-label" for="{{id}}_select">{{label}}
         {{#if required}}<small class="_required" title="{{lang 'common.required'}}">{{lang 'common.required_symbol'}}</small>{{/if}}
     </label>
-    <select class="{{class}} form-select" id="{{id}}_select" data-label="{{label}}" aria-required="{{required}}" aria-labelledby="{{id}}" aria-live="polite" name="{{name}}"
+    <select class="{{class}} form-select" id="{{id}}_select" data-label="{{label}}" aria-required="{{required}}" name="{{name}}"
         {{#if private_id}} data-field-type="{{private_id}}" {{/if}}>
         {{#if options}}
         <option value="">{{chooseprefix}}</option>

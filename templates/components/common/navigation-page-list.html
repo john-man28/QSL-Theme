@@ -5,7 +5,7 @@
     data-collapsible-disabled-breakpoint="medium"
     data-collapsible-disabled-state="open"
     data-collapsible-enabled-state="closed">
-    {{name}} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use href="#icon-add" /></svg></i>
+    {{name}} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-add" /></svg></i>
 </a>
 <div class="navPage-subMenu navPage-subMenu--standard" id="navPages-page-{{@index}}" aria-hidden="true" tabindex="-1">
     <ul class="navPage-subMenu-list">
@@ -17,8 +17,8 @@
                 {{#if children}}
                     <a class="navPages-action-toggle" href="#"
                         data-collapsible="navPages-page-{{../../index}}-{{@index}}">
-                        <span class="_more">{{lang 'common.nav_more'}} <svg class="icon"><use href="#icon-add"></use></svg></span>
-                        <span class="_less">{{lang 'common.nav_less'}} <svg class="icon"><use href="#icon-minus"></use></svg></span>
+                        <span class="_more">{{lang 'common.nav_more'}} <svg class="icon"><use xlink:href="#icon-add"></use></svg></span>
+                        <span class="_less">{{lang 'common.nav_less'}} <svg class="icon"><use xlink:href="#icon-minus"></use></svg></span>
                     </a>
                     <a class="navPage-subMenu-action has-subMenu" href="{{url}}" data-instantload>{{name}}</a>
                     <ul class="navPage-childList" id="navPages-page-{{../../index}}-{{@index}}">

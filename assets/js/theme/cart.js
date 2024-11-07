@@ -56,7 +56,19 @@ export default class Cart extends PageManager {
         const minQty = parseInt($el.data('quantityMin'), 10);
         const minError = $el.data('quantityMinError');
         const maxError = $el.data('quantityMaxError');
-        const newQty = $target.data('action') === 'inc' ? oldQty + 1 : oldQty - 1;
+         // Start Ticket 1002
+        let newQty_updated;
+        let getPackValue = $target.parent('.form-increment').siblings('[data-pack-value]').val();
+        if(getPackValue && getPackValue !== undefined){
+            getPackValue = parseInt(getPackValue);
+            newQty_updated = $target.data('action') === 'inc' ? oldQty + getPackValue : oldQty - getPackValue;
+        }else{
+            newQty_updated = $target.data('action') === 'inc' ? oldQty + 1 : oldQty - 1;
+        }
+        const newQty = newQty_updated;
+        //console.log('newQty '+newQty); 
+        // End Ticket 1002
+
         // Does not quality for min/max quantity
         if (newQty < minQty) {
             return showAlertModal(minError);

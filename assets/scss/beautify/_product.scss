@@ -501,6 +501,7 @@
 
         @include beautify__fixFontBaselineShift;
         @include breakpoint("medium") {
+            max-width: 230px;
             @if (stencilString("card-textAlign") == "left") {
                 margin: 0;
             }
@@ -640,6 +641,7 @@
     flex-wrap: wrap;
 
     .price-section {
+        order: 2;
         margin: 0 spacing("third") 0 0 !important;
 
         &:last-child {
@@ -656,13 +658,11 @@
     }
 
     .non-sale-price--withTax {
+        order: 1;
+
         .price {
             font-weight: fontWeight("normal");
         }
-    }
-
-    ._br {
-        width: 100%;
     }
 }
 
@@ -915,10 +915,6 @@
 
         .card-text--summary {
             order: 9;
-        }
-
-        .card-bulkOrder-options {
-            order: 10;
         }
     }
 
@@ -1409,13 +1405,6 @@
     .card-footer {
         width: 30%;
         text-align: inherit;
-
-        @include breakpoint("small") {
-            .card-buttons ._qtyAdd .button {
-                max-width: 250px;
-            }
-        }
-
         @include breakpoint("medium") {
             position: static;
             visibility: visible;
@@ -1845,13 +1834,16 @@
     }
 }
 
+.productView-titleWrapper {
+    clear: both;
+    display: flex;
+    justify-content: space-between;
+}
 
 .productView-title {
     clear: both;
     line-height: 1.35;
     font-size: fontSize("larger");
-    font-family: $body-font-family;
-    font-weight: fontWeight("semibold");
 
     @media (max-width: screenSize("medium") - 1px) {
         margin-bottom: spacing("third");
@@ -1869,7 +1861,7 @@
 
     .productView-reviewBrand-item {
         margin-left: spacing("half");
-        color: $color-textSecondary;
+        color: $color-textBase;
         display: inline-block;
         padding-right: spacing("base")*1.25;
         vertical-align: middle;
@@ -1926,7 +1918,6 @@
     width: get-width(stencilString("pdp_brand_size"));
     height: get-height(stencilString("pdp_brand_size"));
     object-fit: contain;
-    object-position: center left;
 }
 
 .productView-rating {
@@ -1957,7 +1948,7 @@
     font-size: fontSize("base");
 
     a {
-        color: $color-textSecondary;
+        color: inherit;
         display: inline-block;
     }
 
@@ -1967,7 +1958,7 @@
         }
 
         a {
-            color: $color-textSecondary;
+            color: $color-textBase;
             text-decoration: underline;
 
             &:hover,
@@ -2203,16 +2194,6 @@
             font-weight: fontWeight("normal");
             color: inherit;
         }
-
-        .price.price--saving {
-            font-size: 18px;
-            line-height: 12px;
-            vertical-align: middle;
-        }
-    }
-
-    &:has(.productView-saleLabel) .price-section--saving {
-        margin-right: spacing("half");
     }
 
     .price--non-sale,
@@ -2240,8 +2221,28 @@
             margin-top: -(spacing("half"));
         }
     }
-}
 
+    .price-section--withoutTax.rrp-price--withoutTax {
+        position: relative;
+        padding: 0 spacing("quarter");
+
+        &::after,
+        &::before {
+            position: absolute;
+            top: -1px;
+        }
+
+        &::after {
+            content: ")";
+            right: 0;
+        }
+
+        &::before {
+            content: "(";
+            left: 0;
+        }
+    }
+}
 @if(stencilString("productpage_images_position") == "right") {
     .productView-images {
         @media (min-width: screenSize("medium")) and (max-width: screenSize("large") - 1px) {
@@ -2641,19 +2642,12 @@
         gap: spacing("base");
         margin-bottom: spacing("single");
 
-        @if stencilString("layout") == "left-sidebar" {
-            flex-direction: column;
-        }
-
         a {
             font-size: fontSize("small");
             padding-top: spacing("half") * 1.5;
             padding-bottom: spacing("half") * 1.5;
             margin-bottom: 0;
             margin-left: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         > .button--buyNow {
@@ -2762,7 +2756,7 @@
                 margin-bottom: 0;
                 display: inline-flex;
                 border: 2px solid $container-border-global-color-base;
-                border-radius: $input-border-radius;
+                border-radius: $global-radius;
                 padding-left: spacing("base");
                 padding-right: spacing("quarter");
                 flex-wrap: nowrap;
@@ -2784,15 +2778,6 @@
             .form-label--alternate {
                 font-size: fontSize("smallest");
                 color: stencilColor("color-textSecondary");
-            }
-
-            .add-to-cart-wallet-buttons {
-                clear: both;
-                padding-top: spacing("half");
-            }
-
-            #form-action-addToCartLater {
-                margin-top: spacing("half");
             }
         }
     }
@@ -3323,6 +3308,10 @@ ul.dropdown-menu {
             &::before,
             &::after {
                 display: none;
+            }
+
+            .quickView & {
+                top: -2.25rem;
             }
         }
 
@@ -4374,10 +4363,6 @@ ul.dropdown-menu {
 
 .quickView {
     max-height: calc(100vh - 50px);
-
-    .productView-descriptionWrapper .productView-description {
-        margin: 0 spacing("half");
-    }
     @include breakpoint("medium") {
         padding: 0;
 
@@ -4447,7 +4432,6 @@ ul.dropdown-menu {
         border-radius: unset;
         padding-top: 0;
         padding-bottom: 0;
-        margin-top: 0;
 
         .productView-title {
             font-size: fontSize("larger");
@@ -4494,13 +4478,10 @@ ul.dropdown-menu {
             flex-wrap: wrap;
         }
 
-        .productView-product {
-            padding-bottom: spacing("single") * 1.25;
-        }
-
-        .productView-details:nth-child(2) {
+        .productView-details:first-child {
             // float: right;
             width: calc(100% - 150px);
+            min-height: 100px;
             display: flex;
             align-items: center;
         }
@@ -5151,7 +5132,7 @@ ul.dropdown-menu {
 .productView-details .form-field._addToCartVisibility {
     display: inline-flex;
     border: 2px solid $container-border-global-color-base;
-    border-radius: $input-border-radius;
+    border-radius: $global-radius;
     padding-left: spacing("base");
     padding-right: spacing("quarter");
     align-items: center;

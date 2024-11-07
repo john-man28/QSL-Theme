@@ -130,12 +130,6 @@
         @include breakpoint("medium") {
             right: -($container-padding);
         }
-
-        .icon-label {
-            @include breakpoint("medium") {
-                @include u-hidden("visually", !important);
-            }
-        }
     }
 
     .productGrid {

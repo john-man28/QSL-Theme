@@ -7,12 +7,12 @@ const compareListTmpl = `
         <div class="supermarket-compareList-panel">
             <button type="button" class="button button--close" data-compare-product-toggle btn-close>
                 <span class="is-srOnly">Close</span>
-                <span class="supermarket-compareList-icon"><svg><use href="#icon-double-arrow-right"></use></svg></span>
+                <span class="supermarket-compareList-icon"><svg><use xlink:href="#icon-double-arrow-right"></use></svg></span>
                 <span class="supermarket-compareList-text">{{compare}}</span>
             </button>
             <button type="button" class="button button--open" data-compare-product-toggle btn-open>
                 <span class="is-srOnly">Open</span>
-                <span class="supermarket-compareList-icon"><svg><use href="#icon-double-arrow-left"></use></svg></span>
+                <span class="supermarket-compareList-icon"><svg><use xlink:href="#icon-double-arrow-left"></use></svg></span>
                 <span class="supermarket-compareList-text">{{compare}}</span>
             </button>
             <div class="supermarket-compareList-panel-body">
@@ -33,7 +33,9 @@ const compareListItemTmpl = `
         </a>
         <button type="button" class="supermarket-compareList-remove" data-compare-product-remove="{{id}}">
             <span class="is-srOnly">{{remove}}{{alt}}</span>
-            <span><svg class="icon"><use href="#icon-close"></use></svg></span>
+            <span>
+                <svg class="icon"><use xlink:href="#icon-close"></use></svg>
+            </span>
         </button>
     </div>
 `;

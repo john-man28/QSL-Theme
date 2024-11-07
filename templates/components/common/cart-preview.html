@@ -1,7 +1,7 @@
 <div class="previewCart" data-cart-quantity="{{cart.quantity}}" data-cart-price="{{cart.grand_total.value}}" data-cart-formatted="{{cart.grand_total.formatted}}">
     <div class="loadingOverlay"></div>
     <div class="_header">
-        <a href="#" class="_close is-open" data-toggle="cart-preview-dropdown"><svg class="icon"><use href="#icon-close"></use></svg><span class="sr-only">{{lang 'common.close'}}</span></a>
+        <a href="#" class="_close is-open" data-toggle="cart-preview-dropdown"><svg class="icon"><use xlink:href="#icon-close"></use></svg><span class="sr-only">{{lang 'common.close'}}</span></a>
         {{> components/papathemes/cart-popup/page-title}}
         <div data-papathemes-cart-popup-status>
             {{> components/papathemes/cart-popup/status-messages}}
@@ -94,7 +94,7 @@
 
                 {{#if cart.show_primary_checkout_button}}
                     <div class="previewCartAction-checkout">
-                        <a href="{{urls.checkout.single_address}}" class="button button--primary" data-primary-checkout-now-action>
+                        <a href="{{urls.checkout.single_address}}" class="button button--primary">
                             {{lang 'cart.preview.checkout_now'}}
                         </a>
                     </div>

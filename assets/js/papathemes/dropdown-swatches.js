@@ -11,13 +11,11 @@ export default function (product, {
     hideOriginalSwatches = false,
     hideOriginalSwatchesFunc = $formField => $formField.children('.form-option-swatch, .form-radio').css({
         position: 'absolute',
-        // visibility: 'hidden',
-        opacity: 0,
+        visibility: 'hidden',
         height: 0,
         width: 0,
         overflow: 'hidden',
         margin: 0,
-        padding: 0,
     }),
 } = {}) {
     product.$scope.find(swatchFieldSelector).not('._dropdownSwatchesLoaded')

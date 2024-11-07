@@ -92,22 +92,11 @@ export default function () {
         }
     };
 
-    // papathemes-supermarket: show/hide loading indicator functions
-    const $form = $('[data-search-quick]').closest('form');
-    const showLoading = () => {
-        $form.addClass('_loading');
-    };
-    const hideLoading = () => {
-        $form.removeClass('_loading');
-    };
-
     // stagger searching for 1200ms after last input
     const debounceWaitTime = 1200;
     const doSearch = (searchQuery) => {
-        showLoading(); // papathemes-supermarket
         $quickSearchBox.addClass('loading'); // mooncat
         utils.api.search.search(searchQuery, { template: 'search/quick-results' }, (err, response) => {
-            hideLoading(); // papathemes-supermarket
             if (err) {
                 return false;
             }
@@ -128,7 +117,7 @@ export default function () {
         const searchQuery = $(currentTarget).val();
 
         // server will only perform search with at least 3 characters
-        if (searchQuery.length < 2) {
+        if (searchQuery.length < 3) {
             return;
         }
 

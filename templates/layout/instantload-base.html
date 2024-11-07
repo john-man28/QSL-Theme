@@ -80,9 +80,6 @@
         {{~inject 'validationDefaultDictionaryJSON' (langJson 'validation_default_messages')}}
         {{~inject 'ajaxAddToCartEnterQty' (lang 'bulk_order.validate.enter_qty')}}
         {{~inject 'bulkOrderEnterQty' (lang 'bulk_order.validate.enter_qty')}}
-        {{~inject 'bulkOrderChooseOptions' (lang 'bulk_order.validate.choose_options')}}
-        {{~inject 'txtMinQty' (lang 'products.quantity_min' quantity='%qty%')}}
-        {{~inject 'txtMaxQty' (lang 'products.quantity_max' quantity='%qty%')}}
         {{~inject 'compareAddonLang_compare' (lang 'common.compare')}}
         {{~inject 'compareAddonLang_quick_view' (lang 'products.quick_view')}}
         {{~inject 'compareAddonLang_remove' (lang 'compare.remove')}}
@@ -94,12 +91,6 @@
         {{~inject 'currencyCode' currency_selector.active_currency_code}}
         {{~inject 'hidePriceFromGuests' settings.hide_price_from_guests}}
         {{~inject 'isCrawlerAndSpeedTestMode' (getVar 'isCrawlerAndSpeedTestMode')}}
-        {{~inject 'hidePriceFromGuests' settings.hide_price_from_guests}}
-        {{~inject 'outOfStockDefaultMessage' (lang 'products.out_of_stock_default_message')}}
-        {{~inject 'pdp_price_label' theme_settings.pdp-price-label}}
-        {{~inject 'pdp_sale_price_label' theme_settings.pdp-sale-price-label}}
-        {{~inject 'pdp_non_sale_price_label' theme_settings.pdp-non-sale-price-label}}
-        {{~inject 'pdp_retail_price_label' theme_settings.pdp-retail-price-label}}
         {{{snippet 'htmlhead'}}}
     </div>
     <div id="instantload-body-element" class="csscolumns supermarket-layout--{{theme_settings.layout}} 
@@ -169,16 +160,7 @@
 
         <script id="instantload-script">
             // Exported in app.js
-            (function() {
-                var parentContext = window.themeInstantLoad_jsContext || {};
-                var context = JSON.parse({{jsContext}} || '{}');
-                Object.keys(context).forEach(function(key) {
-                    if (context[key] === null && parentContext[key] !== undefined) {
-                        context[key] = parentContext[key];
-                    }
-                });
-                window.stencilBootstrap("{{page_type}}", JSON.stringify(context), false).load();
-            })();
+            window.stencilBootstrap("{{page_type}}", {{jsContext}}, false).load();
         </script>
 
         {{{footer.scripts}}}

@@ -1,3 +1,6 @@
+import mediaQueryListFactory from '../theme/common/media-query-list';
+
+let mediumMediaQuery;
 let uid = 1;
 
 class YoutubeSlick {
@@ -26,18 +29,20 @@ class YoutubeSlick {
         // store player object for use later
         $(event.target.getIframe()).closest('.slick-slide').data('youtube-player', event.target);
 
-        this.$slick.addClass('slick-video-playing');
-        setTimeout(() => {
-            if ($(event.target.getIframe()).closest('.slick-slide').hasClass('slick-active')) {
-                if (this.$slick.is('[data-youtube-mute]')) {
-                    event.target.mute();
+        // On desktop: Play video if first slide is video
+        if (mediumMediaQuery.matches) {
+            setTimeout(() => {
+                if ($(event.target.getIframe()).closest('.slick-slide').hasClass('slick-active')) {
+                    if (this.$slick.is('[data-youtube-mute]')) {
+                        event.target.mute();
+                    }
+                    if (this.$slick.is('[data-youtube-autoplay]')) {
+                        this.$slick.slick('slickPause');
+                        event.target.playVideo();
+                    }
                 }
-                if (this.$slick.is('[data-youtube-autoplay]')) {
-                    this.$slick.slick('slickPause');
-                    event.target.playVideo();
-                }
-            }
-        }, 200);
+            }, 200);
+        }
     }
 
     onPlayerStateChange(event) {
@@ -81,8 +86,6 @@ class YoutubeSlick {
                     iv_load_policy: 3,
                     modestbranding: 1,
                     wmode: 'transparent',
-                    // autoplay: 1,
-                    playsinline: 1,
                 },
                 events: {
                     onReady: this.onPlayerReady,
@@ -106,14 +109,16 @@ class YoutubeSlick {
         // On desktop:
         // - Auto play video when open next slide
         // - Stop auto slide
-        const player = this.$slick.find('.slick-slide.slick-active').data('youtube-player');
-        if (player) {
-            if (this.$slick.is('[data-youtube-mute]')) {
-                player.mute();
-            }
-            if (this.$slick.is('[data-youtube-autoplay]')) {
-                this.$slick.slick('slickPause');
-                player.playVideo();
+        if (mediumMediaQuery.matches) {
+            const player = this.$slick.find('.slick-slide.slick-active').data('youtube-player');
+            if (player) {
+                if (this.$slick.is('[data-youtube-mute]')) {
+                    player.mute();
+                }
+                if (this.$slick.is('[data-youtube-autoplay]')) {
+                    this.$slick.slick('slickPause');
+                    player.playVideo();
+                }
             }
         }
     }
@@ -131,6 +136,8 @@ function initCarousel($carousel) {
 
 export default function youtubeCarouselFactory($carousel) {
     if ($carousel.find('[data-youtube]').length > 0) {
+        mediumMediaQuery = mediaQueryListFactory('medium');
+
         if (typeof window.onYouTubeIframeAPIReady === 'undefined') {
             window.onYouTubeIframeAPIReady = initCarousel.bind(window, $carousel);
 

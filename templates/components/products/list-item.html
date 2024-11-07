@@ -46,16 +46,14 @@
                 {{/if}}
             {{/each}}
         {{/if}}
-        <a href="{{url}}" {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}}>
-            {{> components/common/responsive-img
-                image=image
-                class="listItem-image"
-                fallback_size=theme_settings.productgallery_size
-                lazyload=theme_settings.lazyload_mode
-                default_image=theme_settings.default_image_product
-                otherAttributes=(getVar 'productCardImageSizeAttrs')
-            }}
-        </a>
+        {{> components/common/responsive-img
+            image=image
+            class="listItem-image"
+            fallback_size=theme_settings.productgallery_size
+            lazyload=theme_settings.lazyload_mode
+            default_image=theme_settings.default_image_product
+            otherAttributes=(getVar 'productCardImageSizeAttrs')
+        }}
     </figure>
     <div class="listItem-body">
         <div class="listItem-content">
@@ -91,7 +89,7 @@
                     {{else}}
                         {{#if out_of_stock_message }}
                         <a href="{{url}}" {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}} class="button button--small button--primary">{{out_of_stock_message}}</a>
-                        {{else if add_to_cart_url}}
+                        {{else}}
                         <a href="{{add_to_cart_url}}" {{#if settings.data_tag_enabled}}{{#unless theme_settings.ajax_add_to_cart}} data-event-type="product-click"{{/unless}}{{/if}} class="button button--small button--primary"{{#if theme_settings.ajax_add_to_cart}} data-papathemes-cart-item-add{{/if}}>{{lang "products.add_to_cart"}}</a>
                         {{/if}}
                     {{/if}}

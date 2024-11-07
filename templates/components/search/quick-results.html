@@ -21,7 +21,7 @@
                 <div class="search-suggestion search-suggestion--query">
                     <div class="alertBox alertBox--info">
                         <div class="alertBox-column alertBox-icon">
-                            <svg class="icon"><use href="#icon-ih-search"></use></svg>
+                            <svg class="icon"><use xlink:href="#icon-ih-search"></use></svg>
                         </div>
                         <div class="alertBox-column alertBox-message">
                             <p>{{lang 'forms.search.did_you_mean'}} <strong>{{forms.search.suggested_query.query}}</strong></p>
@@ -73,7 +73,7 @@
                         <li class="category-suggestion">
                             {{#each this}}
                                 <a href="{{url}}">{{name}}</a>
-                                {{#unless @last}} <svg class="icon"><use href="#icon-chevron-right"></use></svg> {{/unless}}
+                                {{#unless @last}} <svg class="icon"><use xlink:href="#icon-chevron-right"></use></svg> {{/unless}}
                             {{/each}}
                         </li>
                         {{/each}}

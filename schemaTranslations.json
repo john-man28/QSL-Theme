@@ -62,6 +62,13 @@
     "uk": "Продукція",
     "zh": "产品"
   },
+  "i18n.DisplayStyle": {
+    "default": "Display style",
+    "fr": "Style d’affichage",
+    "it": "Stile display",
+    "uk": "Стиль відображення",
+    "zh": "不显示样式"
+  },
   "i18n.Blog": {
     "default": "Blog",
     "fr": "Blog",
@@ -181,6 +188,27 @@
     "uk": "Показати \"&copy;\", рік та назву магазину",
     "zh": "显示\"&copy;\", 当前年份和店铺名称"
   },
+  "i18n.BlackWhiteText": {
+    "default": "Black (white text)",
+    "fr": "Noir (texte blanc)",
+    "it": "Nero (testo bianco)",
+    "uk": "Чорний (білий текст)",
+    "zh": "黑（白色字体）"
+  },
+  "i18n.WhiteBlackText": {
+    "default": "White (black text)",
+    "fr": "Blanc (texte noir)",
+    "it": "Bianco (testo nero)",
+    "uk": "Білий (чорний текст)",
+    "zh": "白（黑字体）"
+  },
+  "i18n.WhiteBlackTextWithBorder": {
+    "default": "White (black text with border)",
+    "fr": "Blanc (texte noir avec bordure)",
+    "it": "Bianco (testo nero con bordo)",
+    "uk": "Білий (чорний текст з облямівкою)",
+    "zh": "白（和字体带边框）"
+  },
   "i18n.Medium": {
     "default": "Medium",
     "fr": "Moyen",
@@ -243,6 +271,13 @@
     "it": "*Le dimensioni massime dei campioni di trama sono 150x150.",
     "uk": "* Для текстурних зразків максимальні розміри - 150х150.",
     "zh": "*文本切换形式，最大尺寸150x150。"
+  },
+  "i18n.ShowQuantitySelectionOnProduct": {
+    "default": "Show quantity selection on product pages",
+    "fr": "Afficher la sélection de quantité sur les pages de produits",
+    "it": "Mostra selezione quantità sulle pagine prodotto",
+    "uk": "Показати вибір кількості на сторінках товарів",
+    "zh": "在产品页面显示数量选项框"
   },
   "i18n.ShowProductWeight": {
     "default": "Show product weight",
@@ -489,7 +524,7 @@
     "zh": "按钮内容"
   },
   "i18n.SmartPaypalButton": {
-    "default": "Paypal Button"
+    "default": "Smart Paypal Button"
   },
   "i18n.PayPalCheckout": {
     "default": "PayPal Checkout",
@@ -519,8 +554,22 @@
     "uk": "PayPal",
     "zh": "PayPal"
   },
+  "i18n.ShowButtonsHorizontally": {
+    "default": "Show buttons horizontally",
+    "fr": "Afficher les boutons horizontalement",
+    "it": "Mostra bottoni in orizzontale",
+    "uk": "Показати кнопки горизонтально",
+    "zh": "水平显示按钮"
+  },
+  "i18n.ShowButtonsVertically": {
+    "default": "Show buttons vertically",
+    "fr": "Afficher les boutons verticalement",
+    "it": "Mostra bottoni in verticale",
+    "uk": "Показати кнопки вертикально",
+    "zh": "垂直显示按钮"
+  },
   "i18n.CheckoutPayPalButton": {
-    "default": "PayPal Button on checkout page"
+    "default": "Checkout PayPal Button"
   },
   "i18n.ProductPageBanner": {
     "default": "Product page banner"
@@ -617,47 +666,5 @@
   },
   "i18n.ProductCustomBadges": {
     "default": "Enable custom badget from '__badge' custom field"
-  },
-  "i18n.ShowQuickPaymentButtons": {
-    "default": "Show quick payment buttons"
-  },
-  "i18n.QuickPaymentButtons": {
-    "default": "Quick payment buttons on product page"
-  },
-  "i18n.NumberOfButtonsAlwaysVisible": {
-    "default": "Number of buttons always visible"
-  },
-  "i18n.ProviderSortingOrderLabel": {
-    "default": "Sort Order"
-  },
-  "i18n.PayPalProviderSortingLabel": {
-    "default": "PayPal"
-  },
-  "i18n.PayPalCreditProviderSortingLabel": {
-    "default": "Pay Later"
-  },
-  "i18n.PayPalVenmoProviderSortingLabel": {
-    "default": "Venmo"
-  },
-  "i18n.PayPalSepaProviderSortingLabel": {
-    "default": "SEPA"
-  },
-  "i18n.GooglepayProviderSortingLabel": {
-    "default": "Google Pay"
-  },
-  "i18n.ApplepayProviderSortingLabel": {
-    "default": "Apple Pay"
-  },
-  "i18n.AfterpayProviderSortingLabel": {
-    "default": "After Pay"
-  },
-  "i18n.AmazonProviderSortingLabel": {
-    "default": "Amazon Pay"
-  },
-  "i18n.MasterpassProviderSortingLabel": {
-    "default": "Masterpass"
-  },
-  "i18n.BoltProviderSortingLabel": {
-    "default": "Bolt"
   }
 }

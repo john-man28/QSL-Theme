@@ -545,6 +545,29 @@
       },
       {
         "type": "heading",
+        "content": "Apple Pay"
+      },
+      {
+        "type": "select",
+        "label": "Button Color",
+        "id": "applePay-button",
+        "options": [
+          {
+            "value": "black",
+            "label": "i18n.BlackWhiteText"
+          },
+          {
+            "value": "white",
+            "label": "i18n.WhiteBlackText"
+          },
+          {
+            "value": "white-border",
+            "label": "i18n.WhiteBlackTextWithBorder"
+          }
+        ]
+      },
+      {
+        "type": "heading",
         "content": "Form Labels"
       },
       {
@@ -850,7 +873,7 @@
       },
       {
         "type": "heading",
-        "content": "User Navigation"
+        "content": "User navigation"
       },
       {
         "type": "color",
@@ -1456,6 +1479,190 @@
   {
     "name": "i18n.HomePage",
     "settings": [
+      {
+        "type": "heading",
+        "content": "Carousel Informations"
+      },
+      {
+        "type": "input",
+        "label": "1 Carousel Title",
+        "force_reload": true,
+        "id": "hero-carousal-title-1"
+      },
+      {
+        "type": "input",
+        "label": "1 Carousel Description",
+        "force_reload": true,
+        "id": "hero-carousal-desc-1"
+      },
+      {
+        "type": "input",
+        "label": "1 Carousel Image",
+        "force_reload": true,
+        "id": "hero-carousal-image-1"
+      },
+      {
+        "type": "input",
+        "label": "1 Carousel button url",
+        "force_reload": true,
+        "id": "hero-carousal-url-1"
+      },
+      {
+        "type": "input",
+        "label": "1 Carousel button Text",
+        "force_reload": true,
+        "id": "hero-carousal-button-text-1"
+      },
+      {
+        "type": "select",
+        "label": "Position",
+        "id": "hero-carousal-position-1",
+        "options": [
+          {
+            "value": "left",
+            "label": "i18n.Left"
+          },
+          {
+            "value": "right",
+            "label": "i18n.Right"
+          }
+        ]
+      },
+      {
+        "type": "input",
+        "label": "2 Carousel Title",
+        "force_reload": true,
+        "id": "hero-carousal-title-2"
+      },
+      {
+        "type": "input",
+        "label": "2 Carousel Description",
+        "force_reload": true,
+        "id": "hero-carousal-desc-2"
+      },
+      {
+        "type": "input",
+        "label": "2 Carousel Image",
+        "force_reload": true,
+        "id": "hero-carousal-image-2"
+      },
+      {
+        "type": "input",
+        "label": "2 Carousel button url",
+        "force_reload": true,
+        "id": "hero-carousal-url-2"
+      },
+      {
+        "type": "input",
+        "label": "2 Carousel button Text",
+        "force_reload": true,
+        "id": "hero-carousal-button-text-2"
+      },
+      {
+        "type": "select",
+        "label": "Position",
+        "id": "hero-carousal-position-2",
+        "options": [
+          {
+            "value": "left",
+            "label": "i18n.Left"
+          },
+          {
+            "value": "right",
+            "label": "i18n.Right"
+          }
+        ]
+      },
+      {
+        "type": "input",
+        "label": "3 Carousel Title",
+        "force_reload": true,
+        "id": "hero-carousal-title-3"
+      },
+      {
+        "type": "input",
+        "label": "3 Carousel Description",
+        "force_reload": true,
+        "id": "hero-carousal-desc-3"
+      },
+      {
+        "type": "input",
+        "label": "3 Carousel Image",
+        "force_reload": true,
+        "id": "hero-carousal-image-3"
+      },
+      {
+        "type": "input",
+        "label": "3 Carousel button url",
+        "force_reload": true,
+        "id": "hero-carousal-url-3"
+      },
+      {
+        "type": "input",
+        "label": "3 Carousel Button Text",
+        "force_reload": true,
+        "id": "hero-carousal-button-text-3"
+      },
+      {
+        "type": "select",
+        "label": "Position",
+        "id": "hero-carousal-position-3",
+        "options": [
+          {
+            "value": "left",
+            "label": "i18n.Left"
+          },
+          {
+            "value": "right",
+            "label": "i18n.Right"
+          }
+        ]
+      },
+      {
+        "type": "input",
+        "label": "4 Carousel Title",
+        "force_reload": true,
+        "id": "hero-carousal-title-4"
+      },
+      {
+        "type": "input",
+        "label": "4 Carousel Description",
+        "force_reload": true,
+        "id": "hero-carousal-desc-4"
+      },
+      {
+        "type": "input",
+        "label": "4 Carousel Image",
+        "force_reload": true,
+        "id": "hero-carousal-image-4"
+      },
+      {
+        "type": "input",
+        "label": "4 Carousel button url",
+        "force_reload": true,
+        "id": "hero-carousal-url-4"
+      },
+      {
+        "type": "input",
+        "label": "4 Carousel Button Text",
+        "force_reload": true,
+        "id": "hero-carousal-button-text-4"
+      },
+      {
+        "type": "select",
+        "label": "Position",
+        "id": "hero-carousal-position-4",
+        "options": [
+          {
+            "value": "left",
+            "label": "i18n.Left"
+          },
+          {
+            "value": "right",
+            "label": "i18n.Right"
+          }
+        ]
+      },
       {
         "type": "heading",
         "content": "Sections"
@@ -2348,6 +2555,12 @@
       },
       {
         "type": "checkbox",
+        "label": "i18n.ShowQuantitySelectionOnProduct",
+        "force_reload": true,
+        "id": "show_product_quantity_box"
+      },
+      {
+        "type": "checkbox",
         "label": "i18n.AjaxAddToCart",
         "force_reload": true,
         "id": "ajax_add_to_cart"
@@ -2378,8 +2591,8 @@
       },
       {
         "type": "text",
-        "label": "Max recently viewed",
-        "id": "product_recentviewed_max",
+        "label": "Show recently viewed",
+        "id": "product_recently_viewed",
         "force_reload": true
       },
       {
@@ -2787,12 +3000,6 @@
         ]
       },
       {
-        "type": "checkbox",
-        "label": "i18n.ShowQuickPaymentButtons",
-        "force_reload": true,
-        "id": "show_quick_payment_buttons"
-      },
-      {
         "type": "heading",
         "content": "Category Page"
       },
@@ -2998,7 +3205,7 @@
       },
       {
         "type": "select",
-        "label": "Contextual search",
+        "label": "Show quick search in category",
         "id": "categorypage_search",
         "force_reload": true,
         "options": [
@@ -3313,12 +3520,6 @@
       },
       {
         "type": "checkbox",
-        "label": "Show quantity input",
-        "id": "card_show_qty",
-        "force_reload": true
-      },
-      {
-        "type": "checkbox",
         "label": "Show border",
         "id": "card_show_border",
         "force_reload": true
@@ -3487,6 +3688,25 @@
       },
       {
         "type": "heading",
+        "content": "Product cards (Quick search)"
+      },
+      {
+        "type": "color",
+        "label": "Background",
+        "id": "card--alternate-backgroundColor"
+      },
+      {
+        "type": "color",
+        "label": "Border",
+        "id": "card--alternate-borderColor"
+      },
+      {
+        "type": "color",
+        "label": "Text hover",
+        "id": "card--alternate-color--hover"
+      },
+      {
+        "type": "heading",
         "content": "i18n.ImageSizes"
       },
       {
@@ -3511,7 +3731,7 @@
       },
       {
         "type": "imageDimension",
-        "label": "Thumbnail",
+        "label": "Thumbnail image",
         "id": "productthumb_size",
         "force_reload": true,
         "options": [
@@ -4178,92 +4398,12 @@
       },
       {
         "type": "heading",
-        "content": "i18n.QuickPaymentButtons"
-      },
-      {
-        "type": "select",
-        "label": "i18n.NumberOfButtonsAlwaysVisible",
-        "force_reload": true,
-        "id": "paymentbuttons-number-of-buttons",
-        "options": [
-          {
-            "value": 1,
-            "label": "1"
-          },
-          {
-            "value": 2,
-            "label": "2"
-          }
-        ]
-      },
-      {
-        "type": "sort",
-        "label": "i18n.ProviderSortingOrderLabel",
-        "id": "paymentbuttons-provider-sorting",
-        "force_reload": true,
-        "options": [
-          {
-            "value": "paypal",
-            "label": "i18n.PayPalProviderSortingLabel",
-            "enabledBy": "paypal"
-          },
-          {
-            "value": "paypal-credit",
-            "label": "i18n.PayPalCreditProviderSortingLabel",
-            "enabledBy": "paypal-credit"
-          },
-          {
-            "value": "paypal-venmo",
-            "label": "i18n.PayPalVenmoProviderSortingLabel",
-            "enabledBy": "paypal-venmo"
-          },
-          {
-            "value": "sepa",
-            "label": "i18n.PayPalSepaProviderSortingLabel",
-            "enabledBy": "sepa"
-          },
-          {
-            "value": "googlepay",
-            "label": "i18n.GooglepayProviderSortingLabel",
-            "enabledBy": "googlepay"
-          },
-          {
-            "value": "applepay",
-            "label": "i18n.ApplepayProviderSortingLabel",
-            "enabledBy": "applepay"
-          },
-          {
-            "value": "afterpay",
-            "label": "i18n.AfterpayProviderSortingLabel",
-            "enabledBy": "afterpay"
-          },
-          {
-            "value": "amazonpay",
-            "label": "i18n.AmazonProviderSortingLabel",
-            "enabledBy": "amazonpay"
-          },
-          {
-            "value": "masterpass",
-            "label": "i18n.MasterpassProviderSortingLabel",
-            "enabledBy": "masterpass"
-          },
-          {
-            "value": "bolt",
-            "label": "i18n.BoltProviderSortingLabel",
-            "enabledBy": "bolt"
-          }
-        ]
-      },
-      {
-        "type": "heading",
-        "content": "i18n.SmartPaypalButton",
-        "enable": "payPalProvidersEnabled"
+        "content": "i18n.SmartPaypalButton"
       },
       {
         "type": "select",
         "label": "i18n.ButtonColor",
         "id": "paymentbuttons-paypal-color",
-        "enable": "payPalProvidersEnabled",
         "force_reload": true,
         "options": [
           {
@@ -4292,7 +4432,6 @@
         "type": "select",
         "label": "i18n.ButtonShape",
         "id": "paymentbuttons-paypal-shape",
-        "enable": "payPalProvidersEnabled",
         "force_reload": true,
         "options": [
           {
@@ -4309,7 +4448,6 @@
         "type": "select",
         "label": "i18n.ButtonContent",
         "id": "paymentbuttons-paypal-label",
-        "enable": "payPalProvidersEnabled",
         "force_reload": true,
         "options": [
           {
@@ -4331,15 +4469,29 @@
         ]
       },
       {
+        "type": "select",
+        "label": "i18n.DisplayStyle",
+        "id": "paymentbuttons-paypal-layout",
+        "force_reload": true,
+        "options": [
+          {
+            "value": "horizontal",
+            "label": "i18n.ShowButtonsHorizontally"
+          },
+          {
+            "value": "vertical",
+            "label": "i18n.ShowButtonsVertically"
+          }
+        ]
+      },
+      {
         "type": "heading",
-        "content": "i18n.CheckoutPayPalButton",
-        "enable": "payPalProvidersEnabled"
+        "content": "i18n.CheckoutPayPalButton"
       },
       {
         "type": "select",
         "label": "i18n.ButtonColor",
         "id": "checkout-paymentbuttons-paypal-color",
-        "enable": "payPalProvidersEnabled",
         "force_reload": true,
         "options": [
           {
@@ -4368,7 +4520,6 @@
         "type": "select",
         "label": "i18n.ButtonShape",
         "id": "checkout-paymentbuttons-paypal-shape",
-        "enable": "payPalProvidersEnabled",
         "force_reload": true,
         "options": [
           {
@@ -4385,7 +4536,6 @@
         "type": "select",
         "label": "i18n.ButtonSize",
         "id": "checkout-paymentbuttons-paypal-size",
-        "enable": "payPalProvidersEnabled",
         "force_reload": true,
         "options": [
           {
@@ -4406,7 +4556,6 @@
         "type": "select",
         "label": "i18n.ButtonContent",
         "id": "checkout-paymentbuttons-paypal-label",
-        "enable": "payPalProvidersEnabled",
         "force_reload": true,
         "options": [
           {

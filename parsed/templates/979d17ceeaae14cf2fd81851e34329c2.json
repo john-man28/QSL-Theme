@@ -1,3 +1,1 @@
-{
-  "components/carousel-content-desc": "<div class=\"heroCarousel-content _desc-mobile{{#unless show_background}} heroCarousel-content--empty{{/unless}}\">\n    <p class=\"heroCarousel-description\">{{{text}}}</p>\n</div>\n"
-}
+{"components/carousel-content-desc":"<div class=\"heroCarousel-content _desc-mobile{{#unless show_background}} heroCarousel-content--empty{{/unless}}\">\n    <p class=\"heroCarousel-description\">{{{text}}}</p>\n</div>\n"}

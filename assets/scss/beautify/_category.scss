@@ -2782,19 +2782,13 @@ aside.beautify__filters {
         }
 
         .navProducts-item {
-            font-size: fontSize("smallest");
-            white-space: nowrap;
-
-            @include breakpoint("medium") {
-                font-size: fontSize("smaller");
-
-            }
+            font-size: fontSize("smaller");
 
             a {
                 color: $color-textSecondary;
                 text-decoration: none;
-                padding: 0;
-                font-weight: fontWeight("normal");
+                padding: 0 spacing("half");
+                font-weight: fontWeight("semibold");
                 width: max-content;
 
                 &:hover {
@@ -2802,22 +2796,9 @@ aside.beautify__filters {
                     text-decoration: underline;
                 }
             }
-
-            + .navProducts-item {
-                &::before {
-                    content: "";
-                    margin: 0 spacing("half");
-                    display: inline-block;
-                    width: 4px;
-                    height: 4px;
-                    border-radius: 2px;
-                    background-color: rgba($color-textSecondary, 0.3);
-                    vertical-align: middle;
-                }
-            }
         }
 
-        .navProducts-action::before {
+        .navPages-action::before {
             content: unset;
         }
 
@@ -2987,8 +2968,7 @@ aside.beautify__filters {
                     text-decoration: unset;
                     color: $color-textBase;
                     display: block;
-                    font-size: fontSize("smaller");
-                    font-weight: fontWeight("semibold");
+                    font-weight: $font-weight-bold;
                     white-space: nowrap;
 
                     &:hover,
@@ -3008,10 +2988,6 @@ aside.beautify__filters {
 h1.categoryPage-heading {
     margin-bottom: spacing("single");
     text-align: left;
-
-    &:has(~ .kitchenary-categoryPage-subCategories:not(._hasImage)) {
-        margin-bottom: spacing("half");
-    }
 
     @media (max-width: (screenSize("medium") - 1px)) {
         text-align: center;

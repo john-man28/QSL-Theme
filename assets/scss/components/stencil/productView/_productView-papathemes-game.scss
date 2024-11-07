@@ -780,7 +780,10 @@
                 .productView-alsoBought-item-title {
                     margin-right: 0;
                     color: $color-textBase;
+                    font-weight: $fontWeight-medium;
                     text-decoration: unset;
+                    font-size: fontSize("base");
+                    line-height: 1.5;
                     margin-bottom: $spacing-half;
                     height: auto;
 
@@ -1256,8 +1259,6 @@
                         width: fit-content;
                         height: auto;
                         display: flex;
-                        align-items: center;
-                        min-height: auto;
 
                         @media (max-width: (screenSize("small") - 1px)) {
                             padding: $spacing-base remCalc(30);

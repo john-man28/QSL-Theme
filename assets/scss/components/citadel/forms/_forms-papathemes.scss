@@ -89,32 +89,3 @@
         }
     }
 }
-
-// Fix accessibility and prevent mobile screen zoom when focusing on input boxes
-// --------------------------------------------------------------------------------------
-
-.form-input,
-.form-select--date,
-.form-input--incrementTotal {
-    @media (max-width: (screenSize("medium") - 1px)) {
-        @if $input-font-size < remCalc(16) {
-            font-size: remCalc(16);
-
-            &::placeholder {
-                font-size: $input-font-size;
-            }
-        }
-    }
-}
-
-.form-input--small {
-    @media (max-width: (screenSize("medium") - 1px)) {
-        @if $input-small-fontSize < 16 {
-            font-size: remCalc(16);
-
-            &::placeholder {
-                font-size: $input-small-fontSize;
-            }
-        }
-    }
-}

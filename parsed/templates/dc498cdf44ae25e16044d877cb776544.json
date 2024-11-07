@@ -1,3 +1,1 @@
-{
-  "components/papathemes/page/popup": "<div class=\"modal-body modal-nutrition\">\n    {{{page.content}}}\n</div>"
-}
+{"components/papathemes/page/popup":"<div class=\"modal-body modal-nutrition\">\n    {{{page.content}}}\n</div>\n"}

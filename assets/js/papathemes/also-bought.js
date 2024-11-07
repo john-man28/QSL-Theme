@@ -184,7 +184,7 @@ export default class AlsoBought {
                         <span class="is-srOnly">{{quantityDecreaseTxt}}</span>
                         <i class="icon" aria-hidden="true">
                             <svg>
-                                <use href="#icon-minus"/>
+                                <use xlink:href="#icon-minus"/>
                             </svg>
                         </i>
                     </button>
@@ -203,7 +203,7 @@ export default class AlsoBought {
                         <span class="is-srOnly">{{quantityIncreaseTxt}}</span>
                         <i class="icon" aria-hidden="true">
                             <svg>
-                                <use href="#icon-add"/>
+                                <use xlink:href="#icon-add"/>
                             </svg>
                         </i>
                     </button>
@@ -219,7 +219,7 @@ export default class AlsoBought {
         templateCustomTags = null,
         ratingStarHtmlFunc = (isFull = true) => `
             <span class="icon icon--rating${isFull ? 'Full' : 'Empty'}">
-                <svg><use href="#icon-star" /></svg>
+                <svg><use xlink:href="#icon-star" /></svg>
             </span>
         `,
         customBadgeTemplate = (value) => `
@@ -295,8 +295,6 @@ export default class AlsoBought {
         const productIds = $productEls.get().map(el => $(el).data('productId'));
 
         if ($productEls.length > 0) {
-            // papathemes-beautify: have not received report and test this issue yet, so comment out for now!
-            // this.$alsoBoughtEl.before('<div><!-- Fix Safari --></div>'); // Fix Also Bought displays overlapping the product image on Safari
             this.$alsoBoughtEl.removeClass('u-hiddenVisually');
 
             $.ajax({
@@ -683,12 +681,7 @@ export default class AlsoBought {
                         }
 
                         // init foundation collapsible
-                        const collapsibleArray = collapsibleFactory('[data-options-collapsible]', { $context: $productEl });
-
-                        collapsibleArray.forEach(collapsible => {
-                            this.fixCollapsibleADA(collapsible);
-                            collapsible.$toggle.on('toggle.collapsible', () => this.fixCollapsibleADA(collapsible));
-                        });
+                        collapsibleFactory('[data-options-collapsible]', { $context: $productEl });
 
                         // bind events
                         $productEl.find('[data-also-bought-checkbox]').on('change', this.onAlsoBoughtCheckboxChange.bind(this, $productEl));
@@ -702,11 +695,7 @@ export default class AlsoBought {
 
             // init parent product item
             const $parentProductEl = $('[data-parent-product]', this.$alsoBoughtEl);
-            const collapsibleArray = collapsibleFactory('[data-options-collapsible]', { $context: $parentProductEl });
-            collapsibleArray.forEach(collapsible => {
-                this.fixCollapsibleADA(collapsible);
-                collapsible.$toggle.on('toggle.collapsible', () => this.fixCollapsibleADA(collapsible));
-            });
+            collapsibleFactory('[data-options-collapsible]', { $context: $parentProductEl });
             $('[data-also-bought-checkbox]', $parentProductEl).on('change', this.onAlsoBoughtCheckboxChange.bind(this, $parentProductEl));
 
             // listen parent product price change
@@ -799,14 +788,6 @@ export default class AlsoBought {
             }
         } else {
             $withoutTax.hide();
-        }
-    }
-
-    fixCollapsibleADA(collapsible) {
-        if (collapsible.isCollapsed) {
-            collapsible.$target.find('form, input, select, textarea, button').attr('tabindex', '-1');
-        } else {
-            collapsible.$target.find('form, input, select, textarea, button').removeAttr('tabindex');
         }
     }
 

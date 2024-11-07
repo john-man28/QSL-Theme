@@ -5,7 +5,6 @@
         "call_us2": "Call Us<span class=\"_phoneNumber\">{phone_number}</span>"
     },
     "footer": {
-        "sr_heading": "Footer",
         "footer_start": "Footer Start",
         "brands": "Popular Brands",
         "navigate": "Navigate",
@@ -251,7 +250,6 @@
         "nav_more": "More",
         "nav_less": "Close",
         "nav_back": "Back",
-        "sidebar": "Sidebar",
         "show": "Show",
         "hide": "Hide",
         "menu": "Menu",
@@ -307,7 +305,7 @@
         "heading": "New Account",
         "created": {
             "heading": "Your account has been created",
-            "intro": "Thank you for creating your account at {store_name}. Your account details have been emailed to {email}",
+            "intro": "Thank you for creating your account at {store_name}. Your account details have been emailed to <strong>{email}</strong>",
             "continue": "Continue Shopping"
         },
         "recaptcha_title": "Google recaptcha"
@@ -435,7 +433,6 @@
         "payment_methods": {
             "heading": "Payment Methods",
             "payment_method": "Payment method",
-            "bank_account": "Bank account",
             "billing_address": "Billing address",
             "card_ending_in": "ending in {last_four}",
             "card_expiry": "{month}/{year}",
@@ -454,10 +451,8 @@
                 "jcb": "JCB",
                 "maestro": "Maestro",
                 "mastercard": "Mastercard",
-                "unionpay": "Union Pay",
                 "visa": "Visa"
             },
-            "ach": "ACH",
             "paypal": "PayPal",
             "billing_address_labels": {
               "address_line_1": "Address Line 1",
@@ -485,7 +480,6 @@
             "reason": "Return Reason",
             "action": "Return Action",
             "comments": "Your Comments",
-            "submit_request": "Submit Return Request",
             "list": {
                 "return_number": "Return #{id}",
                 "product_details": "Returning {num_products}"
@@ -593,8 +587,7 @@
             "rma": "RMA Number",
             "question": "Comments/Questions",
             "submit": "Submit Form",
-            "successful": "We've received your feedback and will respond shortly if required. <a href=\"{shopPath}\">Continue</a>.",
-            "manual_captcha_instruction": "Please answer the question below for additional verification."
+            "successful": "We've received your feedback and will respond shortly if required. <a href=\"{shopPath}\">Continue</a>."
         },
         "create_account": {
             "submit_value": "Create Account"
@@ -809,7 +802,6 @@
         },
         "add_to_cart": "Add to Cart",
         "adding_to_cart": "Adding to cart…",
-        "add_to_cart_later": "Add to Cart later",
         "options": "Options",
         "none": "None",
         "sku": "SKU:",
@@ -823,7 +815,6 @@
         "shipping_calculated": "Calculated at Checkout",
         "unavailable": "Unavailable",
         "sold_out": "Out of Stock",
-        "out_of_stock_default_message": "Out of Stock",
         "instock": "In Stock & Ready To Ship!",
         "instock2": "In Stock!",
         "pre_order": "Pre-Order",
@@ -973,8 +964,7 @@
         },
         "error": {
             "empty_field": "Search field cannot be empty."
-        },
-        "product_results": "Product results"
+        }
     },
     "page_not_found": {
         "page_heading": "404 Error - Page not found",
@@ -1116,8 +1106,8 @@
         },
         "pbcst": {
             "bestselling": "Bestselling",
-            "featured": "Highlighted",
-            "new": "Newest",
+            "featured": "Featured",
+            "new": "New Arrivals",
             "reviews": "Top Reviewed",
             "view_all": "View All Products",
             "shop_category": "Shop {name}",
@@ -1164,8 +1154,7 @@
         "view_cart": "View Cart",
         "countinue_shopping": "Continue Shopping",
         "validate": {
-            "enter_qty": "Please enter quantity",
-            "choose_options": "Please choose options"
+            "enter_qty": "Please enter quantity"
         },
         "title": "Bulk Order Layout"
     },
